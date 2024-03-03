@@ -27,16 +27,18 @@ def makeSemester(courses,faculty):
     return semester
 def randomGrade():
     return f"{random.choice(grades)}{random.choice(grade_modifier)}"
-def semesterToGraph(graph,graphS,graphP,strSemester,semesterClasses):
-    graph.add((graphS, graphP, strSemester))  # student has semester 2022
-    for _course_code, _course_num, _course_name in semesterClasses:
-        course_uri=URIRef(f"http://example.org/vocab/{_course_code}")
-        graph.add((strSemester,vivo.TookCourse,course_uri))
-        graph.add((course_uri,vivo.courseCode,Literal(_course_code)))
-        graph.add((course_uri, vivo.courseNumber, Literal(_course_num)))
-        graph.add((course_uri, RDFS.label, Literal(_course_name)))
-        graph.add((course_uri,vivo.Grade,Literal(randomGrade())))
 
+
+def semesterToGraph(graph,graphS,strSemester,semesterClasses):
+    #graphS is student
+    #strSemester is semester URL
+    #semesterClasses is list of classes
+    for _course_code, _course_num, _course_name in semesterClasses:
+        course_uri=URIRef(f"http://example.org/vocab/{_course_code}_{_course_num}")
+        graph.add((course_uri,RDF.type,URIRef(f"http://example.org/vocab/{_course_code}")))
+        graph.add((graphS,vivo.HasTaken,course_uri)) #student has taken course x
+        graph.add((course_uri,vivo.Grade,Literal(randomGrade()))) #course x had grade y
+        graph.add((course_uri,vivo.Semester,strSemester)) #course InSemester semester20xx
 def GenerateandReturn(courses):
     #make graph with namespace binding and 'class'
     g=Graph()
@@ -47,16 +49,18 @@ def GenerateandReturn(courses):
     g.bind("vivo", vivo)
     g.bind("schema", schema)
 
-
     #generate transcript
-    newList=[]
-    NUM_OF_STUDENTS=4
+    NUM_OF_STUDENTS=2
+    NUM_OF_SEMESTER=2
     random.seed(1)
     for i in range(0,NUM_OF_STUDENTS):
-        rand_faculty=random.choice(faculties)
-        random.shuffle(courses)
-        for i in range(0,6):
-            newList.append(makeSemester(courses,rand_faculty))
+
+
+        semesterClassList=[] #clear old classList
+        rand_faculty=random.choice(faculties) #choose newfaculty for new student
+        random.shuffle(courses) #shuffle course List
+        for k in range(0,NUM_OF_SEMESTER):
+            semesterClassList.append(makeSemester(courses,rand_faculty))
             random.shuffle(courses)
 
         #generate student details.
@@ -67,30 +71,20 @@ def GenerateandReturn(courses):
 
                 #make student subject URI
         s=URIRef(f"http://example.org/Student/{last_name},{first_name}")
-        g.add((s, RDF.type, ex.Student)) #add student as instance of class
-        g.add((s,FOAF.name,Literal(f"{first_name} {last_name}", datatype=XSD.string)))
+        g.add((s, RDF.type, ex.Student)) #student s isType Student
+        g.add((s,FOAF.name,Literal(f"{first_name} {last_name}", datatype=XSD.string))) #student s FOAF:name literal
         o=Literal(f'{stuID}',datatype=XSD.string) #object for student ID
         p=ex.HasId
-        g.add((s,p,o)) #add
+        g.add((s,p,o)) #student s HasId o
         o=Literal(f'{email}',datatype=XSD.string)
         p=ex.HasEmail
-        g.add((s,p,o))
-                #add courses to semesters? course code is node
-        #course_uri = URIRef(f"http://example.org/vocab/{course_code}")
-        p=vivo.Semester
-        g.add((s,p,ex.Summer2022)) #student has semester 2022
-        semesterToGraph(g,s,p,semester[0],newList[0])
-        semesterToGraph(g,s,p,semester[1],newList[1])
-        semesterToGraph(g,s,p,semester[2],newList[2])
-        semesterToGraph(g,s,p,semester[3],newList[3])
-        semesterToGraph(g,s,p,semester[4],newList[4])
-        semesterToGraph(g,s,p,semester[5],newList[5])
+        g.add((s,p,o)) #student s hasEmail o
 
-    # for s,p,o in g:
-    #     print(s,p,o)
+        if len(semesterClassList)<=6:
+            for index in range(0,len(semesterClassList)):
+                semesterToGraph(g,s,semester[index],semesterClassList[index])
 
     g.serialize(destination='./output/student.ttl', format='turtle')
-
     return g
 
 

@@ -28,31 +28,44 @@ def what_course_contains_topic(graph, keyword):
         initBindings={'keyword': Literal(escaped_keyword)}
     )
     return [str(row.courseName) for row in query_result]
+# SPARQL query to get {students:grade} who completed a given {course: number}
 def get_students_who_completed_course(graph,value_id,value_course):
     escaped_value_id = re.escape(value_id)
     escaped_value_course = re.escape(value_course)
 
-    # filter regex(str(?student),"http://example.org/Student/Ballard,Darcy","i")
-    # filter regex(str(?s),"BIO","i")
     query_result = graph.query(
-        """        
-SELECT ?student ?grade ?subjectURI ?courseNum WHERE{
-	?subjectURI a vivo:Course  . 
-  	?subjectURI vivo:courseNumber ?courseNum .
-    ?subjectURI vivo:courseCode ?course . 
-  	?student a ex:Student .
-  	?student vivo:Semester ?x .
-  	?x vivo:TookCourse ?subjectURI  .	 
-  	?subjectURI vivo:Grade ?grade .
-  FILTER regex(str(?courseNum),"330","i") .
-  FILTER regex(str(?course),"BIOL","i")
+        """  
+SELECT ?name ?stuId WHERE{
+  ?stu a ex:Student .
+   ?stu ex:HasId ?stuId .
+   ?stu foaf:name ?name .
+  	?stu vivo:HasTaken ?subjectURI .
+  FILTER regex(str(?subjectURI),?value_id,"i") .
+  FILTER regex(str(?subjectURI),?value_course,"i") .
 }
         """,
-        initBindings={'Svalue_id': Literal(escaped_value_id,datatype=XSD.string),'Svalue_course': Literal(escaped_value_course,datatype=XSD.string)}
+        initBindings={'value_id': Literal(escaped_value_id,datatype=XSD.string),'value_course': Literal(escaped_value_course,datatype=XSD.string)}
     )
     return query_result
-    return [(str(row.student),str(row.grade),str(row.s),str(row.id)) for row in query_result]
+# SPARQL query to get {students:grade} who completed a given {course: number}
+def get_students_Transcript(graph,value_stu):
+    escaped_value_student = re.escape(value_stu)
 
+    query_result = graph.query(
+        """        
+SELECT ?name ?stuId ?sem ?grade  WHERE{
+  ?stu a ex:Student .
+   ?stu ex:HasId ?stuId .
+   ?stu foaf:name ?name .
+  ?stu vivo:HasTaken ?subjectURI .
+  ?subjectURI vivo:Semester ?sem .
+  ?subjectURI vivo:Grade ?grade
+  filter regex(?name,?value_student,"i")
+}
+        """,
+        initBindings={'value_student': Literal(escaped_value_student,datatype=XSD.string)}
+    )
+    return query_result
 # SPARQL query to get all courses and their universities
 def get_courses_and_universities(graph):
     query_result = graph.query(
@@ -99,25 +112,38 @@ def main():
 
     # serialize the graph to a file
     turtle_file_path = './output/graph.ttl'
+    g.serialize(destination=turtle_file_path, format='turtle')
+
+    #generate Student Graph  and combine it with class graph
     g2=SG.GenerateandReturn(courses)
     g=g+g2
-    students_who_completed_x=get_students_who_completed_course(g,"330","BIOL")
-    for o,t,th,fo in students_who_completed_x:
-        print(f"{o} {t} {th} {fo}")
+
+    # serialize the graph to a file
+    turtle_file_path = './output/combinedGraph.ttl'
     g.serialize(destination=turtle_file_path, format='turtle')
+
 
     # first query: get all courses and their universities
     courses_and_universities = get_courses_and_universities(g)
-    # for course_uri, course_name, university in courses_and_universities:
-    #     print(f"Course URI: {course_uri}, Course Name: {course_name}, Offered By: {university}")
+    for course_uri, course_name, university in courses_and_universities:
+        print(f"Course URI: {course_uri}, Course Name: {course_name}, Offered By: {university}")
 
-    #
-    # # second query: find what course covers a specific topic
-    # topic_keyword = "artificial intelligence"
-    # courses_discussing_topic = what_course_contains_topic(g, topic_keyword)
-    # print(f"Courses discussing '{topic_keyword}':")
-    # for course in courses_discussing_topic:
-    #     print(course)
+    # second query: find what course covers a specific topic
+    topic_keyword = "artificial intelligence"
+    courses_discussing_topic = what_course_contains_topic(g, topic_keyword)
+    print(f"Courses discussing '{topic_keyword}':")
+    for course in courses_discussing_topic:
+        print(course)
+
+    # twelth query: which [students] have completed [value_course] [value_id]
+    students_who_completed_x = get_students_who_completed_course(g, "506", "Coms")
+    for o, t in students_who_completed_x:
+        print(f"{o} {t}")
+
+    #thirteenth query: print transcript for a [student] listing all courses along with grade acheived
+    student_transcript = get_students_Transcript(g, "Braun")
+    for name, sem, cour, grade in student_transcript:
+        print(f"{name} {sem} {cour} {grade} ")
 
 if __name__ == '__main__':
     main()
