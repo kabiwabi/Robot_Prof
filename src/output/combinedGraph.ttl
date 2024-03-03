@@ -4,10 +4,10 @@
 @prefix vivo: <http://vivoweb.org/ontology/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-ex:Student a rdfs:Class ;
+vivo:Student a rdfs:Class ;
     rdfs:range foaf:Person .
 
-<http://example.org/Student/Braun,Courtenay> a ex:Student ;
+<http://example.org/Student/Braun,Courtenay> a vivo:Student ;
     ex:HasEmail "co_bra@live.concordia.ca"^^xsd:string ;
     ex:HasId "156223"^^xsd:string ;
     vivo:HasTaken <http://example.org/vocab/BIOL_515>,
@@ -20,7 +20,7 @@ ex:Student a rdfs:Class ;
         <http://example.org/vocab/URBS_420> ;
     foaf:name "Courtenay Braun"^^xsd:string .
 
-<http://example.org/Student/Ramsey,Ilise> a ex:Student ;
+<http://example.org/Student/Ramsey,Ilise> a vivo:Student ;
     ex:HasEmail "il_ram@live.concordia.ca"^^xsd:string ;
     ex:HasId "784503"^^xsd:string ;
     vivo:HasTaken <http://example.org/vocab/ACTU_486>,
@@ -4417,7 +4417,7 @@ Artificial Intelligence Applications""",
 
 <http://example.org/vocab/ACTU_486> a <http://example.org/vocab/ACTU> ;
     vivo:Grade "C-" ;
-    vivo:Semester ex:Fall2022 .
+    vivo:Semester vivo:Fall2022 .
 
 <http://example.org/vocab/BIOL> a vivo:Course ;
     rdfs:label "Advanced Statistics in Biological Science",
@@ -4495,7 +4495,7 @@ Artificial Intelligence Applications""",
 
 <http://example.org/vocab/BIOL_515> a <http://example.org/vocab/BIOL> ;
     vivo:Grade "B-" ;
-    vivo:Semester ex:Fall2022 .
+    vivo:Semester vivo:Fall2022 .
 
 <http://example.org/vocab/CHEM> a vivo:Course ;
     rdfs:label "Advanced Laboratory in Biochemistry",
@@ -4570,15 +4570,15 @@ Artificial Intelligence Applications""",
 
 <http://example.org/vocab/CHEM_325> a <http://example.org/vocab/CHEM> ;
     vivo:Grade "F+" ;
-    vivo:Semester ex:Fall2022 .
+    vivo:Semester vivo:Fall2022 .
 
 <http://example.org/vocab/COMS_506> a <http://example.org/vocab/COMS> ;
     vivo:Grade "A" ;
-    vivo:Semester ex:Summer2022 .
+    vivo:Semester vivo:Summer2022 .
 
 <http://example.org/vocab/COMS_684> a <http://example.org/vocab/COMS> ;
     vivo:Grade "F+" ;
-    vivo:Semester ex:Fall2022 .
+    vivo:Semester vivo:Fall2022 .
 
 <http://example.org/vocab/ECON> a vivo:Course ;
     rdfs:label "Applied Econometrics",
@@ -4626,15 +4626,15 @@ Artificial Intelligence Applications""",
 
 <http://example.org/vocab/ECON_200> a <http://example.org/vocab/ECON> ;
     vivo:Grade "F-" ;
-    vivo:Semester ex:Fall2022 .
+    vivo:Semester vivo:Fall2022 .
 
 <http://example.org/vocab/FTRA_612> a <http://example.org/vocab/FTRA> ;
     vivo:Grade "D+" ;
-    vivo:Semester ex:Fall2022 .
+    vivo:Semester vivo:Fall2022 .
 
 <http://example.org/vocab/FTRA_655> a <http://example.org/vocab/FTRA> ;
     vivo:Grade "C+" ;
-    vivo:Semester ex:Summer2022 .
+    vivo:Semester vivo:Summer2022 .
 
 <http://example.org/vocab/HIST> a vivo:Course ;
     rdfs:label "Advanced Topics in Public History",
@@ -4713,7 +4713,7 @@ Artificial Intelligence Applications""",
 
 <http://example.org/vocab/HIST_498> a <http://example.org/vocab/HIST> ;
     vivo:Grade "D" ;
-    vivo:Semester ex:Summer2022 .
+    vivo:Semester vivo:Summer2022 .
 
 <http://example.org/vocab/ITAL> a vivo:Course ;
     rdfs:label "Intermediate Italian: Intensive Course ",
@@ -4730,7 +4730,7 @@ Artificial Intelligence Applications""",
 
 <http://example.org/vocab/ITAL_200> a <http://example.org/vocab/ITAL> ;
     vivo:Grade "B" ;
-    vivo:Semester ex:Fall2022 .
+    vivo:Semester vivo:Fall2022 .
 
 <http://example.org/vocab/MCHI> a vivo:Course ;
     rdfs:label "Intermediate Modern Chinese I ",
@@ -4747,7 +4747,7 @@ Artificial Intelligence Applications""",
 
 <http://example.org/vocab/MCHI_250> a <http://example.org/vocab/MCHI> ;
     vivo:Grade "A" ;
-    vivo:Semester ex:Summer2022 .
+    vivo:Semester vivo:Summer2022 .
 
 <http://example.org/vocab/PHYS> a vivo:Course ;
     rdfs:label "Chemical Aspects of Biophysics",
@@ -4801,15 +4801,15 @@ Artificial Intelligence Applications""",
 
 <http://example.org/vocab/PHYS_760> a <http://example.org/vocab/PHYS> ;
     vivo:Grade "A-" ;
-    vivo:Semester ex:Summer2022 .
+    vivo:Semester vivo:Summer2022 .
 
 <http://example.org/vocab/POLI_315> a <http://example.org/vocab/POLI> ;
     vivo:Grade "C-" ;
-    vivo:Semester ex:Summer2022 .
+    vivo:Semester vivo:Summer2022 .
 
 <http://example.org/vocab/POLI_397> a <http://example.org/vocab/POLI> ;
     vivo:Grade "D+" ;
-    vivo:Semester ex:Fall2022 .
+    vivo:Semester vivo:Fall2022 .
 
 <http://example.org/vocab/PSYC> a vivo:Course ;
     rdfs:label "APC Practicum I",
@@ -4898,7 +4898,7 @@ Artificial Intelligence Applications""",
 
 <http://example.org/vocab/PSYC_840> a <http://example.org/vocab/PSYC> ;
     vivo:Grade "C" ;
-    vivo:Semester ex:Summer2022 .
+    vivo:Semester vivo:Summer2022 .
 
 <http://example.org/vocab/URBS> a vivo:Course ;
     rdfs:label "Advanced Urban Laboratory",
@@ -4933,7 +4933,7 @@ Artificial Intelligence Applications""",
 
 <http://example.org/vocab/URBS_420> a <http://example.org/vocab/URBS> ;
     vivo:Grade "C" ;
-    vivo:Semester ex:Summer2022 .
+    vivo:Semester vivo:Summer2022 .
 
 <http://example.org/vocab/COMS> a vivo:Course ;
     rdfs:label "Communication Analysis of Environment",

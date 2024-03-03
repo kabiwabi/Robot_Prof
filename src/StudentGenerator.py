@@ -9,7 +9,7 @@ schema = Namespace("http://schema.org/")
 grades=('A','B','C','D','F')
 grade_modifier=('-','+','')
 faculties=('FFA','FAS','GCS','JMSB')
-semester=[ex.Summer2022,ex.Fall2022,ex.Winter2022,ex.Summer2023,ex.Fall2023,ex.Winter2023]
+semester=[vivo.Summer2022,vivo.Fall2022,vivo.Winter2022,vivo.Summer2023,vivo.Fall2023,vivo.Winter2023]
 def random_line(fname):
     lines = open(fname).read().splitlines()
     return random.choice(lines)
@@ -43,8 +43,8 @@ def GenerateandReturn(courses):
     #make graph with namespace binding and 'class'
     g=Graph()
     g.bind('ex',ex)
-    g.add((ex.Student,RDF.type,RDFS.Class))
-    g.add((ex.Student,RDFS.range,FOAF.Person))
+    g.add((vivo.Student,RDF.type,RDFS.Class))
+    g.add((vivo.Student,RDFS.range,FOAF.Person))
     # Define the namespaces
     g.bind("vivo", vivo)
     g.bind("schema", schema)
@@ -71,7 +71,7 @@ def GenerateandReturn(courses):
 
                 #make student subject URI
         s=URIRef(f"http://example.org/Student/{last_name},{first_name}")
-        g.add((s, RDF.type, ex.Student)) #student s isType Student
+        g.add((s, RDF.type, vivo.Student)) #student s isType Student
         g.add((s,FOAF.name,Literal(f"{first_name} {last_name}", datatype=XSD.string))) #student s FOAF:name literal
         o=Literal(f'{stuID}',datatype=XSD.string) #object for student ID
         p=ex.HasId
