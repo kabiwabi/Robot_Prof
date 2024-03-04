@@ -3,14 +3,17 @@ import pandas as pd
 from rdflib import Graph, URIRef, Literal, Namespace, RDF
 from rdflib.namespace import RDFS, FOAF, DCTERMS, XSD
 import urllib.parse
+import StudentGenerator as SG
 
 # Define the namespaces
 vivo = Namespace("http://vivoweb.org/ontology/core#")
 schema = Namespace("http://schema.org/")
 
+
 # Function to replace spaces with underscores and URL-encode for valid URIs
 def sanitize_string(part):
     return urllib.parse.quote_plus(part.replace(' ', '_'))
+
 
 # SPARQL query to find what course covers a specific topic
 def what_course_contains_topic(graph, keyword):
@@ -28,6 +31,76 @@ def what_course_contains_topic(graph, keyword):
     )
     return [str(row.courseName) for row in query_result]
 
+
+# SPARQL query  to get {students:grade} who completed a given {course: number}
+def get_students_who_completed_course(graph, value_id, value_course):
+    escaped_value_id = re.escape(value_id)
+    escaped_value_course = re.escape(value_course)
+
+    query_result = graph.query(
+        """  
+SELECT ?name ?stuId WHERE{
+    ?stu a vivo:Student .
+    ?stu vivo:HasId ?stuId .
+    ?stu foaf:name ?name .
+  	?stu vivo:HasTaken ?subjectURI .
+  FILTER regex(str(?subjectURI),?value_id,"i") .
+  FILTER regex(str(?subjectURI),?value_course,"i") .
+}
+        """,
+        initBindings={'value_id': Literal(escaped_value_id, datatype=XSD.string),
+                      'value_course': Literal(escaped_value_course, datatype=XSD.string)}
+    )
+    return query_result
+
+
+# SPARQL query to get [grade] of [student] who completed a given [course] [number]
+def get_grades_of_student_who_completed_course(graph, value_stu, value_id, value_course):
+    escaped_value_id = re.escape(value_id)
+    escaped_value_course = re.escape(value_course)
+    escaped_value_student = re.escape(value_stu)
+
+    query_result = graph.query(
+        """  
+SELECT ?grade WHERE{
+    ?stu a vivo:Student .
+    ?stu vivo:HasId ?stuId .
+    ?stu foaf:name ?name .
+  	?stu vivo:HasTaken ?subjectURI .
+  	?subjectURI vivo:Grade ?grade .
+  FILTER regex(str(?subjectURI),?value_id,"i") .
+  FILTER regex(str(?subjectURI),?value_course,"i") .
+  FILTER regex(str(?stu),?value_student,"i") .
+}
+        """,
+        initBindings={'value_id': Literal(escaped_value_id, datatype=XSD.string),
+                      'value_course': Literal(escaped_value_course, datatype=XSD.string),
+                      'value_student': Literal(escaped_value_student, datatype=XSD.string)}
+    )
+    return [str(row.grade) for row in query_result]
+
+
+# SPARQL query to get {students:grade} who completed a given {course: number}
+def get_students_Transcript(graph, value_stu):
+    escaped_value_student = re.escape(value_stu)
+
+    query_result = graph.query(
+        """        
+SELECT ?name ?stuId ?sem ?grade  WHERE{
+    ?stu a vivo:Student .
+    ?stu vivo:HasId ?stuId .
+    ?stu foaf:name ?name .
+    ?stu vivo:HasTaken ?subjectURI .
+    ?subjectURI vivo:Semester ?sem .
+    ?subjectURI vivo:Grade ?grade .
+  filter regex(?name,?value_student,"i")
+}
+        """,
+        initBindings={'value_student': Literal(escaped_value_student, datatype=XSD.string)}
+    )
+    return query_result
+
+
 # SPARQL query to get all courses and their universities
 def get_courses_and_universities(graph):
     query_result = graph.query(
@@ -35,11 +108,12 @@ def get_courses_and_universities(graph):
         SELECT ?course ?name ?university WHERE {
             ?course a vivo:Course .
             ?course rdfs:label ?name .
-            ?course vivo:offeredBy ?university .
+            ?course vivo:offeredBy ?university .            
         }
         """
     )
     return [(str(row.course), str(row.name), str(row.university)) for row in query_result]
+
 
 def main():
     csv_file_path = './res/CATALOG.csv'
@@ -54,19 +128,35 @@ def main():
     g.add((concordia_uri, RDF.type, FOAF.Organization))
     g.add((concordia_uri, RDFS.label, Literal("Concordia University")))
     g.add((concordia_uri, vivo.description, Literal("A public university located in Montreal, Quebec, Canada.")))
+    courses = []
+    course2 = {}
 
     for index, row in dataframe.iterrows():
         course_code = sanitize_string(str(row['Course code']))
+        course_num = sanitize_string(str(row['Course number']))
+        faculty = sanitize_string(str(row['Faculty']))
         course_uri = URIRef(f"http://example.org/vocab/{course_code}")
 
         g.add((course_uri, RDF.type, vivo.Course))
         g.add((course_uri, RDFS.label, Literal(row['Course Name'])))
-        g.add((course_uri, vivo.courseNumber, Literal(course_code)))
+        g.add((course_uri, vivo.courseCode, Literal(course_code)))
+        g.add((course_uri, vivo.courseNumber, Literal(course_num)))
         g.add((course_uri, vivo.description, Literal(row['Description'])))
         g.add((course_uri, vivo.offeredBy, concordia_uri))
 
+        course2[faculty] = (course_code, course_num, row['Course Name']);
+        courses.append((faculty, course_code, course_num, row['Course Name']))
+
     # serialize the graph to a file
     turtle_file_path = './output/graph.ttl'
+    g.serialize(destination=turtle_file_path, format='turtle')
+
+    # generate Student Graph  and combine it with class graph
+    g2 = SG.GenerateandReturn(courses)
+    g = g + g2
+
+    # serialize the graph to a file
+    turtle_file_path = './output/combinedGraph.ttl'
     g.serialize(destination=turtle_file_path, format='turtle')
 
     # first query: get all courses and their universities
@@ -74,13 +164,31 @@ def main():
     for course_uri, course_name, university in courses_and_universities:
         print(f"Course URI: {course_uri}, Course Name: {course_name}, Offered By: {university}")
 
-
     # second query: find what course covers a specific topic
     topic_keyword = "artificial intelligence"
     courses_discussing_topic = what_course_contains_topic(g, topic_keyword)
-    print(f"Courses discussing '{topic_keyword}':")
+    print(f"\nCourses discussing '{topic_keyword}':")
     for course in courses_discussing_topic:
         print(course)
+
+    # eleventh query: get [grade] of [student] who has complete [course] [number]
+    students_who_completed_x = get_grades_of_student_who_completed_course(g, "Ilise", "506", "coms")
+    print(f"\nIlise Ramsey Completed: Coms 506 with grade of:")
+    for grade in students_who_completed_x:
+        print(grade)
+
+    # twelth query: which [students] have completed [value_course] [value_id]
+    students_who_completed_x = get_students_who_completed_course(g, "506", "Coms")
+    print('\n')
+    for o, t in students_who_completed_x:
+        print(f"{o} {t}")
+
+    # thirteenth query: print transcript for a [student] listing all courses along with grade acheived
+    student_transcript = get_students_Transcript(g, "Braun")
+    print('\n')
+    for name, sem, cour, grade in student_transcript:
+        print(f"{name} {sem} {cour} {grade} ")
+
 
 if __name__ == '__main__':
     main()
