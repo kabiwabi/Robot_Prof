@@ -9,7 +9,7 @@ vivo:Student a rdfs:Class ;
 
 <http://example.org/Student/Braun,Courtenay> a vivo:Student ;
     ex:HasEmail "co_bra@live.concordia.ca"^^xsd:string ;
-    ex:HasId "156223"^^xsd:string ;
+    vivo:HasId "156223"^^xsd:string ;
     vivo:HasTaken <http://example.org/vocab/BIOL_515>,
         <http://example.org/vocab/CHEM_325>,
         <http://example.org/vocab/ECON_200>,
@@ -22,7 +22,7 @@ vivo:Student a rdfs:Class ;
 
 <http://example.org/Student/Ramsey,Ilise> a vivo:Student ;
     ex:HasEmail "il_ram@live.concordia.ca"^^xsd:string ;
-    ex:HasId "784503"^^xsd:string ;
+    vivo:HasId "784503"^^xsd:string ;
     vivo:HasTaken <http://example.org/vocab/ACTU_486>,
         <http://example.org/vocab/COMS_506>,
         <http://example.org/vocab/COMS_684>,
