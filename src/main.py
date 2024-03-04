@@ -5,7 +5,7 @@ from rdflib.namespace import RDFS, FOAF, DCTERMS, XSD
 import urllib.parse
 import StudentGenerator as SG
 
-SPARQLSERVER=True
+SPARQLSERVER=False
 if(SPARQLSERVER):
     import Fuseki_Queries as FQ
 
@@ -92,16 +92,13 @@ SELECT ?name ?stuId WHERE{
     )
     return query_result
 
-
-
-
-# SPARQL query 13: to get {students:grade} who completed a given {course: number}
+# SPARQL query 13: print a transcript for {students}
 def get_students_Transcript(graph, value_stu):
     escaped_value_student = re.escape(value_stu)
 
     query_result = graph.query(
         """        
-SELECT ?name ?stuId ?sem ?grade  WHERE{
+SELECT ?name ?stuId ?subjectURI ?sem ?grade  WHERE{
     ?stu a vivo:Student .
     ?stu vivo:HasId ?stuId .
     ?stu foaf:name ?name .
@@ -114,10 +111,6 @@ SELECT ?name ?stuId ?sem ?grade  WHERE{
         initBindings={'value_student': Literal(escaped_value_student, datatype=XSD.string)}
     )
     return query_result
-
-
-
-
 
 def main():
     if(SPARQLSERVER):
@@ -193,13 +186,16 @@ def main():
     # thirteenth query: print transcript for a [student] listing all courses along with grade acheived
     student_transcript = get_students_Transcript(g, "Braun")
     print('\nQuery 13')
-    for name, sem, cour, grade in student_transcript:
-        print(f"{name} {sem} {cour} {grade} ")
+    #?name ?stuId ?subjectURI ?sem ?grade
+    for name,stuID,subject, sem, grade in student_transcript:
+        print(f"{name} {sem} {subject} {grade} ")
 
     if SPARQLSERVER:
+        FQ.FusekiQuery1(sparql)
+        FQ.FusekiQuery2(sparql,topic_keyword)
         FQ.FusekiQuery11(sparql,"Ilise", "506", "coms")
         FQ.FusekiQuery12(sparql,"506", "Coms")
-        #FQ.FusekiQuery13(sparql,"Braun")
+        FQ.FusekiQuery13(sparql,"Braun")
 
 if __name__ == '__main__':
     main()
