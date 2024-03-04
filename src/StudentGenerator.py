@@ -5,7 +5,6 @@ from datetime import datetime
 
 ex=Namespace("http://example.org/")
 vivo = Namespace("http://vivoweb.org/ontology/core#")
-schema = Namespace("http://schema.org/")
 grades=('A','B','C','D','F')
 grade_modifier=('-','+','')
 faculties=('FFA','FAS','GCS','JMSB')
@@ -47,7 +46,6 @@ def GenerateandReturn(courses):
     g.add((vivo.Student,RDFS.range,FOAF.Person))
     # Define the namespaces
     g.bind("vivo", vivo)
-    g.bind("schema", schema)
 
     #generate transcript
     NUM_OF_STUDENTS=2
@@ -74,7 +72,7 @@ def GenerateandReturn(courses):
         g.add((s, RDF.type, vivo.Student)) #student s isType Student
         g.add((s,FOAF.name,Literal(f"{first_name} {last_name}", datatype=XSD.string))) #student s FOAF:name literal
         o=Literal(f'{stuID}',datatype=XSD.string) #object for student ID
-        p=ex.HasId
+        p=vivo.HasId
         g.add((s,p,o)) #student s HasId o
         o=Literal(f'{email}',datatype=XSD.string)
         p=ex.HasEmail

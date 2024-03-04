@@ -41,7 +41,7 @@ def get_students_who_completed_course(graph, value_id, value_course):
         """  
 SELECT ?name ?stuId WHERE{
     ?stu a vivo:Student .
-    ?stu ex:HasId ?stuId .
+    ?stu vivo:HasId ?stuId .
     ?stu foaf:name ?name .
   	?stu vivo:HasTaken ?subjectURI .
   FILTER regex(str(?subjectURI),?value_id,"i") .
@@ -64,7 +64,7 @@ def get_grades_of_student_who_completed_course(graph, value_stu, value_id, value
         """  
 SELECT ?grade WHERE{
     ?stu a vivo:Student .
-    ?stu ex:HasId ?stuId .
+    ?stu vivo:HasId ?stuId .
     ?stu foaf:name ?name .
   	?stu vivo:HasTaken ?subjectURI .
   	?subjectURI vivo:Grade ?grade .
@@ -88,7 +88,7 @@ def get_students_Transcript(graph, value_stu):
         """        
 SELECT ?name ?stuId ?sem ?grade  WHERE{
     ?stu a vivo:Student .
-    ?stu ex:HasId ?stuId .
+    ?stu vivo:HasId ?stuId .
     ?stu foaf:name ?name .
     ?stu vivo:HasTaken ?subjectURI .
     ?subjectURI vivo:Semester ?sem .
@@ -167,23 +167,25 @@ def main():
     # second query: find what course covers a specific topic
     topic_keyword = "artificial intelligence"
     courses_discussing_topic = what_course_contains_topic(g, topic_keyword)
-    print(f"Courses discussing '{topic_keyword}':")
+    print(f"\nCourses discussing '{topic_keyword}':")
     for course in courses_discussing_topic:
         print(course)
 
     # eleventh query: get [grade] of [student] who has complete [course] [number]
     students_who_completed_x = get_grades_of_student_who_completed_course(g, "Ilise", "506", "coms")
-    print(f"Ilise Ramsey Completed: Coms 506 with grade of:")
+    print(f"\nIlise Ramsey Completed: Coms 506 with grade of:")
     for grade in students_who_completed_x:
         print(grade)
 
     # twelth query: which [students] have completed [value_course] [value_id]
     students_who_completed_x = get_students_who_completed_course(g, "506", "Coms")
+    print('\n')
     for o, t in students_who_completed_x:
         print(f"{o} {t}")
 
     # thirteenth query: print transcript for a [student] listing all courses along with grade acheived
     student_transcript = get_students_Transcript(g, "Braun")
+    print('\n')
     for name, sem, cour, grade in student_transcript:
         print(f"{name} {sem} {cour} {grade} ")
 
