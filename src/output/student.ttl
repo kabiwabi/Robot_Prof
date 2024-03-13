@@ -1,0 +1,99 @@
+@prefix ex: <http://example.org/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vivo: <http://vivoweb.org/ontology/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+vivo:Student a rdfs:Class ;
+    rdfs:range foaf:Person .
+
+<http://example.org/Student/Braun,Courtenay> a vivo:Student ;
+    ex:HasEmail "co_bra@live.concordia.ca"^^xsd:string ;
+    vivo:HasId "156223"^^xsd:string ;
+    vivo:HasTaken <http://example.org/vocab/BIOL_515>,
+        <http://example.org/vocab/CHEM_325>,
+        <http://example.org/vocab/ECON_200>,
+        <http://example.org/vocab/FTRA_612>,
+        <http://example.org/vocab/HIST_498>,
+        <http://example.org/vocab/PHYS_760>,
+        <http://example.org/vocab/PSYC_840>,
+        <http://example.org/vocab/URBS_420> ;
+    foaf:name "Courtenay Braun"^^xsd:string .
+
+<http://example.org/Student/Ramsey,Ilise> a vivo:Student ;
+    ex:HasEmail "il_ram@live.concordia.ca"^^xsd:string ;
+    vivo:HasId "784503"^^xsd:string ;
+    vivo:HasTaken <http://example.org/vocab/ACTU_486>,
+        <http://example.org/vocab/COMS_506>,
+        <http://example.org/vocab/COMS_684>,
+        <http://example.org/vocab/FTRA_655>,
+        <http://example.org/vocab/ITAL_200>,
+        <http://example.org/vocab/MCHI_250>,
+        <http://example.org/vocab/POLI_315>,
+        <http://example.org/vocab/POLI_397> ;
+    foaf:name "Ilise Ramsey"^^xsd:string .
+
+<http://example.org/vocab/ACTU_486> a <http://example.org/vocab/ACTU> ;
+    vivo:Grade "C-" ;
+    vivo:Semester vivo:Fall2022 .
+
+<http://example.org/vocab/BIOL_515> a <http://example.org/vocab/BIOL> ;
+    vivo:Grade "B-" ;
+    vivo:Semester vivo:Fall2022 .
+
+<http://example.org/vocab/CHEM_325> a <http://example.org/vocab/CHEM> ;
+    vivo:Grade "F+" ;
+    vivo:Semester vivo:Fall2022 .
+
+<http://example.org/vocab/COMS_506> a <http://example.org/vocab/COMS> ;
+    vivo:Grade "A" ;
+    vivo:Semester vivo:Summer2022 .
+
+<http://example.org/vocab/COMS_684> a <http://example.org/vocab/COMS> ;
+    vivo:Grade "F+" ;
+    vivo:Semester vivo:Fall2022 .
+
+<http://example.org/vocab/ECON_200> a <http://example.org/vocab/ECON> ;
+    vivo:Grade "F-" ;
+    vivo:Semester vivo:Fall2022 .
+
+<http://example.org/vocab/FTRA_612> a <http://example.org/vocab/FTRA> ;
+    vivo:Grade "D+" ;
+    vivo:Semester vivo:Fall2022 .
+
+<http://example.org/vocab/FTRA_655> a <http://example.org/vocab/FTRA> ;
+    vivo:Grade "C+" ;
+    vivo:Semester vivo:Summer2022 .
+
+<http://example.org/vocab/HIST_498> a <http://example.org/vocab/HIST> ;
+    vivo:Grade "D" ;
+    vivo:Semester vivo:Summer2022 .
+
+<http://example.org/vocab/ITAL_200> a <http://example.org/vocab/ITAL> ;
+    vivo:Grade "B" ;
+    vivo:Semester vivo:Fall2022 .
+
+<http://example.org/vocab/MCHI_250> a <http://example.org/vocab/MCHI> ;
+    vivo:Grade "A" ;
+    vivo:Semester vivo:Summer2022 .
+
+<http://example.org/vocab/PHYS_760> a <http://example.org/vocab/PHYS> ;
+    vivo:Grade "A-" ;
+    vivo:Semester vivo:Summer2022 .
+
+<http://example.org/vocab/POLI_315> a <http://example.org/vocab/POLI> ;
+    vivo:Grade "C-" ;
+    vivo:Semester vivo:Summer2022 .
+
+<http://example.org/vocab/POLI_397> a <http://example.org/vocab/POLI> ;
+    vivo:Grade "D+" ;
+    vivo:Semester vivo:Fall2022 .
+
+<http://example.org/vocab/PSYC_840> a <http://example.org/vocab/PSYC> ;
+    vivo:Grade "C" ;
+    vivo:Semester vivo:Summer2022 .
+
+<http://example.org/vocab/URBS_420> a <http://example.org/vocab/URBS> ;
+    vivo:Grade "C" ;
+    vivo:Semester vivo:Summer2022 .
+
