@@ -49,6 +49,55 @@ def FusekiQuery2(sparql, keyword):
     except Exception as e:
         print(e)
 
+# Fuseki query 4: List all [courses] offered by [university] within the [subject] (e.g., “COMP”, “SOEN”).
+def FusekiQuery4(sparql,value_uni, value_courseName):
+    sparql.setQuery("""    
+        PREFIX vivo: <http://vivoweb.org/ontology/core#>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        SELECT ?course ?university WHERE{
+            ?course vivo:courseCode ?courseCode .  
+  			?course rdfs:label ?name .
+            ?course vivo:offeredBy ?university .
+            FILTER regex(str(?courseCode), \"%s\", "i") .
+            FILTER regex(str(?university),  \"%s\","i") .
+            }
+    """%( value_courseName,value_uni))
+    sparql.setReturnFormat("json")
+
+    try:
+        ret=sparql.queryAndConvert()
+        i=1 #index to track theoretical answer vs fuseki obtained vs main.py obtained
+        print("Fueski Response Q4:")
+        for result in ret['results']['bindings']:
+            print(f"{i}: {result['course']['value']} offered by {result['university']['value']}" )
+            i+=1
+    except Exception as e:
+        print(e)
+
+# Fuseki query 10: What competencies [topics] does a student gain after completing [course] [number]?
+def FusekiQuery10(sparql, value_courseCode, value_courseNum):
+    sparql.setQuery(
+        """
+        PREFIX vivo: <http://vivoweb.org/ontology/core#>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        SELECT ?description WHERE{
+            ?course vivo:courseCode ?courseCode .  
+  			?course vivo:courseNumber ?courseNumber .
+  			?course vivo:description ?description
+            FILTER regex(str(?courseCode), \"%s\", "i") .
+            FILTER regex(str(?courseNumber), \"%s\","i") .
+        }
+        """%( value_courseCode,value_courseNum) )
+    sparql.setReturnFormat("json")
+    try:
+        ret=sparql.queryAndConvert()
+        print(f"\nFuseki Response Q10:")
+        for result in ret['results']['bindings']:
+            print(result['description']['value'])
+    except Exception as e:
+        print(e)
 # Fuseki query 11: to get [grade] of [student] who completed a given [course] [number]
 def FusekiQuery11(sparql, value_stu, value_id, value_course):
     escaped_value_id = re.escape(value_id)

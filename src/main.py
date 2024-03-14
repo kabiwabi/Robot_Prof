@@ -5,7 +5,7 @@ from rdflib.namespace import RDFS, FOAF, DCTERMS, XSD
 import urllib.parse
 import StudentGenerator as SG
 
-SPARQLSERVER=False
+SPARQLSERVER=True
 if(SPARQLSERVER):
     import Fuseki_Queries as FQ
 
@@ -46,6 +46,41 @@ def what_course_contains_topic(graph, keyword):
         initBindings={'keyword': Literal(escaped_keyword)}
     )
     return [str(row.courseName) for row in query_result]
+# SPARQL query 4: List all [courses] offered by [university] within the [subject] (e.g., “COMP”, “SOEN”).
+def all_courses_offered_Uni_in_Subject(graph, value_uni, value_courseName):
+    escaped_value_uni = re.escape(value_uni)
+    escaped_value_courseName = re.escape(value_courseName)
+    query_result = graph.query(
+        """
+        SELECT ?course ?university WHERE{
+            ?course vivo:courseCode ?courseCode .  
+  			?course rdfs:label ?name .
+            ?course vivo:offeredBy ?university .
+            FILTER regex(str(?courseCode), ?value_courseName, "i") .
+            FILTER regex(str(?university), ?value_uni,"i") .
+        }
+        """,
+        initBindings={'value_courseName': Literal(escaped_value_courseName), 'value_uni': Literal(escaped_value_uni, datatype=XSD.string)}
+    )
+    return [(str(row.course), str(row.university)) for row in query_result]
+# SPARQL query 10: What competencies [topics] does a student gain after completing [course] [number]?
+def competencies_gained_from_course_courseNum(graph, value_courseCode, value_courseNum):
+    escaped_value_courseName = re.escape(value_courseCode)
+    escaped_value_courseNumber = re.escape(value_courseNum)
+    query_result = graph.query(
+        """
+        SELECT ?description WHERE{
+            ?course vivo:courseCode ?courseCode .  
+  			?course vivo:courseNumber ?courseNumber .
+  			?course vivo:description ?description
+            FILTER regex(str(?courseCode), ?value_courseName, "i") .
+            FILTER regex(str(?courseNumber), ?value_courseNumber,"i") .
+        }
+        """,
+        initBindings={'value_courseName': Literal(escaped_value_courseName), 'value_courseNumber': Literal(escaped_value_courseNumber, datatype=XSD.string)}
+    )
+    return [(str(row.description)) for row in query_result]
+
 
 # SPARQL query 11: to get [grade] of [student] who completed a given [course] [number]
 def get_grades_of_student_who_completed_course(graph, value_stu, value_id, value_course):
@@ -171,6 +206,20 @@ def main():
     for course in courses_discussing_topic:
         print(course)
 
+    #fourth query: all courses belonging to COEN from Concordia
+    example = all_courses_offered_Uni_in_Subject(g,"conc","COEN")
+    i=1
+    print("\n\nQ4: These are the courses within [Coen] offered by [concordia]")
+    for  course, uni in (example):
+        print(f"{i}: {course} offerend by: {uni}")
+        i+=1
+
+    #tenth query:
+    sol=competencies_gained_from_course_courseNum(g,"stat","380")
+    print("\n\nQ10:")
+    for description in sol:
+        print(description)
+
     # eleventh query: get [grade] of [student] who has complete [course] [number]
     students_who_completed_x = get_grades_of_student_who_completed_course(g, "Ilise", "506", "coms")
     print(f"\n Q11:\nIlise Ramsey Completed: Coms 506 with grade of:")
@@ -192,7 +241,9 @@ def main():
 
     if SPARQLSERVER:
         FQ.FusekiQuery1(sparql)
-        FQ.FusekiQuery2(sparql,topic_keyword)
+        FQ.FusekiQuery2(sparql,"artificial intelligence")
+        FQ.FusekiQuery4(sparql,"conc","coen")
+        FQ.FusekiQuery10(sparql,"stat","380")
         FQ.FusekiQuery11(sparql,"Ilise", "506", "coms")
         FQ.FusekiQuery12(sparql,"506", "Coms")
         FQ.FusekiQuery13(sparql,"Braun")
