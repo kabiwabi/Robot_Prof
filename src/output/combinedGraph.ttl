@@ -4,8 +4,12 @@
 @prefix vivo: <http://vivoweb.org/ontology/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+vivo:Course a rdfs:Class .
+
 vivo:Student a rdfs:Class ;
     rdfs:range foaf:Person .
+
+vivo:University a rdfs:Class .
 
 <http://example.org/Student/Braun,Courtenay> a vivo:Student ;
     ex:HasEmail "co_bra@live.concordia.ca"^^xsd:string ;
@@ -5154,7 +5158,9 @@ Co-listé : FTRA 544 ou 545""",
         " This course introduces students to the historical origins of the concept of human rights; the international regime and the acceptance of several generations of rights such as civil and political rights, economic rights, group rights, and women’s rights; the critiques of universalism and the problems of implementation of human rights." ;
     vivo:offeredBy <http://example.org/vocab/ConcordiaUniversity> .
 
-<http://example.org/vocab/ConcordiaUniversity> a foaf:Organization ;
+<http://example.org/vocab/ConcordiaUniversity> a vivo:University ;
     rdfs:label "Concordia University" ;
-    vivo:description "A public university located in Montreal, Quebec, Canada." .
+    vivo:description "A public university located in Montreal, Quebec, Canada." ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Concordia_University>,
+        <https://www.wikidata.org/wiki/Q1108272> .
 
