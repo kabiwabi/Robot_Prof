@@ -5,8 +5,8 @@ from rdflib.namespace import RDFS, FOAF, DCTERMS, XSD
 import urllib.parse
 import StudentGenerator as SG
 
-SPARQLSERVER=True
-if(SPARQLSERVER):
+SPARQLSERVER = False
+if (SPARQLSERVER):
     import Fuseki_Queries as FQ
 
 # Define the namespaces
@@ -31,6 +31,8 @@ def get_courses_and_universities(graph):
         """
     )
     return [(str(row.course), str(row.name), str(row.university)) for row in query_result]
+
+
 # SPARQL query 2: to find what course covers a specific topic
 def what_course_contains_topic(graph, keyword):
     escaped_keyword = re.escape(keyword)
@@ -46,6 +48,8 @@ def what_course_contains_topic(graph, keyword):
         initBindings={'keyword': Literal(escaped_keyword)}
     )
     return [str(row.courseName) for row in query_result]
+
+
 # SPARQL query 4: List all [courses] offered by [university] within the [subject] (e.g., “COMP”, “SOEN”).
 def all_courses_offered_Uni_in_Subject(graph, value_uni, value_courseName):
     escaped_value_uni = re.escape(value_uni)
@@ -60,9 +64,12 @@ def all_courses_offered_Uni_in_Subject(graph, value_uni, value_courseName):
             FILTER regex(str(?university), ?value_uni,"i") .
         }
         """,
-        initBindings={'value_courseName': Literal(escaped_value_courseName), 'value_uni': Literal(escaped_value_uni, datatype=XSD.string)}
+        initBindings={'value_courseName': Literal(escaped_value_courseName),
+                      'value_uni': Literal(escaped_value_uni, datatype=XSD.string)}
     )
     return [(str(row.course), str(row.university)) for row in query_result]
+
+
 # SPARQL query 10: What competencies [topics] does a student gain after completing [course] [number]?
 def competencies_gained_from_course_courseNum(graph, value_courseCode, value_courseNum):
     escaped_value_courseName = re.escape(value_courseCode)
@@ -77,7 +84,8 @@ def competencies_gained_from_course_courseNum(graph, value_courseCode, value_cou
             FILTER regex(str(?courseNumber), ?value_courseNumber,"i") .
         }
         """,
-        initBindings={'value_courseName': Literal(escaped_value_courseName), 'value_courseNumber': Literal(escaped_value_courseNumber, datatype=XSD.string)}
+        initBindings={'value_courseName': Literal(escaped_value_courseName),
+                      'value_courseNumber': Literal(escaped_value_courseNumber, datatype=XSD.string)}
     )
     return [(str(row.description)) for row in query_result]
 
@@ -90,22 +98,24 @@ def get_grades_of_student_who_completed_course(graph, value_stu, value_id, value
 
     query_result = graph.query(
         """  
-SELECT ?grade WHERE{
-    ?stu a vivo:Student .
-    ?stu vivo:HasId ?stuId .
-    ?stu foaf:name ?name .
-  	?stu vivo:HasTaken ?subjectURI .
-  	?subjectURI vivo:Grade ?grade .
-  FILTER regex(str(?subjectURI),?value_id,"i") .
-  FILTER regex(str(?subjectURI),?value_course,"i") .
-  FILTER regex(str(?stu),?value_student,"i") .
-}
+        SELECT ?grade WHERE{
+            ?stu a vivo:Student .
+            ?stu vivo:HasId ?stuId .
+            ?stu foaf:name ?name .
+          	?stu vivo:HasTaken ?subjectURI .
+          	?subjectURI vivo:Grade ?grade .
+            FILTER regex(str(?subjectURI),?value_id,"i") .
+            FILTER regex(str(?subjectURI),?value_course,"i") .
+            FILTER regex(str(?stu),?value_student,"i") .
+        }
         """,
         initBindings={'value_id': Literal(escaped_value_id, datatype=XSD.string),
                       'value_course': Literal(escaped_value_course, datatype=XSD.string),
                       'value_student': Literal(escaped_value_student, datatype=XSD.string)}
     )
     return [str(row.grade) for row in query_result]
+
+
 # SPARQL query 12:  to get {students:grade} who completed a given {course: number}
 def get_students_who_completed_course(graph, value_id, value_course):
     escaped_value_id = re.escape(value_id)
@@ -113,19 +123,20 @@ def get_students_who_completed_course(graph, value_id, value_course):
 
     query_result = graph.query(
         """  
-SELECT ?name ?stuId WHERE{
-    ?stu a vivo:Student .
-    ?stu vivo:HasId ?stuId .
-    ?stu foaf:name ?name .
-  	?stu vivo:HasTaken ?subjectURI .
-  FILTER regex(str(?subjectURI),?value_id,"i") .
-  FILTER regex(str(?subjectURI),?value_course,"i") .
-}
+        SELECT ?name ?stuId WHERE{
+            ?stu a vivo:Student .
+            ?stu vivo:HasId ?stuId .
+            ?stu foaf:name ?name .
+          	?stu vivo:HasTaken ?subjectURI .
+            FILTER regex(str(?subjectURI),?value_id,"i") .
+            FILTER regex(str(?subjectURI),?value_course,"i") .
+        }
         """,
         initBindings={'value_id': Literal(escaped_value_id, datatype=XSD.string),
                       'value_course': Literal(escaped_value_course, datatype=XSD.string)}
     )
     return query_result
+
 
 # SPARQL query 13: print a transcript for {students}
 def get_students_Transcript(graph, value_stu):
@@ -133,23 +144,24 @@ def get_students_Transcript(graph, value_stu):
 
     query_result = graph.query(
         """        
-SELECT ?name ?stuId ?subjectURI ?sem ?grade  WHERE{
-    ?stu a vivo:Student .
-    ?stu vivo:HasId ?stuId .
-    ?stu foaf:name ?name .
-    ?stu vivo:HasTaken ?subjectURI .
-    ?subjectURI vivo:Semester ?sem .
-    ?subjectURI vivo:Grade ?grade .
-  filter regex(?name,?value_student,"i")
-}
+        SELECT ?name ?stuId ?subjectURI ?sem ?grade  WHERE{
+            ?stu a vivo:Student .
+            ?stu vivo:HasId ?stuId .
+            ?stu foaf:name ?name .
+            ?stu vivo:HasTaken ?subjectURI .
+            ?subjectURI vivo:Semester ?sem .
+            ?subjectURI vivo:Grade ?grade .
+            FILTER regex(?name,?value_student,"i")
+        }
         """,
         initBindings={'value_student': Literal(escaped_value_student, datatype=XSD.string)}
     )
     return query_result
 
+
 def main():
-    if(SPARQLSERVER):
-        sparql=FQ.initSparqlWrapper()
+    if (SPARQLSERVER):
+        sparql = FQ.initSparqlWrapper()
 
     csv_file_path = './res/CATALOG.csv'
     dataframe = pd.read_csv(csv_file_path)
@@ -206,16 +218,16 @@ def main():
     for course in courses_discussing_topic:
         print(course)
 
-    #fourth query: all courses belonging to COEN from Concordia
-    example = all_courses_offered_Uni_in_Subject(g,"conc","COEN")
-    i=1
+    # fourth query: all courses belonging to COEN from Concordia
+    example = all_courses_offered_Uni_in_Subject(g, "conc", "COEN")
+    i = 1  # index used
     print("\n\nQ4: These are the courses within [Coen] offered by [concordia]")
-    for  course, uni in (example):
+    for course, uni in (example):
         print(f"{i}: {course} offerend by: {uni}")
-        i+=1
+        i += 1
 
-    #tenth query:
-    sol=competencies_gained_from_course_courseNum(g,"stat","380")
+    # tenth query:
+    sol = competencies_gained_from_course_courseNum(g, "stat", "380")
     print("\n\nQ10:")
     for description in sol:
         print(description)
@@ -235,18 +247,19 @@ def main():
     # thirteenth query: print transcript for a [student] listing all courses along with grade acheived
     student_transcript = get_students_Transcript(g, "Braun")
     print('\nQuery 13')
-    #?name ?stuId ?subjectURI ?sem ?grade
-    for name,stuID,subject, sem, grade in student_transcript:
+    # ?name ?stuId ?subjectURI ?sem ?grade
+    for name, stuID, subject, sem, grade in student_transcript:
         print(f"{name} {sem} {subject} {grade} ")
 
     if SPARQLSERVER:
         FQ.FusekiQuery1(sparql)
-        FQ.FusekiQuery2(sparql,"artificial intelligence")
-        FQ.FusekiQuery4(sparql,"conc","coen")
-        FQ.FusekiQuery10(sparql,"stat","380")
-        FQ.FusekiQuery11(sparql,"Ilise", "506", "coms")
-        FQ.FusekiQuery12(sparql,"506", "Coms")
-        FQ.FusekiQuery13(sparql,"Braun")
+        FQ.FusekiQuery2(sparql, "artificial intelligence")
+        FQ.FusekiQuery4(sparql, "conc", "coen")
+        FQ.FusekiQuery10(sparql, "stat", "380")
+        FQ.FusekiQuery11(sparql, "Ilise", "506", "coms")
+        FQ.FusekiQuery12(sparql, "506", "Coms")
+        FQ.FusekiQuery13(sparql, "Braun")
+
 
 if __name__ == '__main__':
     main()
