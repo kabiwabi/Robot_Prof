@@ -1,0 +1,11 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vivo: <http://vivoweb.org/ontology/core#> .
+
+vivo:University a rdfs:Class .
+
+<http://example.org/vocab/ConcordiaUniversity> a vivo:University ;
+    rdfs:label "Concordia University" ;
+    vivo:description "A public university located in Montreal, Quebec, Canada." ;
+    rdfs:seeAlso <http://dbpedia.org/resource/Concordia_University>,
+        <https://www.wikidata.org/wiki/Q1108272> .
+
