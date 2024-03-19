@@ -16,7 +16,9 @@ This project aims to build a knowledge graph for an educational assistant using 
     - `student.ttl`: The serialized student data in Turtle format
     - `course.ttl`: The serialized course data in Turtle format
     - `university.ttl`: The serialized university data in Turtle format
+    - `lecture_and_topics.ttl`: The serialized lecture & topics data in Turtle format
   - `main.py`: The main script that builds the knowledge graph
   - `CourseBuilder.py`: Constructs course-related data in the knowledge graph
   - `StudentBuilder.py`: Constructs student-related data in the knowledge graph
   - `UniversityBuilder.py`: Constructs university-related data in the knowledge graph
+  - `LectureAndTopicsBuilder.py`: Constructs lecture and topic-related data in the knowledge graph
