@@ -6,7 +6,7 @@ This project aims to build a knowledge graph for an educational assistant using 
 
 - `src/`: Contains the source code files
   - `queries/`:
-    - `Fuseki_Queries.py`: Contains SPARQL queries for retrieving data from the knowledge graph
+    - `Fuseki_Queries.py`: Contains Fuseki Endpoint queries for retrieving data from the knowledge graph
     - `Query.py`: Handles the execution of SPARQL queries
     - `QueryHelper.py`: Provides helper functions for working with queries
   - `res/`: Stores any necessary resource files
@@ -20,6 +20,7 @@ This project aims to build a knowledge graph for an educational assistant using 
     - `university.ttl`: The serialized university data in Turtle format
     - `lecture_and_topics.ttl`: The serialized lecture & topics data in Turtle format
     - `query_results/`: Contains the results of SPARQL queries'
+    - `fuseki_#_output/`: Contains the results of Fuseki Endpoint queries'
   - `main.py`: The main script that builds the knowledge graph
   - `CourseBuilder.py`: Constructs course-related data in the knowledge graph
   - `StudentBuilder.py`: Constructs student-related data in the knowledge graph
