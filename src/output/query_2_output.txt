@@ -1,0 +1,12 @@
+
+Courses discussing 'programming':
+http://example.org/vocab/IMCA-221
+http://example.org/vocab/%C2%A0-%C2%A0
+http://example.org/vocab/PHYS-679%2A
+http://example.org/vocab/PHYS-236
+http://example.org/vocab/PHYS-440
+http://example.org/vocab/STAT-497
+http://example.org/vocab/STAT-280
+http://example.org/vocab/STAT-380
+http://example.org/vocab/IMCA-322
+http://example.org/vocab/MAST-397

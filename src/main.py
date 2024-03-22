@@ -13,7 +13,6 @@ if (SPARQLSERVER):
 
 # Define the namespaces
 vivo = Namespace("http://vivoweb.org/ontology/core#")
-schema = Namespace("http://schema.org/")
 
 def main():
     if (SPARQLSERVER):
@@ -39,19 +38,19 @@ def main():
     g.serialize(destination=turtle_file_path, format='turtle')
 
     # Execute specific queries
-    # Query.execute_query(g, 1)  # Query 1: Get all courses and their universities
-    # Query.execute_query(g, 2, "programming")  # Query 2: Find courses covering a specific topic
-    # Query.execute_query(g, 3, "COMP-474", 1)  # Query 3: Topics covered in a specific lecture of a course
-    # Query.execute_query(g, 4, "ConcordiaUniversity", "COMP")
-    # Query.execute_query(g, 5, EX.LectureSlides, DBPEDIA.Intelligent_system, "COMP-474")  # Query 5: Materials (slides) recommended for a topic in a course
-    # Query.execute_query(g, 6, "COMP", "474")  # Query 6: Credits for a specific course
-    # Query.execute_query(g, 7, "COMP", "474")  # Query 7: Additional resources for a specific course
-    # Query.execute_query(g, 8, "COMP-474", "474", 1)  # Query 8: Content for a specific lecture in a course
-    # Query.execute_query(g, 9, "Information retrieval", "COMP-479")  # Query 9: Reading materials for a topic in a course
-    # Query.execute_query(g, 10, "stat", "380")  # Query 10: Competencies gained from a course
-    # Query.execute_query(g, 11, "Ilise", "506","coms")  # Query 11: Get grade of a student who completed a course
-    # Query.execute_query(g, 12, "506", "Coms")  # Query 12: Students who completed a specific course
-    # Query.execute_query(g, 13, "Braun")  # Query 13: Print transcript for a student
+    Query.execute_query(g, 1)  # Query 1: Get all courses and their universities
+    Query.execute_query(g, 2, "programming")  # Query 2: Find courses covering a specific topic
+    Query.execute_query(g, 3, "COMP-479", 1)  # Query 3: Topics covered in a specific lecture of a course
+    Query.execute_query(g, 4, "ConcordiaUniversity", "COMP")
+    Query.execute_query(g, 5, DBPEDIA.Intelligent_system, "COMP","474")  # Query 5: Materials recommended for a topic in a course
+    Query.execute_query(g, 6, "COMP", "479")  # Query 6: Credits for a specific course
+    Query.execute_query(g, 7, "COMP", "474")  # Query 7: Additional resources for a specific course
+    Query.execute_query(g, 8, "COMP", "474", 1)  # Query 8: Content for a specific lecture in a course
+    Query.execute_query(g, 9, DBPEDIA.Information_retrieval, "COMP","479")  # Query 9: Reading materials for a topic in a course
+    Query.execute_query(g, 10, "stat", "380")  # Query 10: Competencies gained from a course
+    Query.execute_query(g, 11, "Ilise", "506","coms")  # Query 11: Get grade of a student who completed a course
+    Query.execute_query(g, 12, "506", "Coms")  # Query 12: Students who completed a specific course
+    Query.execute_query(g, 13, "Braun")  # Query 13: Print transcript for a student
 
     if SPARQLSERVER:
         FQ.FusekiQuery1(sparql)
