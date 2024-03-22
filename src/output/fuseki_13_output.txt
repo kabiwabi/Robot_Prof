@@ -1,0 +1,11 @@
+
+Fuseki Response Q13:
+Transcript for student:
+Courtenay Braun 156223 http://vivoweb.org/ontology/core#Fall2022 http://example.org/vocab/BIOL_515 B- 
+Courtenay Braun 156223 http://vivoweb.org/ontology/core#Fall2022 http://example.org/vocab/CHEM_325 F+ 
+Courtenay Braun 156223 http://vivoweb.org/ontology/core#Fall2022 http://example.org/vocab/ECON_200 F- 
+Courtenay Braun 156223 http://vivoweb.org/ontology/core#Fall2022 http://example.org/vocab/FTRA_612 D+ 
+Courtenay Braun 156223 http://vivoweb.org/ontology/core#Summer2022 http://example.org/vocab/HIST_498 D 
+Courtenay Braun 156223 http://vivoweb.org/ontology/core#Summer2022 http://example.org/vocab/PHYS_760 A- 
+Courtenay Braun 156223 http://vivoweb.org/ontology/core#Summer2022 http://example.org/vocab/PSYC_840 C 
+Courtenay Braun 156223 http://vivoweb.org/ontology/core#Summer2022 http://example.org/vocab/URBS_420 C 

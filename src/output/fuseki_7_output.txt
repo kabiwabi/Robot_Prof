@@ -1,0 +1,3 @@
+
+Query 7: Additional resources for COMP 474:
+http://example.org/COMP-474/resources

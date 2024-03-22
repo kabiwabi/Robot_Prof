@@ -1,0 +1,2 @@
+Fueski Response 3: Topics covered in COMP-479 during lecture 1:
+https://dbpedia.org/resource/Information_retrieval

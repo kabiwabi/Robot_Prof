@@ -1,0 +1,82 @@
+Fueski Response Q4:1: http://example.org/vocab/COMP Operating Systems
+2: http://example.org/vocab/COMP Advanced Computer Graphics
+3: http://example.org/vocab/COMP Advanced Database Techniques and Applications
+4: http://example.org/vocab/COMP Advanced Game Development
+5: http://example.org/vocab/COMP Advanced Program Design with C++
+6: http://example.org/vocab/COMP Animation for Computer Games
+7: http://example.org/vocab/COMP Artificial Intelligence
+8: http://example.org/vocab/COMP Compiler Design
+9: http://example.org/vocab/COMP Computer Graphics
+10: http://example.org/vocab/COMP Computer Networks and Protocols
+11: http://example.org/vocab/COMP Computer Organization and Assembly Language
+12: http://example.org/vocab/COMP Computer Science Industrial Experience Reflective Learning II
+13: http://example.org/vocab/COMP Computer Science Industrial Experience Work Term I
+14: http://example.org/vocab/COMP Computer Science Industrial Experience Work Term II
+15: http://example.org/vocab/COMP Computer Science Project I
+16: http://example.org/vocab/COMP Computer Science Project II
+17: http://example.org/vocab/COMP Computer ScienceIndustrial Experience Reflective Learning I
+18: http://example.org/vocab/COMP Data Communication and Computer Networks
+19: http://example.org/vocab/COMP Database Design
+20: http://example.org/vocab/COMP Databases
+21: http://example.org/vocab/COMP Discrete Structures and Formal Languages
+22: http://example.org/vocab/COMP Image Processing
+23: http://example.org/vocab/COMP Information Retrieval and Web Search
+24: http://example.org/vocab/COMP Intelligent Systems
+25: http://example.org/vocab/COMP Introduction to Artificial Intelligence
+26: http://example.org/vocab/COMP Introduction to Game Development
+27: http://example.org/vocab/COMP Introduction to Software Engineering
+28: http://example.org/vocab/COMP Machine Learning
+29: http://example.org/vocab/COMP Multicore Programming
+30: http://example.org/vocab/COMP Object‑Oriented Programming I
+31: http://example.org/vocab/COMP Parallel Programming
+32: http://example.org/vocab/COMP Pattern Recognition
+33: http://example.org/vocab/COMP Principles of Data Structures
+34: http://example.org/vocab/COMP Programming and Problem Solving
+35: http://example.org/vocab/COMP System Software Design
+36: http://example.org/vocab/COMP Tools and Techniques for Software Engineering
+37: http://example.org/vocab/COMP-107 Computer Science Industrial Experience Work Term I
+38: http://example.org/vocab/COMP-108 Computer ScienceIndustrial Experience Reflective Learning I
+39: http://example.org/vocab/COMP-207 Computer Science Industrial Experience Work Term II
+40: http://example.org/vocab/COMP-208 Computer Science Industrial Experience Reflective Learning II
+41: http://example.org/vocab/COMP-248 Object‑Oriented Programming I
+42: http://example.org/vocab/COMP-249 Object‑Oriented Programming I
+43: http://example.org/vocab/COMP-345 Advanced Program Design with C++
+44: http://example.org/vocab/COMP-346 Operating Systems
+45: http://example.org/vocab/COMP-353 Databases
+46: http://example.org/vocab/COMP-354 Introduction to Software Engineering
+47: http://example.org/vocab/COMP-371 Computer Graphics
+48: http://example.org/vocab/COMP-376 Introduction to Game Development
+49: http://example.org/vocab/COMP-426 Multicore Programming
+50: http://example.org/vocab/COMP-428 Parallel Programming
+51: http://example.org/vocab/COMP-442 Compiler Design
+52: http://example.org/vocab/COMP-444 System Software Design
+53: http://example.org/vocab/COMP-445 Data Communication and Computer Networks
+54: http://example.org/vocab/COMP-451 Database Design
+55: http://example.org/vocab/COMP-472 Artificial Intelligence
+56: http://example.org/vocab/COMP-473 Pattern Recognition
+57: http://example.org/vocab/COMP-474 Intelligent Systems
+58: http://example.org/vocab/COMP-476 Advanced Game Development
+59: http://example.org/vocab/COMP-477 Animation for Computer Games
+60: http://example.org/vocab/COMP-478 Image Processing
+61: http://example.org/vocab/COMP-479 Information Retrieval and Web Search
+62: http://example.org/vocab/COMP-490 Computer Science Project I
+63: http://example.org/vocab/COMP-492 Computer Science Project II
+64: http://example.org/vocab/COMP-5201 Computer Organization and Assembly Language
+65: http://example.org/vocab/COMP-5361 Discrete Structures and Formal Languages
+66: http://example.org/vocab/COMP-5461 Operating Systems
+67: http://example.org/vocab/COMP-5481 Programming and Problem Solving
+68: http://example.org/vocab/COMP-5511 Principles of Data Structures
+69: http://example.org/vocab/COMP-5541 Tools and Techniques for Software Engineering
+70: http://example.org/vocab/COMP-628 Parallel Programming
+71: http://example.org/vocab/COMP-6311 Animation for Computer Games
+72: http://example.org/vocab/COMP-6321 Machine Learning
+73: http://example.org/vocab/COMP-6331 Advanced Game Development
+74: http://example.org/vocab/COMP-6421 Compiler Design
+75: http://example.org/vocab/COMP-6461 Computer Networks and Protocols
+76: http://example.org/vocab/COMP-6521 Advanced Database Techniques and Applications
+77: http://example.org/vocab/COMP-6721 Introduction to Artificial Intelligence
+78: http://example.org/vocab/COMP-6731 Pattern Recognition
+79: http://example.org/vocab/COMP-6741 Intelligent Systems
+80: http://example.org/vocab/COMP-6761 Advanced Computer Graphics
+81: http://example.org/vocab/COMP-6771 Image Processing
+82: http://example.org/vocab/COMP-6791 Information Retrieval and Web Search
