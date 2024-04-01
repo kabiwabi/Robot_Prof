@@ -280,6 +280,60 @@ def get_students_Transcript(graph, value_stu):
     )
     return query_result
 
+def query_topics_by_course(course_uri):
+    query = f"""
+        SELECT DISTINCT ?topic ?label ?event ?resource
+        WHERE {{
+            <{course_uri}> vivo:hasTopic ?topic .
+            ?topic rdfs:label ?label .
+            ?event vivo:coversTopic ?topic .
+            ?resource vivo:mentionsTopic ?topic .
+        }}
+    """
+    return query
+
+def query_courses_by_topic(topic_uri):
+    query = f"""
+        SELECT ?course ?event (COUNT(?topic) AS ?count)
+        WHERE {{
+            ?course vivo:hasTopic <{topic_uri}> .
+            ?event vivo:coversTopic <{topic_uri}> .
+            ?event vivo:partOf ?course .
+            ?resource vivo:mentionsTopic <{topic_uri}> .
+        }}
+        GROUP BY ?course ?event
+        ORDER BY DESC(?count)
+    """
+    return query
+
+def query_topic_coverage(topic_uri):
+    query = f"""
+        SELECT ?course ?event ?resource
+        WHERE {{
+            ?course vivo:hasTopic <{topic_uri}> .
+            ?event vivo:coversTopic <{topic_uri}> .
+            ?event vivo:partOf ?course .
+            ?resource vivo:mentionsTopic <{topic_uri}> .
+        }}
+    """
+    return query
+
+def query_missing_topics(course_uri):
+    query = f"""
+        SELECT ?event ?resource
+        WHERE {{
+            ?event vivo:partOf <{course_uri}> .
+            ?resource vivo:partOf ?event .
+            FILTER NOT EXISTS {{
+                ?event vivo:coversTopic ?topic .
+            }}
+            FILTER NOT EXISTS {{
+                ?resource vivo:mentionsTopic ?topic .
+            }}
+        }}
+    """
+    return query
+
 def execute_query(g, query_number, *args):
     output_dir = "./output"
     output_file = f"{output_dir}/query_{query_number}_output.txt"
