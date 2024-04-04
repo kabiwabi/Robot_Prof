@@ -371,7 +371,7 @@ def FusekiQuery13(sparql, value_stu):
 
 
 def execute_fuseki_query(sparql, query_number, *args):
-    output_dir = "./output"
+    output_dir = "src/output"
     output_file = f"{output_dir}/fuseki_{query_number}_output.txt"
     with open(output_file, 'w', encoding="utf-8") as file:
         match query_number:

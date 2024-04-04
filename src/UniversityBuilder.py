@@ -1,8 +1,8 @@
 from rdflib import Graph, URIRef, Literal, Namespace, RDF
 from rdflib.namespace import FOAF, RDFS
 
-
 vivo = Namespace("http://vivoweb.org/ontology/core#")
+
 
 def build_university_graph():
     g = Graph()
@@ -20,7 +20,7 @@ def build_university_graph():
     g.add((concordia_uri, RDFS.seeAlso, URIRef("https://www.wikidata.org/wiki/Q1108272")))
     g.add((concordia_uri, vivo.description, Literal("A public university located in Montreal, Quebec, Canada.")))
 
-    g.serialize(destination='./output/university.ttl', format='turtle')
+    g.serialize(destination='src/output/university.ttl', format='turtle')
 
     # Return the graph
     return g

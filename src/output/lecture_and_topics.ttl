@@ -26,85 +26,85 @@ ex:LectureWorksheet a rdfs:Class ;
 
 <http://example.org/COMP-474/lecture1> a ex:Lecture ;
     ex:coversTopic dbpedia:Intelligent_system ;
-    vivo:hasAssociatedDocument <file:///./res/COMP-474/lectures%5Creading_reading01.pdf>,
-        <file:///./res/COMP-474/lectures%5Cslides_01.pdf>,
-        <file:///./res/COMP-474/lectures%5Cworksheet_01.pdf> ;
+    vivo:hasAssociatedDocument <file:///src/res/COMP-474/lectures%5Creading_reading01.pdf>,
+        <file:///src/res/COMP-474/lectures%5Cslides_01.pdf>,
+        <file:///src/res/COMP-474/lectures%5Cworksheet_01.pdf> ;
     vivo:partOf ex:COMP-474 ;
     vivo:rank 1 .
 
 <http://example.org/COMP-474/lecture2> a ex:Lecture ;
     ex:coversTopic dbpedia:Knowledge_representation_and_reasoning ;
-    vivo:hasAssociatedDocument <file:///./res/COMP-474/lectures%5Creading_reading02.pdf>,
-        <file:///./res/COMP-474/lectures%5Cslides_01.pdf>,
-        <file:///./res/COMP-474/lectures%5Cslides_02.pdf>,
-        <file:///./res/COMP-474/lectures%5Cworksheet_02.pdf> ;
+    vivo:hasAssociatedDocument <file:///src/res/COMP-474/lectures%5Creading_reading02.pdf>,
+        <file:///src/res/COMP-474/lectures%5Cslides_01.pdf>,
+        <file:///src/res/COMP-474/lectures%5Cslides_02.pdf>,
+        <file:///src/res/COMP-474/lectures%5Cworksheet_02.pdf> ;
     vivo:partOf ex:COMP-474 ;
     vivo:rank 2 .
 
 <http://example.org/COMP-474/lecture3> a ex:Lecture ;
-    vivo:hasAssociatedDocument <file:///./res/COMP-474/lectures%5Cslides_02.pdf> ;
+    vivo:hasAssociatedDocument <file:///src/res/COMP-474/lectures%5Cslides_02.pdf> ;
     vivo:partOf ex:COMP-474 ;
     vivo:rank 3 .
 
 <http://example.org/COMP-474/lecture4> a ex:Lecture ;
-    vivo:hasAssociatedDocument <file:///./res/COMP-474/lectures%5Cslides_03.pdf> ;
+    vivo:hasAssociatedDocument <file:///src/res/COMP-474/lectures%5Cslides_03.pdf> ;
     vivo:partOf ex:COMP-474 ;
     vivo:rank 4 .
 
 <http://example.org/COMP-474/lecture5> a ex:Lecture ;
-    vivo:hasAssociatedDocument <file:///./res/COMP-474/lectures%5Cworksheet_01.pdf> ;
+    vivo:hasAssociatedDocument <file:///src/res/COMP-474/lectures%5Cworksheet_01.pdf> ;
     vivo:partOf ex:COMP-474 ;
     vivo:rank 5 .
 
 <http://example.org/COMP-474/lecture6> a ex:Lecture ;
-    vivo:hasAssociatedDocument <file:///./res/COMP-474/lectures%5Cworksheet_02.pdf> ;
+    vivo:hasAssociatedDocument <file:///src/res/COMP-474/lectures%5Cworksheet_02.pdf> ;
     vivo:partOf ex:COMP-474 ;
     vivo:rank 6 .
 
 <http://example.org/COMP-474/lecture7> a ex:Lecture ;
-    vivo:hasAssociatedDocument <file:///./res/COMP-474/lectures%5Cworksheet_03.pdf> ;
+    vivo:hasAssociatedDocument <file:///src/res/COMP-474/lectures%5Cworksheet_03.pdf> ;
     vivo:partOf ex:COMP-474 ;
     vivo:rank 7 .
 
 <http://example.org/COMP-479/lecture1> a ex:Lecture ;
     ex:coversTopic dbpedia:Information_retrieval ;
-    vivo:hasAssociatedDocument <file:///./res/COMP-479/lectures%5Creading_reading01.pdf>,
-        <file:///./res/COMP-479/lectures%5Cslides_01.pdf>,
-        <file:///./res/COMP-479/lectures%5Cworksheet_01.pdf> ;
+    vivo:hasAssociatedDocument <file:///src/res/COMP-479/lectures%5Creading_reading01.pdf>,
+        <file:///src/res/COMP-479/lectures%5Cslides_01.pdf>,
+        <file:///src/res/COMP-479/lectures%5Cworksheet_01.pdf> ;
     vivo:partOf ex:COMP-479 ;
     vivo:rank 1 .
 
 <http://example.org/COMP-479/lecture2> a ex:Lecture ;
     ex:coversTopic dbpedia:Web_search_engine ;
-    vivo:hasAssociatedDocument <file:///./res/COMP-479/lectures%5Creading_reading02.pdf>,
-        <file:///./res/COMP-479/lectures%5Cslides_01intro.pdf>,
-        <file:///./res/COMP-479/lectures%5Cslides_02.pdf>,
-        <file:///./res/COMP-479/lectures%5Cworksheet_02.pdf> ;
+    vivo:hasAssociatedDocument <file:///src/res/COMP-479/lectures%5Creading_reading02.pdf>,
+        <file:///src/res/COMP-479/lectures%5Cslides_01intro.pdf>,
+        <file:///src/res/COMP-479/lectures%5Cslides_02.pdf>,
+        <file:///src/res/COMP-479/lectures%5Cworksheet_02.pdf> ;
     vivo:partOf ex:COMP-479 ;
     vivo:rank 2 .
 
 <http://example.org/COMP-479/lecture3> a ex:Lecture ;
-    vivo:hasAssociatedDocument <file:///./res/COMP-479/lectures%5Cslides_02voc.pdf> ;
+    vivo:hasAssociatedDocument <file:///src/res/COMP-479/lectures%5Cslides_02voc.pdf> ;
     vivo:partOf ex:COMP-479 ;
     vivo:rank 3 .
 
 <http://example.org/COMP-479/lecture4> a ex:Lecture ;
-    vivo:hasAssociatedDocument <file:///./res/COMP-479/lectures%5Cslides_03dict.pdf> ;
+    vivo:hasAssociatedDocument <file:///src/res/COMP-479/lectures%5Cslides_03dict.pdf> ;
     vivo:partOf ex:COMP-479 ;
     vivo:rank 4 .
 
 <http://example.org/COMP-479/lecture5> a ex:Lecture ;
-    vivo:hasAssociatedDocument <file:///./res/COMP-479/lectures%5Cworksheet_01.pdf> ;
+    vivo:hasAssociatedDocument <file:///src/res/COMP-479/lectures%5Cworksheet_01.pdf> ;
     vivo:partOf ex:COMP-479 ;
     vivo:rank 5 .
 
 <http://example.org/COMP-479/lecture6> a ex:Lecture ;
-    vivo:hasAssociatedDocument <file:///./res/COMP-479/lectures%5Cworksheet_02.pdf> ;
+    vivo:hasAssociatedDocument <file:///src/res/COMP-479/lectures%5Cworksheet_02.pdf> ;
     vivo:partOf ex:COMP-479 ;
     vivo:rank 6 .
 
 <http://example.org/COMP-479/lecture7> a ex:Lecture ;
-    vivo:hasAssociatedDocument <file:///./res/COMP-479/lectures%5Cworksheet_03.pdf> ;
+    vivo:hasAssociatedDocument <file:///src/res/COMP-479/lectures%5Cworksheet_03.pdf> ;
     vivo:partOf ex:COMP-479 ;
     vivo:rank 7 .
 
@@ -112,50 +112,50 @@ ex:coversTopic a rdf:Property ;
     rdfs:domain ex:Lecture ;
     rdfs:range dbpedia:Resource .
 
-<file:///./res/COMP-474/lectures%5Creading_reading01.pdf> a ex:LectureReading ;
+<file:///src/res/COMP-474/lectures%5Creading_reading01.pdf> a ex:LectureReading ;
     ex:coversTopic dbpedia:Intelligent_system .
 
-<file:///./res/COMP-474/lectures%5Creading_reading02.pdf> ex:coversTopic dbpedia:Knowledge_representation_and_reasoning .
+<file:///src/res/COMP-474/lectures%5Creading_reading02.pdf> ex:coversTopic dbpedia:Knowledge_representation_and_reasoning .
 
-<file:///./res/COMP-474/lectures%5Cslides_03.pdf> a ex:LectureSlides .
+<file:///src/res/COMP-474/lectures%5Cslides_03.pdf> a ex:LectureSlides .
 
-<file:///./res/COMP-474/lectures%5Cworksheet_03.pdf> a ex:LectureWorksheet .
+<file:///src/res/COMP-474/lectures%5Cworksheet_03.pdf> a ex:LectureWorksheet .
 
-<file:///./res/COMP-479/lectures%5Creading_reading01.pdf> a ex:LectureReading ;
+<file:///src/res/COMP-479/lectures%5Creading_reading01.pdf> a ex:LectureReading ;
     ex:coversTopic dbpedia:Information_retrieval .
 
-<file:///./res/COMP-479/lectures%5Creading_reading02.pdf> ex:coversTopic dbpedia:Web_search_engine .
+<file:///src/res/COMP-479/lectures%5Creading_reading02.pdf> ex:coversTopic dbpedia:Web_search_engine .
 
-<file:///./res/COMP-479/lectures%5Cslides_01.pdf> a ex:LectureSlides ;
+<file:///src/res/COMP-479/lectures%5Cslides_01.pdf> a ex:LectureSlides ;
     ex:coversTopic dbpedia:Information_retrieval .
 
-<file:///./res/COMP-479/lectures%5Cslides_01intro.pdf> a ex:LectureSlides .
+<file:///src/res/COMP-479/lectures%5Cslides_01intro.pdf> a ex:LectureSlides .
 
-<file:///./res/COMP-479/lectures%5Cslides_02.pdf> a ex:LectureSlides ;
+<file:///src/res/COMP-479/lectures%5Cslides_02.pdf> a ex:LectureSlides ;
     ex:coversTopic dbpedia:Web_search_engine .
 
-<file:///./res/COMP-479/lectures%5Cslides_02voc.pdf> a ex:LectureSlides .
+<file:///src/res/COMP-479/lectures%5Cslides_02voc.pdf> a ex:LectureSlides .
 
-<file:///./res/COMP-479/lectures%5Cslides_03dict.pdf> a ex:LectureSlides .
+<file:///src/res/COMP-479/lectures%5Cslides_03dict.pdf> a ex:LectureSlides .
 
-<file:///./res/COMP-479/lectures%5Cworksheet_03.pdf> a ex:LectureWorksheet .
+<file:///src/res/COMP-479/lectures%5Cworksheet_03.pdf> a ex:LectureWorksheet .
 
-<file:///./res/COMP-474/lectures%5Cslides_01.pdf> a ex:LectureSlides ;
+<file:///src/res/COMP-474/lectures%5Cslides_01.pdf> a ex:LectureSlides ;
     ex:coversTopic dbpedia:Intelligent_system .
 
-<file:///./res/COMP-474/lectures%5Cslides_02.pdf> a ex:LectureSlides ;
+<file:///src/res/COMP-474/lectures%5Cslides_02.pdf> a ex:LectureSlides ;
     ex:coversTopic dbpedia:Knowledge_representation_and_reasoning .
 
-<file:///./res/COMP-474/lectures%5Cworksheet_01.pdf> a ex:LectureWorksheet ;
+<file:///src/res/COMP-474/lectures%5Cworksheet_01.pdf> a ex:LectureWorksheet ;
     ex:coversTopic dbpedia:Intelligent_system .
 
-<file:///./res/COMP-474/lectures%5Cworksheet_02.pdf> a ex:LectureWorksheet ;
+<file:///src/res/COMP-474/lectures%5Cworksheet_02.pdf> a ex:LectureWorksheet ;
     ex:coversTopic dbpedia:Knowledge_representation_and_reasoning .
 
-<file:///./res/COMP-479/lectures%5Cworksheet_01.pdf> a ex:LectureWorksheet ;
+<file:///src/res/COMP-479/lectures%5Cworksheet_01.pdf> a ex:LectureWorksheet ;
     ex:coversTopic dbpedia:Information_retrieval .
 
-<file:///./res/COMP-479/lectures%5Cworksheet_02.pdf> a ex:LectureWorksheet ;
+<file:///src/res/COMP-479/lectures%5Cworksheet_02.pdf> a ex:LectureWorksheet ;
     ex:coversTopic dbpedia:Web_search_engine .
 
 ex:COMP-474 a vivo:Course ;
