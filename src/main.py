@@ -14,7 +14,7 @@ CREATEGRAPH = False
 SPARQLSERVER = False
 EXECUTE_BASEQUERIES = False
 if (SPARQLSERVER):
-    from src.queries import Fuseki_Queries as FQ
+    from queries import Fuseki_Queries as FQ
 
 # Define the namespaces
 vivo = Namespace("http://vivoweb.org/ontology/core#")
@@ -83,15 +83,15 @@ def main():
     output_dir = "path/to/output/directory"
 
     # Build the knowledge base
-    # knowledge_base = build_knowledge_base(course_dir, output_dir)
+    knowledge_base = build_knowledge_base(course_dir, output_dir)
 
     # Chatbot interaction
     while True:
         query = input("User: ")
         if query.lower() == 'quit':
             break
-        # response = chatbot_response(query)
-        # print("Chatbot:", response)
+        response = chatbot_response(query)
+        print("Chatbot:", response)
 
 
 if __name__ == '__main__':

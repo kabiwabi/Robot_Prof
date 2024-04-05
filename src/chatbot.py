@@ -1,11 +1,11 @@
 import asyncio
+from sqlalchemy.util import deprecations
 
-from rasa.core import run as Run
+deprecations.SILENCE_UBER_WARNING = True
 from rasa.core.agent import Agent
-import rasa.utils.endpoints as endpoints
 from rasa.shared.nlu import interpreter as RasaNLUInterpreter
-from rasa.shared.nlu.training_data.loading import load_data
 from rasa.shared.core.domain import Domain
+import rasa.utils.endpoints as endpoints
 from rasa.shared.core.training_data.structures import StoryGraph
 import requests
 import json
