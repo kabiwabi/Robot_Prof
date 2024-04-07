@@ -3,6 +3,7 @@ from rdflib import URIRef
 from . import QueryHelper
 import os
 
+
 # Query #1
 def get_courses_and_universities(graph):
     query_result = graph.query(
@@ -15,6 +16,7 @@ def get_courses_and_universities(graph):
         """
     )
     return [(str(row.course), str(row.name), str(row.university)) for row in query_result]
+
 
 # Query #2
 def what_course_contains_topic(graph, keyword):
@@ -29,6 +31,7 @@ def what_course_contains_topic(graph, keyword):
         initBindings={'keyword': Literal(QueryHelper.escape_string(keyword))}
     )
     return [str(row.course) for row in query_result]
+
 
 # Query #3
 def topics_covered_in_lecture(graph, course, lecture_number):
@@ -47,6 +50,7 @@ def topics_covered_in_lecture(graph, course, lecture_number):
                       'value_lectureNumber': Literal(lecture_number)}
     )
     return [str(row.topic) for row in query_result]
+
 
 # Query #4
 def all_courses_offered_Uni_in_Subject(graph, value_uni, value_courseCode):
@@ -106,7 +110,8 @@ def materials_for_topic(graph, topic, course_dept, course_num):
     )
     return [(str(row.lecture), str(row.reading), str(row.worksheet), str(row.slides)) for row in query_result]
 
-#Query #6
+
+# Query #6
 def course_credits(graph, course, course_number):
     query_result = graph.query(
         """
@@ -123,6 +128,7 @@ def course_credits(graph, course, course_number):
                       'value_courseNumber': QueryHelper.literal_string(course_number)}
     )
     return [str(row.credits) for row in query_result]
+
 
 # Query #7
 def course_additional_resources(graph, course, course_number):
@@ -141,6 +147,7 @@ def course_additional_resources(graph, course, course_number):
                       'value_courseNumber': QueryHelper.literal_string(course_number)}
     )
     return [str(row.resource) for row in query_result]
+
 
 # Query #8
 def lecture_content(graph, course_code, course_number, lecture_number):
@@ -182,6 +189,7 @@ def lecture_content(graph, course_code, course_number, lecture_number):
     )
     return [(str(row.lecture), str(row.slides), str(row.worksheet), str(row.reading)) for row in query_result]
 
+
 # Query #9
 def topic_reading_materials(graph, topic, course_dept, course_num):
     query_result = graph.query(
@@ -206,6 +214,7 @@ def topic_reading_materials(graph, topic, course_dept, course_num):
     )
     return [str(row.reading) for row in query_result]
 
+
 # Query #10
 def competencies_gained_from_course_courseNum(graph, value_courseCode, value_courseNum):
     query_result = graph.query(
@@ -222,6 +231,7 @@ def competencies_gained_from_course_courseNum(graph, value_courseCode, value_cou
                       'value_courseNumber': QueryHelper.literal_string(value_courseNum)}
     )
     return [(str(row.description)) for row in query_result]
+
 
 # Query #11
 def get_grades_of_student_who_completed_course(graph, value_stu, value_id, value_course):
@@ -244,6 +254,7 @@ def get_grades_of_student_who_completed_course(graph, value_stu, value_id, value
     )
     return [str(row.grade) for row in query_result]
 
+
 # Query #12
 def get_students_who_completed_course(graph, value_id, value_course):
     query_result = graph.query(
@@ -261,6 +272,7 @@ def get_students_who_completed_course(graph, value_id, value_course):
                       'value_course': QueryHelper.literal_string(value_course)}
     )
     return query_result
+
 
 # Query #13
 def get_students_Transcript(graph, value_stu):
@@ -280,6 +292,7 @@ def get_students_Transcript(graph, value_stu):
     )
     return query_result
 
+
 def query_topics_by_course(course_uri):
     query = f"""
         SELECT DISTINCT ?topic ?label ?event ?resource
@@ -291,6 +304,7 @@ def query_topics_by_course(course_uri):
         }}
     """
     return query
+
 
 def query_courses_by_topic(topic_uri):
     query = f"""
@@ -306,6 +320,7 @@ def query_courses_by_topic(topic_uri):
     """
     return query
 
+
 def query_topic_coverage(topic_uri):
     query = f"""
         SELECT ?course ?event ?resource
@@ -317,6 +332,7 @@ def query_topic_coverage(topic_uri):
         }}
     """
     return query
+
 
 def query_missing_topics(course_uri):
     query = f"""
@@ -334,8 +350,9 @@ def query_missing_topics(course_uri):
     """
     return query
 
+
 def execute_query(g, query_number, *args):
-    output_dir = "./output"
+    output_dir = "src/output"
     output_file = f"{output_dir}/query_{query_number}_output.txt"
     with open(output_file, "w", encoding="utf-8") as file:
         if query_number == 1:

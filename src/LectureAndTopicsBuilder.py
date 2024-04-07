@@ -8,6 +8,7 @@ EX = Namespace("http://example.org/")
 VIVO = Namespace("http://vivoweb.org/ontology/core#")
 DBPEDIA = Namespace("https://dbpedia.org/resource/")
 
+
 def build_lecture_and_topics_graph():
     g = Graph()
     g.bind('ex', EX)
@@ -25,7 +26,8 @@ def build_lecture_and_topics_graph():
 
     g.add((EX.LectureReading, RDF.type, RDFS.Class))
     g.add((EX.LectureReading, RDFS.label, Literal("Lecture Reading")))
-    g.add((EX.LectureReading, RDFS.comment,Literal("A class representing the reading material associated with a lecture.")))
+    g.add((EX.LectureReading, RDFS.comment,
+           Literal("A class representing the reading material associated with a lecture.")))
     g.add((EX.LectureReading, RDFS.subClassOf, EX.Lecture))
 
     g.add((EX.LectureWorksheet, RDF.type, RDFS.Class))
@@ -57,7 +59,7 @@ def build_lecture_and_topics_graph():
         g.add((course_uri, VIVO.courseNumber, Literal(course_num)))
         g.add((course_uri, RDFS.label, Literal(course_name)))
 
-        lectures_dir = f"./res/{course_dept}-{course_num}/lectures"
+        lectures_dir = f"src/res/{course_dept}-{course_num}/lectures"
         lecture_files = os.listdir(lectures_dir)
 
         for i, lecture_file in enumerate(lecture_files, start=1):
@@ -84,9 +86,9 @@ def build_lecture_and_topics_graph():
                 g.add((lecture_uri, EX.coversTopic, topic))
 
                 # Add the same topic to associated worksheet, reading, and slides
-                worksheet_uri = URIRef(f"file:///./res/{course_code}/lectures%5Cworksheet_0{i}.pdf")
-                reading_uri = URIRef(f"file:///./res/{course_code}/lectures%5Creading_reading0{i}.pdf")
-                slide_uri = URIRef(f"file:///./res/{course_code}/lectures%5Cslides_0{i}.pdf")
+                worksheet_uri = URIRef(f"file:///src/res/{course_code}/lectures%5Cworksheet_0{i}.pdf")
+                reading_uri = URIRef(f"file:///src/res/{course_code}/lectures%5Creading_reading0{i}.pdf")
+                slide_uri = URIRef(f"file:///src/res/{course_code}/lectures%5Cslides_0{i}.pdf")
                 g.add((lecture_uri, VIVO.hasAssociatedDocument, worksheet_uri))
                 g.add((lecture_uri, VIVO.hasAssociatedDocument, reading_uri))
                 g.add((lecture_uri, VIVO.hasAssociatedDocument, slide_uri))
@@ -98,5 +100,5 @@ def build_lecture_and_topics_graph():
         g.add((course_uri, VIVO.numberOfCredits, Literal(4, datatype=XSD.integer)))
         g.add((course_uri, RDFS.seeAlso, EX[f"{course_code}/resources"]))
 
-    g.serialize(destination='./output/lecture_and_topics.ttl', format='turtle')
+    g.serialize(destination='src/output/lecture_and_topics.ttl', format='turtle')
     return g
