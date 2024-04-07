@@ -293,17 +293,20 @@ def get_students_Transcript(graph, value_stu):
     return query_result
 
 
-def query_topics_by_course(course_uri):
-    query = f"""
+def query_topics_by_course(graph, course_uri):
+    query_result = graph.query(
+        f"""
+        PREFIX EX: <http://example.org/>
         SELECT DISTINCT ?topic ?label ?event ?resource
         WHERE {{
-            <{course_uri}> vivo:hasTopic ?topic .
+            <{course_uri}> EX:hasTopic ?topic .
             ?topic rdfs:label ?label .
-            ?event vivo:coversTopic ?topic .
-            ?resource vivo:mentionsTopic ?topic .
+            ?event EX:coversTopic ?topic .
+            ?resource EX:mentionsTopic ?topic .
         }}
-    """
-    return query
+        """
+    )
+    return [f"Topic: {str(row.label)}, URI: {str(row.topic)}, Event: {str(row.event)}, Resource: {str(row.resource)}" for row in query_result]
 
 
 def query_courses_by_topic(topic_uri):

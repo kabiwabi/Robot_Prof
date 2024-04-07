@@ -1,5 +1,5 @@
 import os
-import PyPDF2
+from PyPDF2 import PdfReader
 import spacy
 from rdflib import Graph, URIRef, Literal, Namespace
 
@@ -9,10 +9,10 @@ DBR = Namespace("http://dbpedia.org/resource/")
 
 def extract_text_from_pdf(file_path):
     with open(file_path, 'rb') as file:
-        reader = PyPDF2.PdfFileReader(file)
+        reader = PdfReader(file)
         text = ""
-        for page in range(reader.numPages):
-            text += reader.getPage(page).extractText()
+        for page in reader.pages:
+            text += page.extract_text()
     return text
 
 
@@ -22,6 +22,10 @@ def preprocess_course_materials(course_dir, output_dir):
             if file.endswith(".pdf"):
                 file_path = os.path.join(root, file)
                 text = extract_text_from_pdf(file_path)
+
+                if not os.path.exists(output_dir):
+                    os.makedirs(output_dir, exist_ok=True)
+
                 output_path = os.path.join(output_dir, f"{os.path.splitext(file)[0]}.txt")
                 with open(output_path, 'w', encoding='utf-8') as output_file:
                     output_file.write(text)
