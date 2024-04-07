@@ -15,9 +15,9 @@ import json
 # interpreter = RasaNLUInterpreter.create_interpreter
 endpoint = endpoints.EndpointConfig(url="http://localhost:5055/webhook")
 interpreter = RasaNLUInterpreter.NaturalLanguageInterpreter()
-domain = Domain.load("src/rasa/domain.yml")
+domain = Domain.load("./rasa/domain.yml")
 # story_graph = StoryGraph(load_data("src/rasa/data/stories.yml"))
-agent = Agent.load("src/rasa/models/20240401-200410-avocado-factor.tar.gz")
+agent = Agent.load("./rasa/models/20240401-200410-avocado-factor.tar.gz")
 
 
 # Define intents and actions

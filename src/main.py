@@ -44,7 +44,7 @@ def main():
         g.serialize(destination=turtle_file_path, format='turtle')
     else:
         g = Graph()
-        g = g.parse(source='src/output/combinedGraph.ttl', format='turtle')
+        g = g.parse(source='./output/combinedGraph.ttl', format='turtle')
     #
     # # Execute specific queries
     if EXECUTE_BASEQUERIES:
