@@ -2,29 +2,35 @@ version: "3.1"
 
 stories:
 
-- story: happy path
+- story: initialize graph
   steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_great
-  - action: utter_happy
+  - action: action_initialize_graph
 
-- story: sad path 1
+- story: greet and query courses by topic
   steps:
   - intent: greet
   - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: affirm
-  - action: utter_happy
+  - intent: query_courses_by_topic
+    entities:
+    - topic: programming
+  - action: action_courses_by_topic
 
-- story: sad path 2
+- story: query topics covered in lecture
   steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_goodbye
+  - intent: query_topics_covered_in_lecture
+    entities:
+    - course: COMP-479
+    - lecture_number: 1
+  - action: action_topics_covered_in_lecture
+
+- story: query student transcript
+  steps:
+  - intent: query_student_transcript
+    entities:
+    - student: Braun
+  - action: action_student_transcript
+
+- story: handle out-of-scope query
+  steps:
+  - intent: out_of_scope
+  - action: utter_default

@@ -3,31 +3,114 @@ version: "3.1"
 intents:
   - greet
   - goodbye
-  - affirm
-  - deny
+  - query_courses_and_universities
+  - query_courses_by_topic
+  - query_topics_covered_in_lecture
+  - query_courses_offered_by_university
+  - query_materials_for_topic
+  - query_course_credits
+  - query_course_additional_resources
+  - query_lecture_content
+  - query_topic_reading_materials
+  - query_competencies_gained
+  - query_student_grade
+  - query_students_completed_course
+  - query_student_transcript
+  - out_of_scope
   - mood_great
+  - affirm
   - mood_unhappy
+  - deny
   - bot_challenge
+
+entities:
+  - topic
+  - course
+  - lecture_number
+  - university
+  - course_code
+  - course_dept
+  - course_num
+  - course_number
+  - course_id
+  - student
+
+actions:
+  - action_initialize_graph
+  - action_courses_and_universities
+  - action_courses_by_topic
+  - action_topics_covered_in_lecture
+  - action_courses_offered_by_university
+  - action_materials_for_topic
+  - action_course_credits
+  - action_course_additional_resources
+  - action_lecture_content
+  - action_topic_reading_materials
+  - action_competencies_gained
+  - action_student_grade
+  - action_students_completed_course
+  - action_student_transcript
+  - action_default_fallback
+
+slots:
+  topic:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: topic
+  course:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: course
+  lecture_number:
+    type: float
+    mappings:
+      - type: from_entity
+        entity: lecture_number
+  university:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: university
+  course_code:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: course_code
+  course_dept:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: course_dept
+  course_num:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: course_num
+  course_number:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: course_number
+  course_id:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: course_id
+  student:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: student
 
 responses:
   utter_greet:
-  - text: "Hey! How are you?"
-
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
-  utter_did_that_help:
-  - text: "Did that help you?"
-
-  utter_happy:
-  - text: "Great, carry on!"
-
+    - text: "Hello! How can I assist you today?"
   utter_goodbye:
-  - text: "Bye"
-
-  utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
+    - text: "Goodbye! Have a great day."
+  utter_default:
+    - text: "I'm sorry, I didn't understand your question. Could you please rephrase it or ask something else?"
 
 session_config:
   session_expiration_time: 60

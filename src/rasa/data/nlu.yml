@@ -6,86 +6,107 @@ nlu:
     - hey
     - hello
     - hi
-    - hello there
     - good morning
     - good evening
-    - moin
-    - hey there
-    - let's go
-    - hey dude
-    - goodmorning
-    - goodevening
     - good afternoon
 
 - intent: goodbye
   examples: |
-    - cu
-    - good by
-    - cee you later
-    - good night
     - bye
     - goodbye
-    - have a nice day
-    - see you around
-    - bye bye
     - see you later
+    - take care
+    - have a nice day
 
-- intent: affirm
+- intent: query_courses_and_universities
   examples: |
-    - yes
-    - y
-    - indeed
-    - of course
-    - that sounds good
-    - correct
+    - What courses are offered by which universities?
+    - List all courses and their offering universities
+    - Show me the courses and the universities that offer them
 
-- intent: deny
+- intent: query_courses_by_topic
   examples: |
-    - no
-    - n
-    - never
-    - I don't think so
-    - don't like that
-    - no way
-    - not really
+    - What courses cover the topic of [Artificial Intelligence](topic)?
+    - What courses cover the topic of [artificial intelligence](topic)?
+    - What courses cover the topic of [machine learning](topic)?
+    - What courses cover the topic of [AI](topic)?
+    - What courses cover the topic of [ML](topic)?
+    - What courses cover the topic of [math](topic)?
+    - What courses cover the topic of [mathematics](topic)?
+    - What courses cover the topic of [algebra](topic)?
+    - What courses cover the topic of [love](topic)?
+    - What courses cover the topic of [cats](topic)?
+    - What courses cover the topic of [dogs](topic)?
 
-- intent: mood_great
-  examples: |
-    - perfect
-    - great
-    - amazing
-    - feeling like a king
-    - wonderful
-    - I am feeling very good
-    - I am great
-    - I am amazing
-    - I am going to save the world
-    - super stoked
-    - extremely good
-    - so so perfect
-    - so good
-    - so perfect
 
-- intent: mood_unhappy
+- intent: query_topics_covered_in_lecture
   examples: |
-    - my day was horrible
-    - I am sad
-    - I don't feel very well
-    - I am disappointed
-    - super sad
-    - I'm so sad
-    - sad
-    - very sad
-    - unhappy
-    - not good
-    - not very good
-    - extremly sad
-    - so saad
-    - so sad
+    - What topics are covered in lecture [1](lecture_number) of course [COMP-479](course)?
+    - List the topics discussed in [COMP-474](course) during lecture [2](lecture_number)
+    - Topics covered in lecture [3](lecture_number) of [STAT-380](course)
 
-- intent: bot_challenge
+- intent: query_courses_offered_by_university
   examples: |
-    - are you a bot?
-    - are you a human?
-    - am I talking to a bot?
-    - am I talking to a human?
+    - What courses with code [COMP](course_code) are offered by [ConcordiaUniversity](university)?
+    - List the courses offered by [McGillUniversity](university) in the [MATH](course_code) department
+    - Show me [ENGL](course_code) courses offered by [UniversityOfToronto](university)
+
+- intent: query_materials_for_topic
+  examples: |
+    - What materials are recommended for the topic [Intelligent Systems](topic) in [COMP](course_dept) [474](course_num)?
+    - List the materials for [Database Management](topic) in [COMP](course_dept) [353](course_num)
+    - Show me the recommended materials for [Machine Learning](topic) in [STAT](course_dept) [452](course_num)
+
+- intent: query_course_credits
+  examples: |
+    - How many credits is the course [COMP](course) [479](course_number)?
+    - What are the credits for [MATH](course) [201](course_number)?
+    - Credits for [ENGL](course) [102](course_number)
+
+- intent: query_course_additional_resources
+  examples: |
+    - What are the additional resources for the course [COMP](course) [474](course_number)?
+    - List the additional resources for [MATH](course) [240](course_number)
+    - Show me the additional resources available for [STAT](course) [380](course_number)
+
+- intent: query_lecture_content
+  examples: |
+    - What is the content of lecture [1](lecture_number) in [COMP](course_code) [474](course_number)?
+    - Show me the content for lecture [3](lecture_number) of [MATH](course_code) [203](course_number)
+    - Lecture [2](lecture_number) content for [ENGL](course_code) [102](course_number)
+
+- intent: query_topic_reading_materials
+  examples: |
+    - What are the reading materials for the topic [Information Retrieval](topic) in [COMP](course_dept) [479](course_num)?
+    - List the readings for [Probability Theory](topic) in [STAT](course_dept) [380](course_num)
+    - Show me the reading materials for [Calculus](topic) in [MATH](course_dept) [203](course_num)
+
+- intent: query_competencies_gained
+  examples: |
+    - What competencies are gained from the course [STAT](course_code) [380](course_num)?
+    - List the competencies acquired by completing [COMP](course_code) [474](course_num)
+    - Competencies gained from [ENGL](course_code) [102](course_num)
+
+- intent: query_student_grade
+  examples: |
+    - What grade did [Ilise](student) get in the course [COMS](course) [506](course_id)?
+    - Show me the grade of [John](student) for [COMP](course) [474](course_id)
+    - Grade of [Sarah](student) in [MATH](course) [203](course_id)
+
+- intent: query_students_completed_course
+  examples: |
+    - Which students completed the course [COMS](course) [506](course_id)?
+    - List the students who finished [COMP](course) [474](course_id)
+    - Show me the students who completed [MATH](course) [203](course_id)
+
+- intent: query_student_transcript
+  examples: |
+    - Show me the transcript of [Braun](student)
+    - What is the transcript for [Ilise](student)?
+    - Transcript of [John](student)
+
+- intent: out_of_scope
+  examples: |
+    - What is the weather today?
+    - Tell me a joke
+    - Who won the soccer game last night?

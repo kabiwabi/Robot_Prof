@@ -7,7 +7,12 @@ rules:
   - intent: goodbye
   - action: utter_goodbye
 
-- rule: Say 'I am a bot' anytime the user challenges
+- rule: Provide default response for out-of-scope queries
   steps:
-  - intent: bot_challenge
-  - action: utter_iamabot
+  - intent: out_of_scope
+  - action: utter_default
+
+- rule: Query courses by topic
+  steps:
+  - intent: query_courses_by_topic
+  - action: action_courses_by_topic

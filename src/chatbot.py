@@ -10,13 +10,9 @@ from rasa.shared.core.training_data.structures import StoryGraph
 import requests
 import json
 
-# Load the trained model
-# interpreter = RasaNLUInterpreter("src/rasa/data/nlu.yml")
-# interpreter = RasaNLUInterpreter.create_interpreter
 endpoint = endpoints.EndpointConfig(url="http://localhost:5055/webhook")
 interpreter = RasaNLUInterpreter.NaturalLanguageInterpreter()
 domain = Domain.load("./rasa/domain.yml")
-# story_graph = StoryGraph(load_data("src/rasa/data/stories.yml"))
 agent = Agent.load("./rasa/models/20240401-200410-avocado-factor.tar.gz")
 
 
@@ -51,25 +47,9 @@ def chatbot_response(query):
 
     loop = asyncio.get_event_loop()
     result = loop.run_until_complete(agent.parse_message(query))
-    intent = ""  # "result.json()['intent']['name']"
+    intent = ""
     result = loop.run_until_complete(agent.handle_text(query))
     response = result[0]['text']
-    intent = ""  # result.json()['intent']['name']
-
-    # Handle the predicted intent
-    # if intent == "course_description":
-    #     course_code = result["entities"][0]["value"]
-    #     response = course_description(course_code)
-    # elif intent == "topics_covered_in_event":
-    #     course_code = result["entities"][0]["value"]
-    #     event_number = result["entities"][1]["value"]
-    #     topics = topics_covered_in_event(course_code, event_number)
-    #     response = "The topics covered in " + course_code + " - Event " + event_number + " are: " + ", ".join(topics)
-    # elif intent == "course_events_covering_topic":
-    #     topic = result["entities"][0]["value"]
-    #     events = course_events_covering_topic(topic)
-    #     response = "The course events covering " + topic + " are: " + ", ".join(events)
-    # else:
-    #     response = handle_unknown_intent(query)
+    intent = ""
 
     return response

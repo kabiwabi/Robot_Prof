@@ -4,9 +4,11 @@ import CourseBuilder as CB
 import StudentBuilder as SG
 import LectureAndTopicsBuilder as LTB
 from queries import Query
-
+from rasa.core.agent import Agent
+from rasa.utils.endpoints import EndpointConfig
+from rasa.core.channels.rest import RestInput
+from rasa import run
 from LectureAndTopicsBuilder import EX, URIRef, DBPEDIA
-
 from knowledge_base_builder import build_knowledge_base
 from chatbot import chatbot_response
 
@@ -45,8 +47,7 @@ def main():
     else:
         g = Graph()
         g = g.parse(source='./output/combinedGraph.ttl', format='turtle')
-    #
-    # # Execute specific queries
+
     if EXECUTE_BASEQUERIES:
         Query.execute_query(g, 1)  # Query 1: Get all courses and their universities
         Query.execute_query(g, 2, "programming")  # Query 2: Find courses covering a specific topic
@@ -64,35 +65,20 @@ def main():
         Query.execute_query(g, 12, "506", "Coms")  # Query 12: Students who completed a specific course
         Query.execute_query(g, 13, "Braun")  # Query 13: Print transcript for a student
 
-    if SPARQLSERVER:
-        FQ.execute_fuseki_query(sparql, 1)
-        FQ.execute_fuseki_query(sparql, 2, "programming")
-        FQ.execute_fuseki_query(sparql, 3, "COMP-479", 1)
-        FQ.execute_fuseki_query(sparql, 4, "ConcordiaUniversity", "comp")
-        FQ.execute_fuseki_query(sparql, 5, DBPEDIA.Intelligent_system, "COMP", "474")
-        FQ.execute_fuseki_query(sparql, 6, "COMP", "479")
-        FQ.execute_fuseki_query(sparql, 7, "COMP", "474")
-        FQ.execute_fuseki_query(sparql, 8, "COMP", "474", 1)
-        FQ.execute_fuseki_query(sparql, 9, DBPEDIA.Information_retrieval, "COMP", "479")
-        FQ.execute_fuseki_query(sparql, 10, "stat", "380")
-        FQ.execute_fuseki_query(sparql, 11, "Ilise", "506", "coms")
-        FQ.execute_fuseki_query(sparql, 12, "506", "Coms")
-        FQ.execute_fuseki_query(sparql, 13, "Braun")
-
-    course_dir = "path/to/course/materials"
-    output_dir = "path/to/output/directory"
-
-    # Build the knowledge base
-    knowledge_base = build_knowledge_base(course_dir, output_dir)
-
-    # Chatbot interaction
-    while True:
-        query = input("User: ")
-        if query.lower() == 'quit':
-            break
-        response = chatbot_response(query)
-        print("Chatbot:", response)
-
+    # if SPARQLSERVER:
+    #     FQ.execute_fuseki_query(sparql, 1)
+    #     FQ.execute_fuseki_query(sparql, 2, "programming")
+    #     FQ.execute_fuseki_query(sparql, 3, "COMP-479", 1)
+    #     FQ.execute_fuseki_query(sparql, 4, "ConcordiaUniversity", "comp")
+    #     FQ.execute_fuseki_query(sparql, 5, DBPEDIA.Intelligent_system, "COMP", "474")
+    #     FQ.execute_fuseki_query(sparql, 6, "COMP", "479")
+    #     FQ.execute_fuseki_query(sparql, 7, "COMP", "474")
+    #     FQ.execute_fuseki_query(sparql, 8, "COMP", "474", 1)
+    #     FQ.execute_fuseki_query(sparql, 9, DBPEDIA.Information_retrieval, "COMP", "479")
+    #     FQ.execute_fuseki_query(sparql, 10, "stat", "380")
+    #     FQ.execute_fuseki_query(sparql, 11, "Ilise", "506", "coms")
+    #     FQ.execute_fuseki_query(sparql, 12, "506", "Coms")
+    #     FQ.execute_fuseki_query(sparql, 13, "Braun")
 
 if __name__ == '__main__':
     main()

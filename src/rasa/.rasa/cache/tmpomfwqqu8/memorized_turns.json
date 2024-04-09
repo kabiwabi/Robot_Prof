@@ -1,0 +1,16 @@
+{
+  "lookup": {
+    "eJyLrq6NBQAEOAGx": "action_listen",
+    "eJwtTcsJwzAMXUUDmNJevUoIInV1MDhyKsmBYrx7FZzb+7+ljwD9EDpxS5YrR+gTIG87RbhJyWrEntVSTT2UahN1f3k9nmuAQsmaEHLb3yRTDnB53ml6ST2zT1iEbyP5odUjJ8VUTxL6YPaPuTHG+gcdEjcO": "action_topics_covered_in_lecture",
+    "eJy9Ts0KwjAMfpU8QBG99lXGCLPmUOiamaQDKXt3M+pV8OQt+f6nfgTom9COS7LMNUIfB9ZlpQifp2Q1qq7VwqYuStxEnZ9ul+scoFCyJoS1rXeSAQc4Ofc0PaGeq0dYhGcjeaHxlpNi4p2EHpi9Y2Qcvy367v/PyPkNavt0Pg==": "action_listen",
+    "eJwtilEKgCAQBa/iASLq16uIiNh+CLba7hqEePek/HtvZkzri2qF4HY+SMyoVfuHQ3+CVvOkyAI4Wk5ZeEQs9QAUrcy+bnaIykCDR5QPXxXocbNyQh45UCzSu30B9a8sLg==": "action_student_transcript",
+    "eJytjT0KgDAMha/SA4jo2qsUCUUzFGqqSSpI8e4WdXRwcHs/3+O5cjSmLIwb+FFDImvKLYD8jNY8JgZRpMpKTCoVEs0Tklrj+rYbapEFueaB9IrXjLzDQ4GyJxk5LHp8+3sZ/vE9nNtCW8w=": "action_listen",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCczLzMkszEnMyq1Pj0osSCjNraWACp4hc5": "action_listen",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohv7QkPj8tvjg5vyC1tjYWALYRHnM=": "utter_default",
+    "eJyFjMEJwCAMAFfJAJ3AVUoJohEEm4gm/Yi7V2j//u7guHPMA0Zt9KAPmoUdjA+Q/U0Ofim5K/FqrVNbTeal6kBMURL2IJXmZmWq1DBS8lZ0t7pe19c7QQ==": "action_listen",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohvSg1taS2NhYA6dwbhQ==": "utter_greet",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohvSg1taSWgBmlJSWpRfEQpbhMiAUAQvc0lw==": "action_listen",
+    "eJydzkEKgzAQheGrzAGktNtcRWSw4VECmujMpCAhd2+orupC6G4efPxMX2pHZRG8efQWUnRU9oPjOMPRMaaghthsVkgzIbZpjl4CWL1oZDMI7/S/wu8XOiXThiwtwTvqH7f7cE6vGbKxT1kUys+Nv7zW4QP3sV04": "action_courses_by_topic",
+    "eJyljkEKgzAQRa8yByil3eYqIoOGTwnYRGcmBQnevUG7qouK3c2H99+fpiwXKqPgxZ23kKKjsh0cuyccfcIQ1BArmxVSmRBrNEcPAWz54chmEN7Qc4bvL3RIphWyNAbvqLlfb+1ePWXIzD5lUSj3M6/4wa1d7d/V9g1Br4oG": "action_listen"
+  }
+}
