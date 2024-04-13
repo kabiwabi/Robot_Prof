@@ -187,10 +187,10 @@ class ActionLectureContent(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        course_code = tracker.get_slot("course_code")
-        course_number = tracker.get_slot("course_number")
+        course_code = tracker.get_slot("course")
+        course_number = tracker.get_slot("course_num")
         lecture_number = tracker.get_slot("lecture_number")
-        content = query.lecture_content(self.graph, course_code, course_number, lecture_number)
+        content = query.lecture_content(self.graph, course_code, course_number, int(lecture_number))
         response = f"Here is the content for lecture {lecture_number} in {course_code} {course_number}:\n"
         for lecture, slides, worksheet, reading in content:
             response += f"Lecture: {lecture}\nSlides: {slides}\nWorksheet: {worksheet}\nReading: {reading}\n---\n"
@@ -213,7 +213,13 @@ class ActionTopicReadingMaterials(Action):
         topic = tracker.get_slot("topic")
         course_dept = tracker.get_slot("course_dept")
         course_num = tracker.get_slot("course_num")
-        readings = query.topic_reading_materials(self.graph, topic, course_dept, course_num)
+
+        # cheeky fix from q5
+        DBPedia = "https://dbpedia.org/resource/"
+        topic = topic.rsplit(" ")
+        qTopic = DBPedia + topic[0].title() + "_" + topic[1].lower()
+
+        readings = query.topic_reading_materials(self.graph, qTopic, course_dept, course_num)
         response = f"Here are the reading materials for {topic} in {course_dept} {course_num}:\n"
         for reading in readings:
             response += f"- {reading}\n"
@@ -233,9 +239,9 @@ class ActionCompetenciesGained(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        course_code = tracker.get_slot("course_code")
+        course_code = tracker.get_slot("course_dept")
         course_num = tracker.get_slot("course_num")
-        competencies = query.competencies_gained_from_course_courseNum(self.graph, course_code, course_num)
+        competencies = query.competencies_gained_from_course_courseNum(self.graph, course_code, int(course_num))
         response = f"Here are the competencies gained from {course_code} {course_num}:\n"
         for competency in competencies:
             response += f"- {competency}\n"
