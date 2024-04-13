@@ -262,7 +262,7 @@ class ActionStudentGrade(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         student = tracker.get_slot("student")
-        course_id = tracker.get_slot("course_id")
+        course_id = tracker.get_slot("course_num")
         course = tracker.get_slot("course")
         grade = query.get_grades_of_student_who_completed_course(self.graph, student, course_id, course)
         response = f"{student} completed {course} {course_id} with a grade of:\n"
@@ -284,7 +284,7 @@ class ActionStudentsCompletedCourse(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        course_id = tracker.get_slot("course_id")
+        course_id = tracker.get_slot("course_num")
         course = tracker.get_slot("course")
         students = query.get_students_who_completed_course(self.graph, course_id, course)
         response = f"Here are the students who completed {course} {course_id}:\n"
