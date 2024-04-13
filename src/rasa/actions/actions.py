@@ -1,3 +1,4 @@
+import asyncio
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
@@ -10,6 +11,7 @@ def load_graph():
     g = g.parse(source='./output/combinedGraph.ttl', format='turtle')
     return g
 
+
 # QUERY 1 - List all courses offered by [university]
 class ActionCoursesAndUniversities(Action):
     def __init__(self):
@@ -21,12 +23,17 @@ class ActionCoursesAndUniversities(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # loop = asyncio.get_event_loop()
         courses_and_universities = query.get_courses_and_universities(self.graph)
         response = "Here are the courses and their offering universities:\n"
+        response_counter = 0
         for course_uri, course_name, university in courses_and_universities:
-            response += f"- {course_name} ({course_uri}) offered by {university}\n"
-
+            response = f"- {course_name} ({course_uri}) offered by {university}\n"
+            dispatcher.utter_message(text=response)
+            response_counter += 1
+        response = f"- I found {response_counter} courses offered.\n"
         dispatcher.utter_message(text=response)
+
         return []
 
 
@@ -64,7 +71,7 @@ class ActionTopicsCoveredInLecture(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         course = tracker.get_slot("course")
         lecture_number = tracker.get_slot("lecture_number")
-        topics = query.topics_covered_in_lecture(self.graph, course, lecture_number)
+        topics = query.topics_covered_in_lecture(self.graph, str(course), int(lecture_number))
         response = f"Here are the topics covered in {course} during lecture {lecture_number}:\n"
         for topic in topics:
             response += f"- {topic}\n"
