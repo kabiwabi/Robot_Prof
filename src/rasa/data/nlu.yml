@@ -18,12 +18,14 @@ nlu:
     - take care
     - have a nice day
 
+# QUERY 1 - List all courses offered by [university]
 - intent: query_courses_and_universities
   examples: |
     - What courses are offered by which universities?
     - List all courses and their offering universities
     - Show me the courses and the universities that offer them
 
+# QUERY 2 - In which courses is [topic] discussed ?
 - intent: query_courses_by_topic
   examples: |
     - What courses cover the topic of [Artificial Intelligence](topic)?
@@ -37,73 +39,98 @@ nlu:
     - What courses cover the topic of [love](topic)?
     - What courses cover the topic of [cats](topic)?
     - What courses cover the topic of [dogs](topic)?
+    - Show me the courses in which [cars](topic) is discussed
+    - Which courses cover [computers](topic)?
+    - List all the courses that cover the topic of [ai](topic)
 
-
+# QUERY 3 - Which [topics] are covered in [course] during [lecture number] ?
 - intent: query_topics_covered_in_lecture
   examples: |
     - What topics are covered in lecture [1](lecture_number) of course [COMP-479](course)?
     - List the topics discussed in [COMP-474](course) during lecture [2](lecture_number)
     - Topics covered in lecture [3](lecture_number) of [STAT-380](course)
+    - What does lecture [4](lecture_number) of course [COMP-451](course) cover?
+    - Which topics does lecture [5](lecture_number) of course [COMP-472](course) cover?
 
+# QUERY 4 - List all [courses] offered by [university] within the [subject] (e.g., “COMP”, “SOEN”).
 - intent: query_courses_offered_by_university
   examples: |
     - What courses with code [COMP](course_code) are offered by [ConcordiaUniversity](university)?
     - List the courses offered by [McGillUniversity](university) in the [MATH](course_code) department
     - Show me [ENGL](course_code) courses offered by [UniversityOfToronto](university)
+    - What [COEN](course_code) courses are available at [ConcordiaUniversity](university)?
+    - Which [PSYC](course_code) courses does [ConcordiaUniversity](university) have?
 
+# QUERY 5 - What [materials] (slides, readings) are recommended for [topic] in [course] [number]?
 - intent: query_materials_for_topic
   examples: |
     - What materials are recommended for the topic [Intelligent Systems](topic) in [COMP](course_dept) [474](course_num)?
     - List the materials for [Database Management](topic) in [COMP](course_dept) [353](course_num)
     - Show me the recommended materials for [Machine Learning](topic) in [STAT](course_dept) [452](course_num)
 
+# QUERY 6 - How many credits is [course] [number] worth ?
 - intent: query_course_credits
   examples: |
     - How many credits is the course [COMP](course) [479](course_number)?
     - What are the credits for [MATH](course) [201](course_number)?
     - Credits for [ENGL](course) [102](course_number)
 
+# QUERY 7 - For [course] [number], what additional resources (links to web pages) are available ?
 - intent: query_course_additional_resources
   examples: |
     - What are the additional resources for the course [COMP](course) [474](course_number)?
     - List the additional resources for [MATH](course) [240](course_number)
     - Show me the additional resources available for [STAT](course) [380](course_number)
 
+# QUERY 8 - Detail the content (slides, worksheets, readings) available for [lecture number] in [course] [number]
 - intent: query_lecture_content
   examples: |
     - What is the content of lecture [1](lecture_number) in [COMP](course_code) [474](course_number)?
     - Show me the content for lecture [3](lecture_number) of [MATH](course_code) [203](course_number)
     - Lecture [2](lecture_number) content for [ENGL](course_code) [102](course_number)
 
+# QUERY 9 - What reading materials are recommended for studying [topic] in [course] ?
 - intent: query_topic_reading_materials
   examples: |
     - What are the reading materials for the topic [Information Retrieval](topic) in [COMP](course_dept) [479](course_num)?
     - List the readings for [Probability Theory](topic) in [STAT](course_dept) [380](course_num)
     - Show me the reading materials for [Calculus](topic) in [MATH](course_dept) [203](course_num)
+    - What reading materials do you recommend for [Intelligent Systems](topic) in [COMP](course_dept) [474](course_num)?
+    - What materials from [COMP](course_num) [474](course_num) are recommended for the topic of [Intelligent Systems](topic)?
 
+# QUERY 10 - What competencies [topics] does a student gain after completing [course] [number] ?
 - intent: query_competencies_gained
   examples: |
     - What competencies are gained from the course [STAT](course_code) [380](course_num)?
     - List the competencies acquired by completing [COMP](course_code) [474](course_num)
     - Competencies gained from [ENGL](course_code) [102](course_num)
+    - Show me the list of competencies obtained by completing the [COEN](course_code) [320](course_num) course
+    - Give me the list of competencies obtained by completing [PSYC](course_code) [311](course_num)
 
+# QUERY 11 - What grades did [student] achieve in [course] [number] ?
 - intent: query_student_grade
   examples: |
     - What grade did [Ilise](student) get in the course [COMS](course) [506](course_id)?
     - Show me the grade of [John](student) for [COMP](course) [474](course_id)
     - Grade of [Sarah](student) in [MATH](course) [203](course_id)
+    - What is [Jack](student)'s grade for [SOEN](course) [321](course_id)?
 
+# QUERY 12 - Which [students] have completed [course] [number] ?
 - intent: query_students_completed_course
   examples: |
     - Which students completed the course [COMS](course) [506](course_id)?
     - List the students who finished [COMP](course) [474](course_id)
     - Show me the students who completed [MATH](course) [203](course_id)
+    - Give me the list of students who took part in [COEN](course) [316](course_id)
 
+# QUERY 13 - Print a transcript for a [student], listing all the course taken with their grades
 - intent: query_student_transcript
   examples: |
     - Show me the transcript of [Braun](student)
     - What is the transcript for [Ilise](student)?
     - Transcript of [John](student)
+    - Show me [Bob](student)'s grades
+    - What are [Jack](student)'s grades
 
 - intent: out_of_scope
   examples: |

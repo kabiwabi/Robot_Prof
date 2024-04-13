@@ -12,7 +12,80 @@ rules:
   - intent: out_of_scope
   - action: utter_default
 
+# QUERY 1 - List all courses offered by [university]
+- rule: Query courses offered
+  steps:
+    - intent: query_courses_and_universities
+    - action: action_courses_and_universities
+
+# QUERY 2 - In which courses is [topic] discussed ?
 - rule: Query courses by topic
   steps:
   - intent: query_courses_by_topic
   - action: action_courses_by_topic
+
+# QUERY 3 - Which [topics] are covered in [course] during [lecture number] ?
+- rule: Query topics covered in lecture of course
+  steps:
+    - intent: query_topics_covered_in_lecture
+    - action: action_topics_covered_in_lecture
+
+# QUERY 4 - List all [courses] offered by [university] within the [subject] (e.g., “COMP”, “SOEN”).
+- rule: Query courses by university within subject
+  steps:
+    - intent: query_courses_offered_by_university
+    - action: action_courses_offered_by_university
+
+# QUERY 5 - What [materials] (slides, readings) are recommended for [topic] in [course] [number]?
+- rule: Query reading materials for topic in course
+  steps:
+    - intent: query_materials_for_topic
+    - action: action_materials_for_topic
+
+# QUERY 6 - How many credits is [course] [number] worth ?
+- rule: Query credits for course
+  steps:
+    - intent: query_course_credits
+    - action: action_course_credits
+
+# QUERY 7 - For [course] [number], what additional resources (links to web pages) are available ?
+- rule: Query additional resources for course
+  steps:
+    - intent: query_course_additional_resources
+    - action: action_course_additional_resources
+
+# QUERY 8 - Detail the content (slides, worksheets, readings) available for [lecture number] in [course] [number]
+- rule: Query content available for lecture in course
+  steps:
+      - intent: query_lecture_content
+      - action: action_lecture_content
+
+# QUERY 9 - What reading materials are recommended for studying [topic] in [course] ?
+- rule: Query reading materials for topic in course
+  steps:
+    - intent: query_topic_reading_materials
+    - action: action_topic_reading_materials
+
+# QUERY 10 - What competencies [topics] does a student gain after completing [course] [number] ?
+- rule: Query competencies for completing course
+  steps:
+    - intent: query_competencies_gained
+    - action: action_competencies_gained
+
+# QUERY 11 - What grades did [student] achieve in [course] [number] ?
+- rule: Query student grade for course
+  steps:
+    - intent: query_student_grade
+    - action: action_student_grade
+
+# QUERY 12 - Which [students] have completed [course] [number] ?
+- rule: Query students who completed course
+  steps:
+    - intent: query_students_completed_course
+    - action: action_students_completed_course
+
+# QUERY 13 - Print a transcript for a [student], listing all the course taken with their grades
+- rule: Query transcript for student
+  steps:
+    - intent: query_student_transcript
+    - action: action_student_transcript

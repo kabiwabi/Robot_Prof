@@ -10,7 +10,7 @@ def load_graph():
     g = g.parse(source='./output/combinedGraph.ttl', format='turtle')
     return g
 
-
+# QUERY 1 - List all courses offered by [university]
 class ActionCoursesAndUniversities(Action):
     def __init__(self):
         self.graph = load_graph()
@@ -30,6 +30,7 @@ class ActionCoursesAndUniversities(Action):
         return []
 
 
+# QUERY 2 - In which courses is [topic] discussed ?
 class ActionCoursesByTopic(Action):
     def __init__(self):
         self.graph = load_graph()
@@ -50,6 +51,7 @@ class ActionCoursesByTopic(Action):
         return []
 
 
+# QUERY 3 - Which [topics] are covered in [course] during [lecture number] ?
 class ActionTopicsCoveredInLecture(Action):
     def __init__(self):
         self.graph = load_graph()
@@ -71,6 +73,7 @@ class ActionTopicsCoveredInLecture(Action):
         return []
 
 
+# QUERY 4 - List all [courses] offered by [university] within the [subject] (e.g., “COMP”, “SOEN”).
 class ActionCoursesOfferedByUniversity(Action):
     def __init__(self):
         self.graph = load_graph()
@@ -92,6 +95,7 @@ class ActionCoursesOfferedByUniversity(Action):
         return []
 
 
+# QUERY 5 - What [materials] (slides, readings) are recommended for [topic] in [course] [number]?
 class ActionMaterialsForTopic(Action):
     def __init__(self):
         self.graph = load_graph()
@@ -114,6 +118,7 @@ class ActionMaterialsForTopic(Action):
         return []
 
 
+# QUERY 6 - How many credits is [course] [number] worth ?
 class ActionCourseCredits(Action):
     def __init__(self):
         self.graph = load_graph()
@@ -135,6 +140,7 @@ class ActionCourseCredits(Action):
         return []
 
 
+# QUERY 7 - For [course] [number], what additional resources (links to web pages) are available ?
 class ActionCourseAdditionalResources(Action):
     def __init__(self):
         self.graph = load_graph()
@@ -156,6 +162,7 @@ class ActionCourseAdditionalResources(Action):
         return []
 
 
+# QUERY 8 - Detail the content (slides, worksheets, readings) available for [lecture number] in [course] [number]
 class ActionLectureContent(Action):
     def __init__(self):
         self.graph = load_graph()
@@ -178,6 +185,7 @@ class ActionLectureContent(Action):
         return []
 
 
+# QUERY 9 - What reading materials are recommended for studying [topic] in [course] ?
 class ActionTopicReadingMaterials(Action):
     def __init__(self):
         self.graph = load_graph()
@@ -200,6 +208,7 @@ class ActionTopicReadingMaterials(Action):
         return []
 
 
+# QUERY 10 - What competencies [topics] does a student gain after completing [course] [number] ?
 class ActionCompetenciesGained(Action):
     def __init__(self):
         self.graph = load_graph()
@@ -221,6 +230,7 @@ class ActionCompetenciesGained(Action):
         return []
 
 
+# QUERY 11 - What grades did [student] achieve in [course] [number] ?
 class ActionStudentGrade(Action):
     def __init__(self):
         self.graph = load_graph()
@@ -243,6 +253,7 @@ class ActionStudentGrade(Action):
         return []
 
 
+# QUERY 12 - Which [students] have completed [course] [number] ?
 class ActionStudentsCompletedCourse(Action):
     def __init__(self):
         self.graph = load_graph()
@@ -264,6 +275,7 @@ class ActionStudentsCompletedCourse(Action):
         return []
 
 
+# QUERY 13 - Print a transcript for a [student], listing all the course taken with their grades
 class ActionStudentTranscript(Action):
     def __init__(self):
         self.graph = load_graph()
