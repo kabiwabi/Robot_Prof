@@ -114,10 +114,16 @@ class ActionMaterialsForTopic(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         topic = tracker.get_slot("topic")
+
+        # cheeky fix for q5
+        DBPedia = "https://dbpedia.org/resource/"
+        topic = topic.rsplit(" ")
+        qTopic = DBPedia + topic[0].title() + "_" + topic[1].lower()
+
         course_dept = tracker.get_slot("course_dept")
         course_num = tracker.get_slot("course_num")
-        materials = query.materials_for_topic(self.graph, topic, course_dept, course_num)
-        response = f"Here are the materials recommended for {topic} in {course_dept} {course_num}:\n"
+        materials = query.materials_for_topic(self.graph, str(qTopic), str(course_dept), str(course_num))
+        response = f"Here are the materials recommended for {qTopic} in {course_dept} {course_num}:\n"
         for lecture, reading, worksheet, slides in materials:
             response += f"Lecture: {lecture}\nReading: {reading}\nWorksheet: {worksheet}\nSlides: {slides}\n---\n"
 
@@ -137,8 +143,9 @@ class ActionCourseCredits(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         course = tracker.get_slot("course")
-        course_number = tracker.get_slot("course_number")
-        credits = query.course_credits(self.graph, course, course_number)
+        course_number = tracker.get_slot("course_num")
+        print(f"Course number: {course_number}")
+        credits = query.course_credits(self.graph, str(course), str(course_number))
         response = f"The credits for {course} {course_number} are:\n"
         for credit in credits:
             response += f"- {credit}\n"
@@ -159,7 +166,7 @@ class ActionCourseAdditionalResources(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         course = tracker.get_slot("course")
-        course_number = tracker.get_slot("course_number")
+        course_number = tracker.get_slot("course_num")
         resources = query.course_additional_resources(self.graph, course, course_number)
         response = f"Here are the additional resources for {course} {course_number}:\n"
         for resource in resources:
