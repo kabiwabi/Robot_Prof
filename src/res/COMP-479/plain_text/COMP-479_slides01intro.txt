@@ -1,0 +1,1412 @@
+Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+Introduction to Information Retrieval
+http://informationretrieval.org
+IIR 1: Boolean Retrieval
+Hinrich Sch¨ utze
+Center for Information and Language Processing, Universit y of Munich
+2014-04-09
+Sch¨ utze: Boolean Retrieval 1 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+Take-away
+Sch¨ utze: Boolean Retrieval 2 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+Take-away
+Boolean Retrieval: Design and data structures of a simple
+information retrieval system
+Sch¨ utze: Boolean Retrieval 2 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+Take-away
+Boolean Retrieval: Design and data structures of a simple
+information retrieval system
+What topics will be covered in this class?
+Sch¨ utze: Boolean Retrieval 2 / 60Introduction Inverted index Processing Boolean queries Query optimizat ion Course overview
+Outline
+1Introduction
+2Inverted index
+3Processing Boolean queries
+4Query optimization
+5Course overview
+Sch¨ utze: Boolean Retrieval 3 / 60Introduction Inverted index Processing Boolean queries Query optimizat ion Course overview
+Deﬁnition of information retrieval
+Information retrieval (IR) is ﬁnding material (usually documen ts) of
+an unstructured nature (usually text) that satisﬁes an informat ion
+need from within large collections (usually stored on computers ).
+Sch¨ utze: Boolean Retrieval 4 / 60Introduction Inverted index Processing Boolean queries Query optimizat ion Course overview
+Deﬁnition of information retrieval
+Information retrieval (IR) is ﬁndingmaterial (usually documents) of
+an unstructured nature (usually text) that satisﬁes an informat ion
+need from within large collections (usually stored on computers ).
+Sch¨ utze: Boolean Retrieval 4 / 60Introduction Inverted index Processing Boolean queries Query optimizat ion Course overview
+Deﬁnition of information retrieval
+Information retrieval (IR) is ﬁnding material (usually documents) of
+an unstructured nature (usually text) that satisﬁes an informat ion
+need from within large collections (usually stored on computers ).
+Sch¨ utze: Boolean Retrieval 4 / 60Introduction Inverted index Processing Boolean queries Query optimizat ion Course overview
+Deﬁnition of information retrieval
+Information retrieval (IR) is ﬁnding material (usually documen ts) of
+anunstructured nature (usually text) that satisﬁes an information
+need from within large collections (usually stored on computers ).
+Sch¨ utze: Boolean Retrieval 4 / 60Introduction Inverted index Processing Boolean queries Query optimizat ion Course overview
+Deﬁnition of information retrieval
+Information retrieval (IR) is ﬁnding material (usually documen ts) of
+an unstructured nature (usually text) that satisﬁes an information
+needfrom within large collections (usually stored on computers).
+Sch¨ utze: Boolean Retrieval 4 / 60Introduction Inverted index Processing Boolean queries Query optimizat ion Course overview
+Deﬁnition of information retrieval
+Information retrieval (IR) is ﬁnding material (usually documen ts) of
+an unstructured nature (usually text) that satisﬁes an informat ion
+need from within large collections (usually stored on computers).
+Sch¨ utze: Boolean Retrieval 4 / 60Introduction Inverted index Processing Boolean queries Query optimizat ion Course overview
+Deﬁnition of information retrieval
+Information retrieval (IR) is ﬁndingmaterial(usually documents) of
+anunstructured nature (usually text) that satisﬁes an information
+needfrom within large collections (usually stored on computers).
+Sch¨ utze: Boolean Retrieval 4 / 60Introduction Inverted index Processing Boolean queries Query optimizat ion Course overview
+Boolean retrieval
+The Boolean model is arguably the simplest model to base an
+information retrieval system on.
+Sch¨ utze: Boolean Retrieval 7 / 60Introduction Inverted index Processing Boolean queries Query optimizat ion Course overview
+Boolean retrieval
+The Boolean model is arguably the simplest model to base an
+information retrieval system on.
+Queries are Boolean expressions, e.g., Caesar and Brutus
+Sch¨ utze: Boolean Retrieval 7 / 60Introduction Inverted index Processing Boolean queries Query optimizat ion Course overview
+Boolean retrieval
+The Boolean model is arguably the simplest model to base an
+information retrieval system on.
+Queries are Boolean expressions, e.g., Caesar and Brutus
+The seach engine returns all documents that satisfy the
+Boolean expression.
+Sch¨ utze: Boolean Retrieval 7 / 60Introduction Inverted index Processing Boolean queries Query optimizat ion Course overview
+Boolean retrieval
+The Boolean model is arguably the simplest model to base an
+information retrieval system on.
+Queries are Boolean expressions, e.g., Caesar and Brutus
+The seach engine returns all documents that satisfy the
+Boolean expression.
+Does Google use the Boolean model?
+Sch¨ utze: Boolean Retrieval 7 / 60Introduction Inverted index Processing Boolean queries Query optimizat ion Course overview
+Does Google use the Boolean model?
+Sch¨ utze: Boolean Retrieval 8 / 60Introduction Inverted index Processing Boolean queries Query optimizat ion Course overview
+Does Google use the Boolean model?
+On Google, the default interpretation of a query [ w1w2
+...wn] isw1ANDw2AND ...AND wn
+Sch¨ utze: Boolean Retrieval 8 / 60Introduction Inverted index Processing Boolean queries Query optimizat ion Course overview
+Does Google use the Boolean model?
+On Google, the default interpretation of a query [ w1w2
+...wn] isw1ANDw2AND ...AND wn
+Cases where you get hits that do not contain one of the wi:
+Sch¨ utze: Boolean Retrieval 8 / 60Introduction Inverted index Processing Boolean queries Query optimizat ion Course overview
+Does Google use the Boolean model?
+On Google, the default interpretation of a query [ w1w2
+...wn] isw1ANDw2AND ...AND wn
+Cases where you get hits that do not contain one of the wi:
+anchor text
+Sch¨ utze: Boolean Retrieval 8 / 60Introduction Inverted index Processing Boolean queries Query optimizat ion Course overview
+Does Google use the Boolean model?
+On Google, the default interpretation of a query [ w1w2
+...wn] isw1ANDw2AND ...AND wn
+Cases where you get hits that do not contain one of the wi:
+anchor text
+page contains variant of wi(morphology, spelling correction,
+synonym)
+Sch¨ utze: Boolean Retrieval 8 / 60Introduction Inverted index Processing Boolean queries Query optimizat ion Course overview
+Does Google use the Boolean model?
+On Google, the default interpretation of a query [ w1w2
+...wn] isw1ANDw2AND ...AND wn
+Cases where you get hits that do not contain one of the wi:
+anchor text
+page contains variant of wi(morphology, spelling correction,
+synonym)
+long queries ( nlarge)
+Sch¨ utze: Boolean Retrieval 8 / 60Introduction Inverted index Processing Boolean queries Query optimizat ion Course overview
+Does Google use the Boolean model?
+On Google, the default interpretation of a query [ w1w2
+...wn] isw1ANDw2AND ...AND wn
+Cases where you get hits that do not contain one of the wi:
+anchor text
+page contains variant of wi(morphology, spelling correction,
+synonym)
+long queries ( nlarge)
+boolean expression generates very few hits
+Sch¨ utze: Boolean Retrieval 8 / 60Introduction Inverted index Processing Boolean queries Query optimizat ion Course overview
+Does Google use the Boolean model?
+On Google, the default interpretation of a query [ w1w2
+...wn] isw1ANDw2AND ...AND wn
+Cases where you get hits that do not contain one of the wi:
+anchor text
+page contains variant of wi(morphology, spelling correction,
+synonym)
+long queries ( nlarge)
+boolean expression generates very few hits
+Simple Boolean vs. Ranking of result set
+Sch¨ utze: Boolean Retrieval 8 / 60Introduction Inverted index Processing Boolean queries Query optimizat ion Course overview
+Does Google use the Boolean model?
+On Google, the default interpretation of a query [ w1w2
+...wn] isw1ANDw2AND ...AND wn
+Cases where you get hits that do not contain one of the wi:
+anchor text
+page contains variant of wi(morphology, spelling correction,
+synonym)
+long queries ( nlarge)
+boolean expression generates very few hits
+Simple Boolean vs. Ranking of result set
+Simple Boolean retrieval returns matching documents in no
+particular order.
+Sch¨ utze: Boolean Retrieval 8 / 60Introduction Inverted index Processing Boolean queries Query optimizat ion Course overview
+Does Google use the Boolean model?
+On Google, the default interpretation of a query [ w1w2
+...wn] isw1ANDw2AND ...AND wn
+Cases where you get hits that do not contain one of the wi:
+anchor text
+page contains variant of wi(morphology, spelling correction,
+synonym)
+long queries ( nlarge)
+boolean expression generates very few hits
+Simple Boolean vs. Ranking of result set
+Simple Boolean retrieval returns matching documents in no
+particular order.
+Google (and most well designed Boolean engines) rank the
+result set – they rank good hits (according to some estimator
+of relevance) higher than bad hits.
+Sch¨ utze: Boolean Retrieval 8 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Outline
+1Introduction
+2Inverted index
+3Processing Boolean queries
+4Query optimization
+5Course overview
+Sch¨ utze: Boolean Retrieval 9 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Unstructured data in 1650: Shakespeare
+Sch¨ utze: Boolean Retrieval 10 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Unstructured data in 1650
+Which plays of Shakespeare contain the words Brutus and
+Caesar, butnot Calpurnia ?
+Sch¨ utze: Boolean Retrieval 11 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Unstructured data in 1650
+Which plays of Shakespeare contain the words Brutus and
+Caesar, butnot Calpurnia ?
+One could grep all of Shakespeare’s plays for Brutus and
+Caesar, then strip out lines containing Calpurnia .
+Sch¨ utze: Boolean Retrieval 11 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Unstructured data in 1650
+Which plays of Shakespeare contain the words Brutus and
+Caesar, butnot Calpurnia ?
+One could grep all of Shakespeare’s plays for Brutus and
+Caesar, then strip out lines containing Calpurnia .
+Why is grep not the solution?
+Sch¨ utze: Boolean Retrieval 11 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Unstructured data in 1650
+Which plays of Shakespeare contain the words Brutus and
+Caesar, butnot Calpurnia ?
+One could grep all of Shakespeare’s plays for Brutus and
+Caesar, then strip out lines containing Calpurnia .
+Why is grep not the solution?
+Slow (for large collections)
+Sch¨ utze: Boolean Retrieval 11 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Unstructured data in 1650
+Which plays of Shakespeare contain the words Brutus and
+Caesar, butnot Calpurnia ?
+One could grep all of Shakespeare’s plays for Brutus and
+Caesar, then strip out lines containing Calpurnia .
+Why is grep not the solution?
+Slow (for large collections)
+grep is line-oriented, IR is document-oriented
+Sch¨ utze: Boolean Retrieval 11 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Unstructured data in 1650
+Which plays of Shakespeare contain the words Brutus and
+Caesar, butnot Calpurnia ?
+One could grep all of Shakespeare’s plays for Brutus and
+Caesar, then strip out lines containing Calpurnia .
+Why is grep not the solution?
+Slow (for large collections)
+grep is line-oriented, IR is document-oriented
+“not Calpurnia ” is non-trivial
+Sch¨ utze: Boolean Retrieval 11 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Unstructured data in 1650
+Which plays of Shakespeare contain the words Brutus and
+Caesar, butnot Calpurnia ?
+One could grep all of Shakespeare’s plays for Brutus and
+Caesar, then strip out lines containing Calpurnia .
+Why is grep not the solution?
+Slow (for large collections)
+grep is line-oriented, IR is document-oriented
+“not Calpurnia ” is non-trivial
+Other operations (e.g., ﬁnd the word Romans near
+countryman ) not feasible
+Sch¨ utze: Boolean Retrieval 11 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Term-document incidence matrix
+Anthony Julius The Hamlet Othello Macbeth ...
+and Caesar Tempest
+Cleopatra
+Anthony 1 1 0 0 0 1
+Brutus 1 1 0 1 0 0
+Caesar 1 1 0 1 1 1
+Calpurnia 0 1 0 0 0 0
+Cleopatra 1 0 0 0 0 0
+mercy 1 0 1 1 1 1
+worser 1 0 1 1 1 0
+...
+Entry is 1 if term occurs. Example: Calpurnia occurs in Julius Caesar .
+Entry is 0 if term doesn’t occur. Example: Calpurnia doesn’t occur in The
+tempest.
+Sch¨ utze: Boolean Retrieval 12 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Term-document incidence matrix
+Anthony Julius The Hamlet Othello Macbeth ...
+and Caesar Tempest
+Cleopatra
+Anthony 1 1 0 0 0 1
+Brutus 1 1 0 1 0 0
+Caesar 1 1 0 1 1 1
+Calpurnia 0 1 0 0 0 0
+Cleopatra 1 0 0 0 0 0
+mercy 1 0 1 1 1 1
+worser 1 0 1 1 1 0
+...
+Entry is 1 if term occurs. Example: Calpurnia occurs in Julius Caesar .
+Entry is 0 if term doesn’t occur. Example: Calpurnia doesn’t occur in The
+tempest.
+Sch¨ utze: Boolean Retrieval 12 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Term-document incidence matrix
+Anthony Julius The Hamlet Othello Macbeth ...
+and Caesar Tempest
+Cleopatra
+Anthony 1 1 0 0 0 1
+Brutus 1 1 0 1 0 0
+Caesar 1 1 0 1 1 1
+Calpurnia 0 1 0 0 0 0
+Cleopatra 1 0 0 0 0 0
+mercy 1 0 1 1 1 1
+worser 1 0 1 1 1 0
+...
+Entry is 1 if term occurs. Example: Calpurnia occurs in Julius Caesar .
+Entry is 0 if term doesn’t occur. Example: Calpurnia doesn’t occur in The
+tempest.
+Sch¨ utze: Boolean Retrieval 12 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Incidence vectors
+So we have a 0/1 vector for each term.
+To answer the query Brutus and Caesar and not
+Calpurnia :
+Sch¨ utze: Boolean Retrieval 13 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Incidence vectors
+So we have a 0/1 vector for each term.
+To answer the query Brutus and Caesar and not
+Calpurnia :
+Take the vectors for Brutus,Caesar, andCalpurnia
+Complement the vector of Calpurnia
+Do a (bitwise) andon the three vectors
+110100and110111and101111 = 100100
+Sch¨ utze: Boolean Retrieval 13 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+0/1 vectors and result of bitwise operations
+Anthony Julius The Hamlet Othello Macbeth ...
+and Caesar Tempest
+Cleopatra
+Anthony 1 1 0 0 0 1
+Brutus 1 1 0 1 0 0
+Caesar 1 1 0 1 1 1
+Calpurnia 0 1 0 0 0 0
+Cleopatra 1 0 0 0 0 0
+mercy 1 0 1 1 1 1
+worser 1 0 1 1 1 0
+...
+result: 1 0 0 1 0 0
+Sch¨ utze: Boolean Retrieval 14 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Answers to query
+Anthony and Cleopatra, Act III, Scene ii
+Agrippa [Aside to Domitius Enobarbus]: Why, Enobarbus,
+When Antony found Julius Caesar dead,
+He cried almost to roaring; and he wept
+When at Philippi he found Brutus slain.
+Hamlet, Act III, Scene ii
+Lord Polonius: I did enact Julius Caesar: I was killed i’ the
+Capitol; Brutus killed me.
+Sch¨ utze: Boolean Retrieval 15 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Bigger collections
+Consider N= 106documents, each with about 1000 tokens
+Sch¨ utze: Boolean Retrieval 16 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Bigger collections
+Consider N= 106documents, each with about 1000 tokens
+⇒total of 109tokens
+Sch¨ utze: Boolean Retrieval 16 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Bigger collections
+Consider N= 106documents, each with about 1000 tokens
+⇒total of 109tokens
+On average 6 bytes per token, including spaces and
+punctuation⇒size of document collection is about 6 ·109=
+6 GB
+Sch¨ utze: Boolean Retrieval 16 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Bigger collections
+Consider N= 106documents, each with about 1000 tokens
+⇒total of 109tokens
+On average 6 bytes per token, including spaces and
+punctuation⇒size of document collection is about 6 ·109=
+6 GB
+Assume there are M= 500,000 distinct terms in the collection
+Sch¨ utze: Boolean Retrieval 16 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Bigger collections
+Consider N= 106documents, each with about 1000 tokens
+⇒total of 109tokens
+On average 6 bytes per token, including spaces and
+punctuation⇒size of document collection is about 6 ·109=
+6 GB
+Assume there are M= 500,000 distinct terms in the collection
+(Notice that we are making a term/token distinction.)
+Sch¨ utze: Boolean Retrieval 16 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Can’t build the incidence matrix
+M= 500,000×106= half a trillion 0s and 1s.
+Sch¨ utze: Boolean Retrieval 17 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Can’t build the incidence matrix
+M= 500,000×106= half a trillion 0s and 1s.
+But the matrix has no more than one billion 1s.
+Sch¨ utze: Boolean Retrieval 17 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Can’t build the incidence matrix
+M= 500,000×106= half a trillion 0s and 1s.
+But the matrix has no more than one billion 1s.
+Matrix is extremely sparse.
+Sch¨ utze: Boolean Retrieval 17 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Can’t build the incidence matrix
+M= 500,000×106= half a trillion 0s and 1s.
+But the matrix has no more than one billion 1s.
+Matrix is extremely sparse.
+What is a better representations?
+Sch¨ utze: Boolean Retrieval 17 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Can’t build the incidence matrix
+M= 500,000×106= half a trillion 0s and 1s.
+But the matrix has no more than one billion 1s.
+Matrix is extremely sparse.
+What is a better representations?
+We only record the 1s.
+Sch¨ utze: Boolean Retrieval 17 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Inverted Index
+For each term t, we store a list of all documents that contain t.
+Brutus−→124113145173174
+Caesar−→124561657132...
+Calpurnia−→23154101
+...
+/bracehtipupleft/bracehtipdownright/bracehtipdownleft/bracehtipupright /bracehtipupleft /bracehtipdownright/bracehtipdownleft /bracehtipupright
+dictionary postings
+Sch¨ utze: Boolean Retrieval 18 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Inverted Index
+For each term t, we store a list of all documents that contain t.
+Brutus−→124113145173174
+Caesar−→124561657132...
+Calpurnia−→23154101
+...
+/bracehtipupleft/bracehtipdownright/bracehtipdownleft/bracehtipupright /bracehtipupleft /bracehtipdownright/bracehtipdownleft /bracehtipupright
+dictionary postings
+Sch¨ utze: Boolean Retrieval 18 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Inverted Index
+For each term t, we store a list of all documents that contain t.
+Brutus−→124113145173174
+Caesar−→124561657132...
+Calpurnia−→23154101
+...
+/bracehtipupleft/bracehtipdownright/bracehtipdownleft/bracehtipupright /bracehtipupleft /bracehtipdownright/bracehtipdownleft /bracehtipupright
+dictionary postings
+Sch¨ utze: Boolean Retrieval 18 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Inverted index construction
+1Collect the documents to be indexed:
+Friends, Romans, countrymen. So let it be with Caesar ...
+2Tokenize the text, turning each document into a list of tokens :
+Friends Romans countrymen So...
+3Do linguistic preprocessing, producing a list of normalized
+tokens, which are the indexing terms: friend roman
+countryman so...
+4Index the documents that each term occurs in by creating an
+inverted index, consisting of a dictionary and postings.
+Sch¨ utze: Boolean Retrieval 19 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Tokenization and preprocessing
+Doc 1.I did enact Julius Caesar: I
+waskilledi’theCapitol; Brutuskilled
+me.
+Doc 2.SoletitbewithCaesar. The
+noble Brutus hath told you Caesar
+was ambitious:=⇒Doc 1.i did enact julius caesar i was
+killed i’ the capitol brutus killed me
+Doc 2.so let it be with caesar the
+noblebrutushathtoldyoucaesarwas
+ambitious
+Sch¨ utze: Boolean Retrieval 20 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Generate postings
+Doc 1.i did enact juliuscaesar i was
+killed i’ the capitol brutus killed me
+Doc 2.so let it be with caesar the
+noblebrutushathtoldyoucaesarwas
+ambitious=⇒term docID
+i 1
+did 1
+enact 1
+julius 1
+caesar 1
+i 1
+was 1
+killed 1
+i’ 1
+the 1
+capitol 1
+brutus 1
+killed 1
+me 1
+so 2
+let 2
+it 2
+be 2
+with 2
+caesar 2
+the 2
+noble 2
+brutus 2
+hath 2
+told 2
+you 2
+caesar 2
+was 2
+ambitious 2
+Sch¨ utze: Boolean Retrieval 21 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Sort postings
+term docID
+i 1
+did 1
+enact 1
+julius 1
+caesar 1
+i 1
+was 1
+killed 1
+i’ 1
+the 1
+capitol 1
+brutus 1
+killed 1
+me 1
+so 2
+let 2
+it 2
+be 2
+with 2
+caesar 2
+the 2
+noble 2
+brutus 2
+hath 2
+told 2
+you 2
+caesar 2
+was 2
+ambitious 2=⇒term docID
+ambitious 2
+be 2
+brutus 1
+brutus 2
+capitol 1
+caesar 1
+caesar 2
+caesar 2
+did 1
+enact 1
+hath 1
+i 1
+i 1
+i’ 1
+it 2
+julius 1
+killed 1
+killed 1
+let 2
+me 1
+noble 2
+so 2
+the 1
+the 2
+told 2
+you 2
+was 1
+was 2
+with 2
+Sch¨ utze: Boolean Retrieval 22 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Create postings lists, determine document frequency
+term docID
+ambitious 2
+be 2
+brutus 1
+brutus 2
+capitol 1
+caesar 1
+caesar 2
+caesar 2
+did 1
+enact 1
+hath 1
+i 1
+i 1
+i’ 1
+it 2
+julius 1
+killed 1
+killed 1
+let 2
+me 1
+noble 2
+so 2
+the 1
+the 2
+told 2
+you 2
+was 1
+was 2
+with 2=⇒term doc. freq. →postings lists
+ambitious 1→2
+be1→2
+brutus2→1→2
+capitol 1→1
+caesar2→1→2
+did1→1
+enact1→1
+hath1→2
+i1→1
+i’1→1
+it1→2
+julius1→1
+killed1→1
+let1→2
+me1→1
+noble1→2
+so1→2
+the2→1→2
+told1→2
+you1→2
+was2→1→2
+with1→2
+Sch¨ utze: Boolean Retrieval 23 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Split the result into dictionary and postings ﬁle
+Brutus−→124113145173174
+Caesar−→124561657132...
+Calpurnia−→23154101
+...
+/bracehtipupleft/bracehtipdownright/bracehtipdownleft/bracehtipupright /bracehtipupleft /bracehtipdownright/bracehtipdownleft /bracehtipupright
+dictionary postings ﬁle
+Sch¨ utze: Boolean Retrieval 24 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Later in this course
+Index construction: how can we create inverted indexes for
+large collections?
+Sch¨ utze: Boolean Retrieval 25 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Later in this course
+Index construction: how can we create inverted indexes for
+large collections?
+How much space do we need for dictionary and index?
+Sch¨ utze: Boolean Retrieval 25 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Later in this course
+Index construction: how can we create inverted indexes for
+large collections?
+How much space do we need for dictionary and index?
+Index compression: how can we eﬃciently store and process
+indexes for large collections?
+Sch¨ utze: Boolean Retrieval 25 / 60Introduction Inverted index Processing Boolean queries Query optimization Course over view
+Later in this course
+Index construction: how can we create inverted indexes for
+large collections?
+How much space do we need for dictionary and index?
+Index compression: how can we eﬃciently store and process
+indexes for large collections?
+Ranked retrieval: what does the inverted index look like when
+we want the “best” answer?
+Sch¨ utze: Boolean Retrieval 25 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Outline
+1Introduction
+2Inverted index
+3Processing Boolean queries
+4Query optimization
+5Course overview
+Sch¨ utze: Boolean Retrieval 26 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Simple conjunctive query (two terms)
+Consider the query: Brutus AND Calpurnia
+Sch¨ utze: Boolean Retrieval 27 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Simple conjunctive query (two terms)
+Consider the query: Brutus AND Calpurnia
+To ﬁnd all matching documents using inverted index:
+Sch¨ utze: Boolean Retrieval 27 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Simple conjunctive query (two terms)
+Consider the query: Brutus AND Calpurnia
+To ﬁnd all matching documents using inverted index:
+1LocateBrutus in the dictionary
+Sch¨ utze: Boolean Retrieval 27 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Simple conjunctive query (two terms)
+Consider the query: Brutus AND Calpurnia
+To ﬁnd all matching documents using inverted index:
+1LocateBrutus in the dictionary
+2Retrieve its postings list from the postings ﬁle
+Sch¨ utze: Boolean Retrieval 27 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Simple conjunctive query (two terms)
+Consider the query: Brutus AND Calpurnia
+To ﬁnd all matching documents using inverted index:
+1LocateBrutus in the dictionary
+2Retrieve its postings list from the postings ﬁle
+3LocateCalpurnia in the dictionary
+Sch¨ utze: Boolean Retrieval 27 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Simple conjunctive query (two terms)
+Consider the query: Brutus AND Calpurnia
+To ﬁnd all matching documents using inverted index:
+1LocateBrutus in the dictionary
+2Retrieve its postings list from the postings ﬁle
+3LocateCalpurnia in the dictionary
+4Retrieve its postings list from the postings ﬁle
+Sch¨ utze: Boolean Retrieval 27 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Simple conjunctive query (two terms)
+Consider the query: Brutus AND Calpurnia
+To ﬁnd all matching documents using inverted index:
+1LocateBrutus in the dictionary
+2Retrieve its postings list from the postings ﬁle
+3LocateCalpurnia in the dictionary
+4Retrieve its postings list from the postings ﬁle
+5Intersect the two postings lists
+Sch¨ utze: Boolean Retrieval 27 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Simple conjunctive query (two terms)
+Consider the query: Brutus AND Calpurnia
+To ﬁnd all matching documents using inverted index:
+1LocateBrutus in the dictionary
+2Retrieve its postings list from the postings ﬁle
+3LocateCalpurnia in the dictionary
+4Retrieve its postings list from the postings ﬁle
+5Intersect the two postings lists
+6Return intersection to user
+Sch¨ utze: Boolean Retrieval 27 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Intersecting two postings lists
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒
+Sch¨ utze: Boolean Retrieval 28 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Intersecting two postings lists
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒
+Sch¨ utze: Boolean Retrieval 28 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Intersecting two postings lists
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒
+Sch¨ utze: Boolean Retrieval 28 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Intersecting two postings lists
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2
+Sch¨ utze: Boolean Retrieval 28 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Intersecting two postings lists
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2
+Sch¨ utze: Boolean Retrieval 28 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Intersecting two postings lists
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2
+Sch¨ utze: Boolean Retrieval 28 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Intersecting two postings lists
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2
+Sch¨ utze: Boolean Retrieval 28 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Intersecting two postings lists
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2→31
+Sch¨ utze: Boolean Retrieval 28 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Intersecting two postings lists
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2→31
+Sch¨ utze: Boolean Retrieval 28 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Intersecting two postings lists
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2→31
+Sch¨ utze: Boolean Retrieval 28 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Intersecting two postings lists
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2→31
+Sch¨ utze: Boolean Retrieval 28 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Intersecting two postings lists
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2→31
+Sch¨ utze: Boolean Retrieval 28 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Intersecting two postings lists
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2→31
+This is linear in the length of the postings lists.
+Sch¨ utze: Boolean Retrieval 28 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Intersecting two postings lists
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2→31
+This is linear in the length of the postings lists.
+Note: This only works if postings lists are sorted.
+Sch¨ utze: Boolean Retrieval 28 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Intersecting two postings lists
+Intersect (p1,p2)
+1answer←/angbracketleft/angbracketright
+2whilep1/negationslash=nilandp2/negationslash=nil
+3do ifdocID(p1) =docID(p2)
+4 thenAdd(answer,docID(p1))
+5 p1←next(p1)
+6 p2←next(p2)
+7 else ifdocID(p1)<docID(p2)
+8 thenp1←next(p1)
+9 elsep2←next(p2)
+10returnanswer
+Sch¨ utze: Boolean Retrieval 29 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Query processing: Exercise
+france−→1→2→3→4→5→7→8→9→11→12→13→14→15
+paris−→2→6→10→12→14
+lear−→12→15
+Compute hit list for ((paris AND NOT france) OR lear)
+Sch¨ utze: Boolean Retrieval 30 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Boolean retrieval model: Assessment
+The Boolean retrieval model can answer any query that is a
+Boolean expression.
+Sch¨ utze: Boolean Retrieval 31 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Boolean retrieval model: Assessment
+The Boolean retrieval model can answer any query that is a
+Boolean expression.
+Boolean queries are queries that use and,orandnotto join
+query terms.
+Sch¨ utze: Boolean Retrieval 31 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Boolean retrieval model: Assessment
+The Boolean retrieval model can answer any query that is a
+Boolean expression.
+Boolean queries are queries that use and,orandnotto join
+query terms.
+Views each document as a setof terms.
+Sch¨ utze: Boolean Retrieval 31 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Boolean retrieval model: Assessment
+The Boolean retrieval model can answer any query that is a
+Boolean expression.
+Boolean queries are queries that use and,orandnotto join
+query terms.
+Views each document as a setof terms.
+Is precise: Document matches condition or not.
+Sch¨ utze: Boolean Retrieval 31 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Boolean retrieval model: Assessment
+The Boolean retrieval model can answer any query that is a
+Boolean expression.
+Boolean queries are queries that use and,orandnotto join
+query terms.
+Views each document as a setof terms.
+Is precise: Document matches condition or not.
+Primary commercial retrieval tool for 3 decades
+Sch¨ utze: Boolean Retrieval 31 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Boolean retrieval model: Assessment
+The Boolean retrieval model can answer any query that is a
+Boolean expression.
+Boolean queries are queries that use and,orandnotto join
+query terms.
+Views each document as a setof terms.
+Is precise: Document matches condition or not.
+Primary commercial retrieval tool for 3 decades
+Many professional searchers (e.g., lawyers) still like Boolean
+queries.
+Sch¨ utze: Boolean Retrieval 31 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Boolean retrieval model: Assessment
+The Boolean retrieval model can answer any query that is a
+Boolean expression.
+Boolean queries are queries that use and,orandnotto join
+query terms.
+Views each document as a setof terms.
+Is precise: Document matches condition or not.
+Primary commercial retrieval tool for 3 decades
+Many professional searchers (e.g., lawyers) still like Boolean
+queries.
+You know exactly what you are getting.
+Sch¨ utze: Boolean Retrieval 31 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Boolean retrieval model: Assessment
+The Boolean retrieval model can answer any query that is a
+Boolean expression.
+Boolean queries are queries that use and,orandnotto join
+query terms.
+Views each document as a setof terms.
+Is precise: Document matches condition or not.
+Primary commercial retrieval tool for 3 decades
+Many professional searchers (e.g., lawyers) still like Boolean
+queries.
+You know exactly what you are getting.
+Many search systems you use are also Boolean: spotlight,
+email, intranet etc.
+Sch¨ utze: Boolean Retrieval 31 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Commercially successful Boolean retrieval: Westlaw
+Largest commercial legal search service in terms of the
+number of paying subscribers
+Sch¨ utze: Boolean Retrieval 32 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Commercially successful Boolean retrieval: Westlaw
+Largest commercial legal search service in terms of the
+number of paying subscribers
+Over half a million subscribers performing millions of searches
+a day over tens of terabytes of text data
+Sch¨ utze: Boolean Retrieval 32 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Commercially successful Boolean retrieval: Westlaw
+Largest commercial legal search service in terms of the
+number of paying subscribers
+Over half a million subscribers performing millions of searches
+a day over tens of terabytes of text data
+The service was started in 1975.
+Sch¨ utze: Boolean Retrieval 32 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Commercially successful Boolean retrieval: Westlaw
+Largest commercial legal search service in terms of the
+number of paying subscribers
+Over half a million subscribers performing millions of searches
+a day over tens of terabytes of text data
+The service was started in 1975.
+In 2005, Boolean search (called “Terms and Connectors” by
+Westlaw) was still the default, and used by a large percentage
+of users ...
+Sch¨ utze: Boolean Retrieval 32 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Commercially successful Boolean retrieval: Westlaw
+Largest commercial legal search service in terms of the
+number of paying subscribers
+Over half a million subscribers performing millions of searches
+a day over tens of terabytes of text data
+The service was started in 1975.
+In 2005, Boolean search (called “Terms and Connectors” by
+Westlaw) was still the default, and used by a large percentage
+of users ...
+...although ranked retrieval has been available since 1992.
+Sch¨ utze: Boolean Retrieval 32 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Westlaw: Example queries
+Information need: Information on the legal theories involved in
+preventing the disclosure of trade secrets by employees formerly
+employed by a competing company
+Query:“trade secret” /s disclos! /s prevent /s employe!
+Sch¨ utze: Boolean Retrieval 33 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Westlaw: Example queries
+Information need: Requirements for disabled people to be able to
+access a workplace
+Query:disab! /p access! /s work-site work-place (employment /3
+place)
+Sch¨ utze: Boolean Retrieval 33 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Westlaw: Example queries
+Information need: Cases about a host’s responsibility for drunk
+guests
+Query:host! /p (responsib! liab!) /p (intoxicat! drunk!) /p guest
+Sch¨ utze: Boolean Retrieval 33 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Westlaw: Comments
+Proximity operators: /3 = within 3 words, /s = within a
+sentence, /p = within a paragraph
+Sch¨ utze: Boolean Retrieval 34 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Westlaw: Comments
+Proximity operators: /3 = within 3 words, /s = within a
+sentence, /p = within a paragraph
+Space is disjunction, not conjunction! (This was the defaul t in
+search pre-Google.)
+Sch¨ utze: Boolean Retrieval 34 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Westlaw: Comments
+Proximity operators: /3 = within 3 words, /s = within a
+sentence, /p = within a paragraph
+Space is disjunction, not conjunction! (This was the defaul t in
+search pre-Google.)
+Long, precise queries: incrementally developed, not like web
+search
+Sch¨ utze: Boolean Retrieval 34 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Westlaw: Comments
+Proximity operators: /3 = within 3 words, /s = within a
+sentence, /p = within a paragraph
+Space is disjunction, not conjunction! (This was the defaul t in
+search pre-Google.)
+Long, precise queries: incrementally developed, not like web
+search
+Why professional searchers often like Boolean search:
+precision, transparency, control
+Sch¨ utze: Boolean Retrieval 34 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Westlaw: Comments
+Proximity operators: /3 = within 3 words, /s = within a
+sentence, /p = within a paragraph
+Space is disjunction, not conjunction! (This was the defaul t in
+search pre-Google.)
+Long, precise queries: incrementally developed, not like web
+search
+Why professional searchers often like Boolean search:
+precision, transparency, control
+When are Boolean queries the best way of searching? Depends
+on: information need, searcher, document collection, ...
+Sch¨ utze: Boolean Retrieval 34 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Outline
+1Introduction
+2Inverted index
+3Processing Boolean queries
+4Query optimization
+5Course overview
+Sch¨ utze: Boolean Retrieval 35 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Query optimization
+Consider a query that is an andofnterms,n>2
+Sch¨ utze: Boolean Retrieval 36 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Query optimization
+Consider a query that is an andofnterms,n>2
+For each of the terms, get its postings list, then andthem
+together
+Sch¨ utze: Boolean Retrieval 36 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Query optimization
+Consider a query that is an andofnterms,n>2
+For each of the terms, get its postings list, then andthem
+together
+Example query: Brutus AND Calpurnia AND Caesar
+Sch¨ utze: Boolean Retrieval 36 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Query optimization
+Consider a query that is an andofnterms,n>2
+For each of the terms, get its postings list, then andthem
+together
+Example query: Brutus AND Calpurnia AND Caesar
+What is the best order for processing this query?
+Sch¨ utze: Boolean Retrieval 36 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Query optimization
+Example query: Brutus AND Calpurnia AND Caesar
+Sch¨ utze: Boolean Retrieval 37 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Query optimization
+Example query: Brutus AND Calpurnia AND Caesar
+Simple and eﬀective optimization: Process in order of
+increasing frequency
+Sch¨ utze: Boolean Retrieval 37 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Query optimization
+Example query: Brutus AND Calpurnia AND Caesar
+Simple and eﬀective optimization: Process in order of
+increasing frequency
+Start with the shortest postings list, then keep cutting furthe r
+Sch¨ utze: Boolean Retrieval 37 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Query optimization
+Example query: Brutus AND Calpurnia AND Caesar
+Simple and eﬀective optimization: Process in order of
+increasing frequency
+Start with the shortest postings list, then keep cutting furthe r
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Caesar−→5→31
+Sch¨ utze: Boolean Retrieval 37 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Query optimization
+Example query: Brutus AND Calpurnia AND Caesar
+Simple and eﬀective optimization: Process in order of
+increasing frequency
+Start with the shortest postings list, then keep cutting furthe r
+In this example, ﬁrst Caesar, thenCalpurnia , then
+Brutus
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Caesar−→5→31
+Sch¨ utze: Boolean Retrieval 37 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+Optimized intersection algorithm for conjunctive queries
+Intersect (/angbracketleftt1,...,tn/angbracketright)
+1terms←SortByIncreasingFrequency (/angbracketleftt1,...,tn/angbracketright)
+2result←postings(ﬁrst(terms))
+3terms←rest(terms)
+4whileterms/negationslash=nilandresult/negationslash=nil
+5doresult←Intersect (result,postings(ﬁrst(terms)))
+6terms←rest(terms)
+7returnresult
+Sch¨ utze: Boolean Retrieval 38 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+More general optimization
+Example query: ( madding or crowd )and(ignoble or
+strife)
+Sch¨ utze: Boolean Retrieval 39 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+More general optimization
+Example query: ( madding or crowd )and(ignoble or
+strife)
+Get frequencies for all terms
+Sch¨ utze: Boolean Retrieval 39 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+More general optimization
+Example query: ( madding or crowd )and(ignoble or
+strife)
+Get frequencies for all terms
+Estimate the size of each orby the sum of its frequencies
+(conservative)
+Sch¨ utze: Boolean Retrieval 39 / 60Introduction Inverted index Processing Boolean queries Query optimization Course overview
+More general optimization
+Example query: ( madding or crowd )and(ignoble or
+strife)
+Get frequencies for all terms
+Estimate the size of each orby the sum of its frequencies
+(conservative)
+Process in increasing order of orsizes
+Sch¨ utze: Boolean Retrieval 39 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+Outline
+1Introduction
+2Inverted index
+3Processing Boolean queries
+4Query optimization
+5Course overview
+Sch¨ utze: Boolean Retrieval 40 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+Course overview
+We are done with Chapter 1 of IIR (IIR 01).
+Sch¨ utze: Boolean Retrieval 41 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+Course overview
+We are done with Chapter 1 of IIR (IIR 01).
+Plan for the rest of the semester: 18–20 of the 21 chapters of
+IIR
+Sch¨ utze: Boolean Retrieval 41 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+Course overview
+We are done with Chapter 1 of IIR (IIR 01).
+Plan for the rest of the semester: 18–20 of the 21 chapters of
+IIR
+In what follows: teasers for most chapters – to give you a
+sense of what will be covered.
+Sch¨ utze: Boolean Retrieval 41 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 02: The term vocabulary and postings lists
+Phrase queries: “Stanford University”
+Proximity queries: Gates near Microsoft
+We need an index that captures position information for
+phrase queries and proximity queries.
+Sch¨ utze: Boolean Retrieval 42 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 03: Dictionaries and tolerant retrieval
+rd aboard ardent boardroom borderor border lord morbid sordidbo aboard about boardroom border
+✲ ✲ ✲ ✲✲ ✲ ✲ ✲✲ ✲ ✲ ✲
+Sch¨ utze: Boolean Retrieval 43 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 04: Index construction
+master assign
+map
+phasereduce
+phaseassign
+parsersplits
+parser
+parserinver terpostings
+inver ter
+inver tera-f
+g-p
+q-za-f g-p q-z
+a-f g-p q-z
+a-f
+segment
+filesg-p q-z
+Sch¨ utze: Boolean Retrieval 44 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 05: Index compression
+01234560123456 7
+log10 rank7log10 cf
+Zipf’s law
+Sch¨ utze: Boolean Retrieval 45 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 06: Scoring, term weighting and the vector space
+model
+Ranking search results
+Boolean queries only give inclusion or exclusion of documen ts.
+For ranked retrieval, we measure the proximity between the q uery and
+each document.
+One formalism for doing this: the vector space model
+Key challenge in ranked retrieval: evidence accumulation for a term in
+a document
+1 vs. 0 occurence of a query term in the document
+3 vs. 2 occurences of a query term in the document
+Usually: more is better
+But by how much?
+Need a scoring function that translates frequency into scor e or weight
+Sch¨ utze: Boolean Retrieval 46 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 07: Scoring in a complete search system
+Documents
+Document 
+cache
+Indexesk-gramScoring 
+parameters
+MLRtraining 
+setResults 
+page
+IndexersParsing 
+Linguisticsuser query
+Free text query parser
+Spell correction Scoring and ranking
+Tiered inverted 
+positional indexInexact 
+top K 
+retrievalMetadata in 
+zone and 
+field inde xes
+Sch¨ utze: Boolean Retrieval 47 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 08: Evaluation and dynamic summaries
+Sch¨ utze: Boolean Retrieval 48 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 09: Relevance feedback & query expansion
+Sch¨ utze: Boolean Retrieval 49 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 12: Language models
+q1w P (w|q1)w P(w|q1)
+STOP 0.2 toad 0.01
+the 0.2 said 0.03
+a 0.1 likes 0.02
+frog 0.01 that 0.04
+... ...
+This is a one-state probabilistic ﬁnite-state automaton – a unigram
+language model – and the state emission distribution for its one
+stateq1.
+Sch¨ utze: Boolean Retrieval 50 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 12: Language models
+q1w P (w|q1)w P(w|q1)
+STOP 0.2 toad 0.01
+the 0.2 said 0.03
+a 0.1 likes 0.02
+frog 0.01 that 0.04
+... ...
+This is a one-state probabilistic ﬁnite-state automaton – a unigram
+language model – and the state emission distribution for its one
+stateq1.
+STOP is not a word, but a special symbol indicating that the
+automaton stops.
+Sch¨ utze: Boolean Retrieval 50 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 12: Language models
+q1w P (w|q1)w P(w|q1)
+STOP 0.2 toad 0.01
+the 0.2 said 0.03
+a 0.1 likes 0.02
+frog 0.01 that 0.04
+... ...
+This is a one-state probabilistic ﬁnite-state automaton – a unigram
+language model – and the state emission distribution for its one
+stateq1.
+STOP is not a word, but a special symbol indicating that the
+automaton stops.
+frog
+Sch¨ utze: Boolean Retrieval 50 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 12: Language models
+q1w P (w|q1)w P(w|q1)
+STOP 0.2 toad 0.01
+the 0.2 said 0.03
+a 0.1 likes 0.02
+frog 0.01 that 0.04
+... ...
+This is a one-state probabilistic ﬁnite-state automaton – a unigram
+language model – and the state emission distribution for its one
+stateq1.
+STOP is not a word, but a special symbol indicating that the
+automaton stops.
+frog
+P(string) = 0 .01
+Sch¨ utze: Boolean Retrieval 50 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 12: Language models
+q1w P (w|q1)w P(w|q1)
+STOP 0.2 toad 0.01
+the 0.2 said 0.03
+a 0.1 likes 0.02
+frog 0.01 that 0.04
+... ...
+This is a one-state probabilistic ﬁnite-state automaton – a unigram
+language model – and the state emission distribution for its one
+stateq1.
+STOP is not a word, but a special symbol indicating that the
+automaton stops.
+frog said
+P(string) = 0 .01
+Sch¨ utze: Boolean Retrieval 50 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 12: Language models
+q1w P (w|q1)w P(w|q1)
+STOP 0.2 toad 0.01
+the 0.2 said 0.03
+a 0.1 likes 0.02
+frog 0.01 that 0.04
+... ...
+This is a one-state probabilistic ﬁnite-state automaton – a unigram
+language model – and the state emission distribution for its one
+stateq1.
+STOP is not a word, but a special symbol indicating that the
+automaton stops.
+frog said
+P(string) = 0 .01·0.03
+Sch¨ utze: Boolean Retrieval 50 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 12: Language models
+q1w P (w|q1)w P(w|q1)
+STOP 0.2 toad 0.01
+the 0.2 said 0.03
+a 0.1 likes 0.02
+frog 0.01 that 0.04
+... ...
+This is a one-state probabilistic ﬁnite-state automaton – a unigram
+language model – and the state emission distribution for its one
+stateq1.
+STOP is not a word, but a special symbol indicating that the
+automaton stops.
+frog said that
+P(string) = 0 .01·0.03
+Sch¨ utze: Boolean Retrieval 50 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 12: Language models
+q1w P (w|q1)w P(w|q1)
+STOP 0.2 toad 0.01
+the 0.2 said 0.03
+a 0.1 likes 0.02
+frog 0.01 that 0.04
+... ...
+This is a one-state probabilistic ﬁnite-state automaton – a unigram
+language model – and the state emission distribution for its one
+stateq1.
+STOP is not a word, but a special symbol indicating that the
+automaton stops.
+frog said that
+P(string) = 0 .01·0.03·0.04
+Sch¨ utze: Boolean Retrieval 50 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 12: Language models
+q1w P (w|q1)w P(w|q1)
+STOP 0.2 toad 0.01
+the 0.2 said 0.03
+a 0.1 likes 0.02
+frog 0.01 that 0.04
+... ...
+This is a one-state probabilistic ﬁnite-state automaton – a unigram
+language model – and the state emission distribution for its one
+stateq1.
+STOP is not a word, but a special symbol indicating that the
+automaton stops.
+frog said that toad
+P(string) = 0 .01·0.03·0.04
+Sch¨ utze: Boolean Retrieval 50 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 12: Language models
+q1w P (w|q1)w P(w|q1)
+STOP 0.2 toad 0.01
+the 0.2 said 0.03
+a 0.1 likes 0.02
+frog 0.01 that 0.04
+... ...
+This is a one-state probabilistic ﬁnite-state automaton – a unigram
+language model – and the state emission distribution for its one
+stateq1.
+STOP is not a word, but a special symbol indicating that the
+automaton stops.
+frog said that toad
+P(string) = 0 .01·0.03·0.04·0.01
+Sch¨ utze: Boolean Retrieval 50 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 12: Language models
+q1w P (w|q1)w P(w|q1)
+STOP 0.2 toad 0.01
+the 0.2 said 0.03
+a 0.1 likes 0.02
+frog 0.01 that 0.04
+... ...
+This is a one-state probabilistic ﬁnite-state automaton – a unigram
+language model – and the state emission distribution for its one
+stateq1.
+STOP is not a word, but a special symbol indicating that the
+automaton stops.
+frog said that toad likes
+P(string) = 0 .01·0.03·0.04·0.01
+Sch¨ utze: Boolean Retrieval 50 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 12: Language models
+q1w P (w|q1)w P(w|q1)
+STOP 0.2 toad 0.01
+the 0.2 said 0.03
+a 0.1 likes 0.02
+frog 0.01 that 0.04
+... ...
+This is a one-state probabilistic ﬁnite-state automaton – a unigram
+language model – and the state emission distribution for its one
+stateq1.
+STOP is not a word, but a special symbol indicating that the
+automaton stops.
+frog said that toad likes
+P(string) = 0 .01·0.03·0.04·0.01·0.02
+Sch¨ utze: Boolean Retrieval 50 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 12: Language models
+q1w P (w|q1)w P(w|q1)
+STOP 0.2 toad 0.01
+the 0.2 said 0.03
+a 0.1 likes 0.02
+frog 0.01 that 0.04
+... ...
+This is a one-state probabilistic ﬁnite-state automaton – a unigram
+language model – and the state emission distribution for its one
+stateq1.
+STOP is not a word, but a special symbol indicating that the
+automaton stops.
+frog said that toad likes frog
+P(string) = 0 .01·0.03·0.04·0.01·0.02
+Sch¨ utze: Boolean Retrieval 50 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 12: Language models
+q1w P (w|q1)w P(w|q1)
+STOP 0.2 toad 0.01
+the 0.2 said 0.03
+a 0.1 likes 0.02
+frog 0.01 that 0.04
+... ...
+This is a one-state probabilistic ﬁnite-state automaton – a unigram
+language model – and the state emission distribution for its one
+stateq1.
+STOP is not a word, but a special symbol indicating that the
+automaton stops.
+frog said that toad likes frog
+P(string) = 0 .01·0.03·0.04·0.01·0.02·0.01
+Sch¨ utze: Boolean Retrieval 50 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 12: Language models
+q1w P (w|q1)w P(w|q1)
+STOP 0.2 toad 0.01
+the 0.2 said 0.03
+a 0.1 likes 0.02
+frog 0.01 that 0.04
+... ...
+This is a one-state probabilistic ﬁnite-state automaton – a unigram
+language model – and the state emission distribution for its one
+stateq1.
+STOP is not a word, but a special symbol indicating that the
+automaton stops.
+frog said that toad likes frog STOP
+P(string) = 0 .01·0.03·0.04·0.01·0.02·0.01
+Sch¨ utze: Boolean Retrieval 50 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 12: Language models
+q1w P (w|q1)w P(w|q1)
+STOP 0.2 toad 0.01
+the 0.2 said 0.03
+a 0.1 likes 0.02
+frog 0.01 that 0.04
+... ...
+This is a one-state probabilistic ﬁnite-state automaton – a unigram
+language model – and the state emission distribution for its one
+stateq1.
+STOP is not a word, but a special symbol indicating that the
+automaton stops.
+frog said that toad likes frog STOP
+P(string) = 0 .01·0.03·0.04·0.01·0.02·0.01·0.2
+Sch¨ utze: Boolean Retrieval 50 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 12: Language models
+q1w P (w|q1)w P(w|q1)
+STOP 0.2 toad 0.01
+the 0.2 said 0.03
+a 0.1 likes 0.02
+frog 0.01 that 0.04
+... ...
+This is a one-state probabilistic ﬁnite-state automaton – a unigram
+language model – and the state emission distribution for its one
+stateq1.
+STOP is not a word, but a special symbol indicating that the
+automaton stops.
+frog said that toad likes frog STOP
+P(string) = 0 .01·0.03·0.04·0.01·0.02·0.01·0.2
+= 0.0000000000048
+Sch¨ utze: Boolean Retrieval 50 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 13: Text classiﬁcation & Naive Bayes
+Text classiﬁcation = assigning documents automatically to
+predeﬁned classes
+Examples:
+Language (English vs. French)
+Adult content
+Region
+Sch¨ utze: Boolean Retrieval 51 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 14: Vector classiﬁcation
+XX
+XX
+X
+X
+X
+XXX
+X∗
+Sch¨ utze: Boolean Retrieval 52 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 15: Support vector machines
+Sch¨ utze: Boolean Retrieval 53 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 16: Flat clustering
+Sch¨ utze: Boolean Retrieval 54 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 17: Hierarchical clustering
+http://news.google.com
+Sch¨ utze: Boolean Retrieval 55 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 18: Latent Semantic Indexing
+Sch¨ utze: Boolean Retrieval 56 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 19: The web and its challenges
+Unusual and diverse documents
+Unusual and diverse users and information needs
+Beyond terms and text: exploit link analysis, user data
+How do web search engines work?
+How can we make them better?
+Sch¨ utze: Boolean Retrieval 57 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+IIR 21: Link analysis / PageRank
+Sch¨ utze: Boolean Retrieval 58 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+Take-away
+Boolean Retrieval: Design and data structures of a simple
+information retrieval system
+What topics will be covered in this class?
+Sch¨ utze: Boolean Retrieval 59 / 60Introduction Inverted index Processing Boolean queries Qu ery optimization Course overview
+Resources
+Chapter 1 of IIR
+http://cislmu.org
+course schedule
+information retrieval links
+Shakespeare search engine
+Sch¨ utze: Boolean Retrieval 60 / 60

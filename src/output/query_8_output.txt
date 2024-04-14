@@ -1,7 +1,0 @@
-
-Query 8: Content for lecture 1 in COMP 474:
-Lecture: http://example.org/COMP-474/lecture1
-Slides: file:///./res/COMP-474/lectures%5Cslides_01.pdf
-Worksheet: file:///./res/COMP-474/lectures%5Cworksheet_01.pdf
-Reading: file:///./res/COMP-474/lectures%5Creading_reading01.pdf
----

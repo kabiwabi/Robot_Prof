@@ -1,4 +1,0 @@
-
-
-Q10:
-Introduction to methods in statistical/machine learning, computer programming, projects using data

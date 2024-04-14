@@ -79,8 +79,8 @@ def build_student_graph(courses, num_students=2, num_semesters=2):
             semester_classes.append(generate_semester(courses, faculty))
             random.shuffle(courses)
 
-        first_name = random_line("src/res/first-names.txt")
-        last_name = random_line("src/res/last-names.txt")
+        first_name = random_line("res/first-names.txt")
+        last_name = random_line("res/last-names.txt")
         student_id = generate_student_id()
         email = f"{first_name[0:2].lower()}_{last_name[0:3].lower()}@live.concordia.ca"
 
@@ -95,5 +95,5 @@ def build_student_graph(courses, num_students=2, num_semesters=2):
             for index, semester_class in enumerate(semester_classes):
                 add_semester_to_graph(g, student_uri, SEMESTERS[index], semester_class)
 
-    g.serialize(destination='src/output/student.ttl', format='turtle')
+    g.serialize(destination='output/student.ttl', format='turtle')
     return g

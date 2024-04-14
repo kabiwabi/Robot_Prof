@@ -1,0 +1,1944 @@
+Recap Documents Terms Skip pointers Phrase queries
+Introduction to Information Retrieval
+http://informationretrieval.org
+IIR 2: The term vocabulary and postings lists
+Hinrich Sch¨ utze
+Center for Information and Language Processing, Universit y of Munich
+2014-04-09
+Sch¨ utze: The term vocabulary and postings lists 1 / 62Recap Documents Terms Skip pointers Phrase queries
+Overview
+1Recap
+2Documents
+3Terms
+General + Non-English
+English
+4Skip pointers
+5Phrase queries
+Sch¨ utze: The term vocabulary and postings lists 2 / 62Recap Documents Terms Skip pointers Phrase queries
+Outline
+1Recap
+2Documents
+3Terms
+General + Non-English
+English
+4Skip pointers
+5Phrase queries
+Sch¨ utze: The term vocabulary and postings lists 3 / 62Recap Documents Terms Skip pointers Phrase queries
+Inverted index
+For each term t, we store a list of all documents that contain t.
+Brutus−→124113145173174
+Caesar−→124561657132...
+Calpurnia−→23154101
+...
+/bracehtipupleft/bracehtipdownright/bracehtipdownleft/bracehtipupright /bracehtipupleft /bracehtipdownright/bracehtipdownleft /bracehtipupright
+dictionary postings
+Sch¨ utze: The term vocabulary and postings lists 4 / 62Recap Documents Terms Skip pointers Phrase queries
+Intersecting two postings lists
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒
+Sch¨ utze: The term vocabulary and postings lists 5 / 62Recap Documents Terms Skip pointers Phrase queries
+Intersecting two postings lists
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒
+Sch¨ utze: The term vocabulary and postings lists 5 / 62Recap Documents Terms Skip pointers Phrase queries
+Intersecting two postings lists
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒
+Sch¨ utze: The term vocabulary and postings lists 5 / 62Recap Documents Terms Skip pointers Phrase queries
+Intersecting two postings lists
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2
+Sch¨ utze: The term vocabulary and postings lists 5 / 62Recap Documents Terms Skip pointers Phrase queries
+Intersecting two postings lists
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2
+Sch¨ utze: The term vocabulary and postings lists 5 / 62Recap Documents Terms Skip pointers Phrase queries
+Intersecting two postings lists
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2
+Sch¨ utze: The term vocabulary and postings lists 5 / 62Recap Documents Terms Skip pointers Phrase queries
+Intersecting two postings lists
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2
+Sch¨ utze: The term vocabulary and postings lists 5 / 62Recap Documents Terms Skip pointers Phrase queries
+Intersecting two postings lists
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2→31
+Sch¨ utze: The term vocabulary and postings lists 5 / 62Recap Documents Terms Skip pointers Phrase queries
+Intersecting two postings lists
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2→31
+Sch¨ utze: The term vocabulary and postings lists 5 / 62Recap Documents Terms Skip pointers Phrase queries
+Intersecting two postings lists
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2→31
+Sch¨ utze: The term vocabulary and postings lists 5 / 62Recap Documents Terms Skip pointers Phrase queries
+Intersecting two postings lists
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2→31
+Sch¨ utze: The term vocabulary and postings lists 5 / 62Recap Documents Terms Skip pointers Phrase queries
+Constructing the inverted index: Sort postings
+term docID
+I 1
+did 1
+enact 1
+julius 1
+caesar 1
+I 1
+was 1
+killed 1
+i’ 1
+the 1
+capitol 1
+brutus 1
+killed 1
+me 1
+so 2
+let 2
+it 2
+be 2
+with 2
+caesar 2
+the 2
+noble 2
+brutus 2
+hath 2
+told 2
+you 2
+caesar 2
+was 2
+ambitious 2=⇒term docID
+ambitious 2
+be 2
+brutus 1
+brutus 2
+capitol 1
+caesar 1
+caesar 2
+caesar 2
+did 1
+enact 1
+hath 1
+I 1
+I 1
+i’ 1
+it 2
+julius 1
+killed 1
+killed 1
+let 2
+me 1
+noble 2
+so 2
+the 1
+the 2
+told 2
+you 2
+was 1
+was 2
+with 2
+Sch¨ utze: The term vocabulary and postings lists 6 / 62Recap Documents Terms Skip pointers Phrase queries
+Westlaw: Example queries
+Information need: Information on the legal theories involved in
+preventing the disclosure of trade secrets by employees formerly
+employed by a competing company
+Query:“trade secret” /s disclos! /s prevent /s employe!
+Information need: Requirements for disabled people to be able to
+access a workplace
+Query:disab! /p access! /s work-site work-place (employment /3
+place)
+Information need: Cases about a host’s responsibility for drunk
+guests
+Query:host! /p (responsib! liab!) /p (intoxicat! drunk!) /p guest
+Sch¨ utze: The term vocabulary and postings lists 7 / 62Recap Documents Terms Skip pointers Phrase queries
+Does Google use the Boolean model?
+On Google, the default interpretation of a query [ w1w2
+...wn] isw1ANDw2AND ...AND wn
+Cases where you get hits that do not contain one of the wi:
+anchor text
+page contains variant of wi(morphology, spelling correction,
+synonym)
+long queries ( nlarge)
+boolean expression generates very few hits
+Simple Boolean vs. Ranking of result set
+Simple Boolean retrieval returns matching documents in no
+particular order.
+Google (and most well designed Boolean engines) rank the
+result set – they rank good hits (according to some estimator
+of relevance) higher than bad hits.
+Sch¨ utze: The term vocabulary and postings lists 8 / 62Recap Documents Terms Skip pointers Phrase queries
+Take-away
+Sch¨ utze: The term vocabulary and postings lists 9 / 62Recap Documents Terms Skip pointers Phrase queries
+Take-away
+Understanding of the basic unit of classical information
+retrieval systems: wordsanddocuments : What is a
+document, what is a term?
+Sch¨ utze: The term vocabulary and postings lists 9 / 62Recap Documents Terms Skip pointers Phrase queries
+Take-away
+Understanding of the basic unit of classical information
+retrieval systems: wordsanddocuments : What is a
+document, what is a term?
+Tokenization: how to get from raw text to words (or tokens)
+Sch¨ utze: The term vocabulary and postings lists 9 / 62Recap Documents Terms Skip pointers Phrase queries
+Take-away
+Understanding of the basic unit of classical information
+retrieval systems: wordsanddocuments : What is a
+document, what is a term?
+Tokenization: how to get from raw text to words (or tokens)
+More complex indexes: skip pointers and phrases
+Sch¨ utze: The term vocabulary and postings lists 9 / 62Recap Documents Terms Skip pointers Phrase queries
+Outline
+1Recap
+2Documents
+3Terms
+General + Non-English
+English
+4Skip pointers
+5Phrase queries
+Sch¨ utze: The term vocabulary and postings lists 10 / 62Recap Documents Terms Skip pointers Phrase queries
+Documents
+Last lecture: Simple Boolean retrieval system
+Sch¨ utze: The term vocabulary and postings lists 11 / 62Recap Documents Terms Skip pointers Phrase queries
+Documents
+Last lecture: Simple Boolean retrieval system
+Our assumptions were:
+Sch¨ utze: The term vocabulary and postings lists 11 / 62Recap Documents Terms Skip pointers Phrase queries
+Documents
+Last lecture: Simple Boolean retrieval system
+Our assumptions were:
+We know what a document is.
+Sch¨ utze: The term vocabulary and postings lists 11 / 62Recap Documents Terms Skip pointers Phrase queries
+Documents
+Last lecture: Simple Boolean retrieval system
+Our assumptions were:
+We know what a document is.
+We can “machine-read” each document.
+Sch¨ utze: The term vocabulary and postings lists 11 / 62Recap Documents Terms Skip pointers Phrase queries
+Documents
+Last lecture: Simple Boolean retrieval system
+Our assumptions were:
+We know what a document is.
+We can “machine-read” each document.
+This can be complex in reality.
+Sch¨ utze: The term vocabulary and postings lists 11 / 62Recap Documents Terms Skip pointers Phrase queries
+Parsing a document
+We need to deal with format and language of each document.
+Sch¨ utze: The term vocabulary and postings lists 12 / 62Recap Documents Terms Skip pointers Phrase queries
+Parsing a document
+We need to deal with format and language of each document.
+What format is it in? pdf, word, excel, html etc.
+Sch¨ utze: The term vocabulary and postings lists 12 / 62Recap Documents Terms Skip pointers Phrase queries
+Parsing a document
+We need to deal with format and language of each document.
+What format is it in? pdf, word, excel, html etc.
+What language is it in?
+Sch¨ utze: The term vocabulary and postings lists 12 / 62Recap Documents Terms Skip pointers Phrase queries
+Parsing a document
+We need to deal with format and language of each document.
+What format is it in? pdf, word, excel, html etc.
+What language is it in?
+What character set is in use?
+Sch¨ utze: The term vocabulary and postings lists 12 / 62Recap Documents Terms Skip pointers Phrase queries
+Parsing a document
+We need to deal with format and language of each document.
+What format is it in? pdf, word, excel, html etc.
+What language is it in?
+What character set is in use?
+Each of these is a classiﬁcation problem, which we will study
+later in this course (IIR 13).
+Sch¨ utze: The term vocabulary and postings lists 12 / 62Recap Documents Terms Skip pointers Phrase queries
+Parsing a document
+We need to deal with format and language of each document.
+What format is it in? pdf, word, excel, html etc.
+What language is it in?
+What character set is in use?
+Each of these is a classiﬁcation problem, which we will study
+later in this course (IIR 13).
+Alternative: use heuristics
+Sch¨ utze: The term vocabulary and postings lists 12 / 62Recap Documents Terms Skip pointers Phrase queries
+Format/Language: Complications
+A single index usually contains terms of several languages.
+Sch¨ utze: The term vocabulary and postings lists 13 / 62Recap Documents Terms Skip pointers Phrase queries
+Format/Language: Complications
+A single index usually contains terms of several languages.
+Sometimes a document or its components contain multiple
+languages/formats.
+Sch¨ utze: The term vocabulary and postings lists 13 / 62Recap Documents Terms Skip pointers Phrase queries
+Format/Language: Complications
+A single index usually contains terms of several languages.
+Sometimes a document or its components contain multiple
+languages/formats.
+French email with Spanish pdf attachment
+Sch¨ utze: The term vocabulary and postings lists 13 / 62Recap Documents Terms Skip pointers Phrase queries
+Format/Language: Complications
+A single index usually contains terms of several languages.
+Sometimes a document or its components contain multiple
+languages/formats.
+French email with Spanish pdf attachment
+What is the document unit for indexing?
+Sch¨ utze: The term vocabulary and postings lists 13 / 62Recap Documents Terms Skip pointers Phrase queries
+Format/Language: Complications
+A single index usually contains terms of several languages.
+Sometimes a document or its components contain multiple
+languages/formats.
+French email with Spanish pdf attachment
+What is the document unit for indexing?
+A ﬁle?
+Sch¨ utze: The term vocabulary and postings lists 13 / 62Recap Documents Terms Skip pointers Phrase queries
+Format/Language: Complications
+A single index usually contains terms of several languages.
+Sometimes a document or its components contain multiple
+languages/formats.
+French email with Spanish pdf attachment
+What is the document unit for indexing?
+A ﬁle?
+An email?
+Sch¨ utze: The term vocabulary and postings lists 13 / 62Recap Documents Terms Skip pointers Phrase queries
+Format/Language: Complications
+A single index usually contains terms of several languages.
+Sometimes a document or its components contain multiple
+languages/formats.
+French email with Spanish pdf attachment
+What is the document unit for indexing?
+A ﬁle?
+An email?
+An email with 5 attachments?
+Sch¨ utze: The term vocabulary and postings lists 13 / 62Recap Documents Terms Skip pointers Phrase queries
+Format/Language: Complications
+A single index usually contains terms of several languages.
+Sometimes a document or its components contain multiple
+languages/formats.
+French email with Spanish pdf attachment
+What is the document unit for indexing?
+A ﬁle?
+An email?
+An email with 5 attachments?
+A group of ﬁles (ppt or latex in HTML)?
+Sch¨ utze: The term vocabulary and postings lists 13 / 62Recap Documents Terms Skip pointers Phrase queries
+Format/Language: Complications
+A single index usually contains terms of several languages.
+Sometimes a document or its components contain multiple
+languages/formats.
+French email with Spanish pdf attachment
+What is the document unit for indexing?
+A ﬁle?
+An email?
+An email with 5 attachments?
+A group of ﬁles (ppt or latex in HTML)?
+Upshot: Answering the question “what is a document?” is
+not trivial and requires some design decisions.
+Sch¨ utze: The term vocabulary and postings lists 13 / 62Recap Documents Terms Skip pointers Phrase queries
+Format/Language: Complications
+A single index usually contains terms of several languages.
+Sometimes a document or its components contain multiple
+languages/formats.
+French email with Spanish pdf attachment
+What is the document unit for indexing?
+A ﬁle?
+An email?
+An email with 5 attachments?
+A group of ﬁles (ppt or latex in HTML)?
+Upshot: Answering the question “what is a document?” is
+not trivial and requires some design decisions.
+Also: XML
+Sch¨ utze: The term vocabulary and postings lists 13 / 62Recap Documents Terms Skip pointers Phrase queries
+Outline
+1Recap
+2Documents
+3Terms
+General + Non-English
+English
+4Skip pointers
+5Phrase queries
+Sch¨ utze: The term vocabulary and postings lists 14 / 62Recap Documents Terms Skip pointers Phrase queries
+Outline
+1Recap
+2Documents
+3Terms
+General + Non-English
+English
+4Skip pointers
+5Phrase queries
+Sch¨ utze: The term vocabulary and postings lists 15 / 62Recap Documents Terms Skip pointers Phrase queries
+Deﬁnitions
+Word– A delimited string of characters as it appears in the
+text.
+Sch¨ utze: The term vocabulary and postings lists 16 / 62Recap Documents Terms Skip pointers Phrase queries
+Deﬁnitions
+Word– A delimited string of characters as it appears in the
+text.
+Term– A “normalized” word (case, morphology, spelling etc);
+an equivalence class of words.
+Sch¨ utze: The term vocabulary and postings lists 16 / 62Recap Documents Terms Skip pointers Phrase queries
+Deﬁnitions
+Word– A delimited string of characters as it appears in the
+text.
+Term– A “normalized” word (case, morphology, spelling etc);
+an equivalence class of words.
+Token– An instance of a word or term occurring in a
+document.
+Sch¨ utze: The term vocabulary and postings lists 16 / 62Recap Documents Terms Skip pointers Phrase queries
+Deﬁnitions
+Word– A delimited string of characters as it appears in the
+text.
+Term– A “normalized” word (case, morphology, spelling etc);
+an equivalence class of words.
+Token– An instance of a word or term occurring in a
+document.
+Type– The same as a term in most cases: an equivalence
+class of tokens.
+Sch¨ utze: The term vocabulary and postings lists 16 / 62Recap Documents Terms Skip pointers Phrase queries
+Normalization
+Need to “normalize” words in indexed text as well as query
+terms into the same form.
+Sch¨ utze: The term vocabulary and postings lists 17 / 62Recap Documents Terms Skip pointers Phrase queries
+Normalization
+Need to “normalize” words in indexed text as well as query
+terms into the same form.
+Example: We want to match U.S.A.andUSA
+Sch¨ utze: The term vocabulary and postings lists 17 / 62Recap Documents Terms Skip pointers Phrase queries
+Normalization
+Need to “normalize” words in indexed text as well as query
+terms into the same form.
+Example: We want to match U.S.A.andUSA
+We most commonly implicitly deﬁne equivalence classes of
+terms.
+Sch¨ utze: The term vocabulary and postings lists 17 / 62Recap Documents Terms Skip pointers Phrase queries
+Normalization
+Need to “normalize” words in indexed text as well as query
+terms into the same form.
+Example: We want to match U.S.A.andUSA
+We most commonly implicitly deﬁne equivalence classes of
+terms.
+Alternatively: do asymmetric expansion
+Sch¨ utze: The term vocabulary and postings lists 17 / 62Recap Documents Terms Skip pointers Phrase queries
+Normalization
+Need to “normalize” words in indexed text as well as query
+terms into the same form.
+Example: We want to match U.S.A.andUSA
+We most commonly implicitly deﬁne equivalence classes of
+terms.
+Alternatively: do asymmetric expansion
+window→window, windows
+Sch¨ utze: The term vocabulary and postings lists 17 / 62Recap Documents Terms Skip pointers Phrase queries
+Normalization
+Need to “normalize” words in indexed text as well as query
+terms into the same form.
+Example: We want to match U.S.A.andUSA
+We most commonly implicitly deﬁne equivalence classes of
+terms.
+Alternatively: do asymmetric expansion
+window→window, windows
+windows→Windows, windows
+Sch¨ utze: The term vocabulary and postings lists 17 / 62Recap Documents Terms Skip pointers Phrase queries
+Normalization
+Need to “normalize” words in indexed text as well as query
+terms into the same form.
+Example: We want to match U.S.A.andUSA
+We most commonly implicitly deﬁne equivalence classes of
+terms.
+Alternatively: do asymmetric expansion
+window→window, windows
+windows→Windows, windows
+Windows (no expansion)
+Sch¨ utze: The term vocabulary and postings lists 17 / 62Recap Documents Terms Skip pointers Phrase queries
+Normalization
+Need to “normalize” words in indexed text as well as query
+terms into the same form.
+Example: We want to match U.S.A.andUSA
+We most commonly implicitly deﬁne equivalence classes of
+terms.
+Alternatively: do asymmetric expansion
+window→window, windows
+windows→Windows, windows
+Windows (no expansion)
+More powerful, but less eﬃcient
+Sch¨ utze: The term vocabulary and postings lists 17 / 62Recap Documents Terms Skip pointers Phrase queries
+Normalization
+Need to “normalize” words in indexed text as well as query
+terms into the same form.
+Example: We want to match U.S.A.andUSA
+We most commonly implicitly deﬁne equivalence classes of
+terms.
+Alternatively: do asymmetric expansion
+window→window, windows
+windows→Windows, windows
+Windows (no expansion)
+More powerful, but less eﬃcient
+Why don’t you want to put window,Window,windows, and
+Windows in the same equivalence class?
+Sch¨ utze: The term vocabulary and postings lists 17 / 62Recap Documents Terms Skip pointers Phrase queries
+Normalization: Other languages
+Normalization and language detection interact.
+Sch¨ utze: The term vocabulary and postings lists 18 / 62Recap Documents Terms Skip pointers Phrase queries
+Normalization: Other languages
+Normalization and language detection interact.
+PETER WILL NICHT MIT. →MIT = mit
+Sch¨ utze: The term vocabulary and postings lists 18 / 62Recap Documents Terms Skip pointers Phrase queries
+Normalization: Other languages
+Normalization and language detection interact.
+PETER WILL NICHT MIT. →MIT = mit
+He got his PhD from MIT. →MIT/ne}ationslash= mit
+Sch¨ utze: The term vocabulary and postings lists 18 / 62Recap Documents Terms Skip pointers Phrase queries
+Tokenization: Recall construction of inverted index
+Input:
+Friends, Romans, countrymen. So let it be with Caesar ...
+Sch¨ utze: The term vocabulary and postings lists 19 / 62Recap Documents Terms Skip pointers Phrase queries
+Tokenization: Recall construction of inverted index
+Input:
+Friends, Romans, countrymen. So let it be with Caesar ...
+Output:
+friendromancountryman so...
+Sch¨ utze: The term vocabulary and postings lists 19 / 62Recap Documents Terms Skip pointers Phrase queries
+Tokenization: Recall construction of inverted index
+Input:
+Friends, Romans, countrymen. So let it be with Caesar ...
+Output:
+friendromancountryman so...
+Each token is a candidate for a postings entry.
+Sch¨ utze: The term vocabulary and postings lists 19 / 62Recap Documents Terms Skip pointers Phrase queries
+Tokenization: Recall construction of inverted index
+Input:
+Friends, Romans, countrymen. So let it be with Caesar ...
+Output:
+friendromancountryman so...
+Each token is a candidate for a postings entry.
+What are valid tokens to emit?
+Sch¨ utze: The term vocabulary and postings lists 19 / 62Recap Documents Terms Skip pointers Phrase queries
+Exercises
+In June, the dog likes to chase the cat in the barn. –How many
+word tokens? How many word types?
+Why tokenization is diﬃcult – even in English. Tokenize: Mr.
+O’Neill thinks that the boys’ stories about Chile’s capital a ren’t
+amusing.
+Sch¨ utze: The term vocabulary and postings lists 20 / 62Recap Documents Terms Skip pointers Phrase queries
+Tokenization problems: One word or two? (or several)
+Hewlett-Packard
+Sch¨ utze: The term vocabulary and postings lists 21 / 62Recap Documents Terms Skip pointers Phrase queries
+Tokenization problems: One word or two? (or several)
+Hewlett-Packard
+State-of-the-art
+Sch¨ utze: The term vocabulary and postings lists 21 / 62Recap Documents Terms Skip pointers Phrase queries
+Tokenization problems: One word or two? (or several)
+Hewlett-Packard
+State-of-the-art
+co-education
+Sch¨ utze: The term vocabulary and postings lists 21 / 62Recap Documents Terms Skip pointers Phrase queries
+Tokenization problems: One word or two? (or several)
+Hewlett-Packard
+State-of-the-art
+co-education
+the hold-him-back-and-drag-him-away maneuver
+Sch¨ utze: The term vocabulary and postings lists 21 / 62Recap Documents Terms Skip pointers Phrase queries
+Tokenization problems: One word or two? (or several)
+Hewlett-Packard
+State-of-the-art
+co-education
+the hold-him-back-and-drag-him-away maneuver
+data base
+Sch¨ utze: The term vocabulary and postings lists 21 / 62Recap Documents Terms Skip pointers Phrase queries
+Tokenization problems: One word or two? (or several)
+Hewlett-Packard
+State-of-the-art
+co-education
+the hold-him-back-and-drag-him-away maneuver
+data base
+San Francisco
+Sch¨ utze: The term vocabulary and postings lists 21 / 62Recap Documents Terms Skip pointers Phrase queries
+Tokenization problems: One word or two? (or several)
+Hewlett-Packard
+State-of-the-art
+co-education
+the hold-him-back-and-drag-him-away maneuver
+data base
+San Francisco
+Los Angeles-based company
+Sch¨ utze: The term vocabulary and postings lists 21 / 62Recap Documents Terms Skip pointers Phrase queries
+Tokenization problems: One word or two? (or several)
+Hewlett-Packard
+State-of-the-art
+co-education
+the hold-him-back-and-drag-him-away maneuver
+data base
+San Francisco
+Los Angeles-based company
+cheap San Francisco-Los Angeles fares
+Sch¨ utze: The term vocabulary and postings lists 21 / 62Recap Documents Terms Skip pointers Phrase queries
+Tokenization problems: One word or two? (or several)
+Hewlett-Packard
+State-of-the-art
+co-education
+the hold-him-back-and-drag-him-away maneuver
+data base
+San Francisco
+Los Angeles-based company
+cheap San Francisco-Los Angeles fares
+York University vs. New York University
+Sch¨ utze: The term vocabulary and postings lists 21 / 62Recap Documents Terms Skip pointers Phrase queries
+Numbers
+3/20/91
+Sch¨ utze: The term vocabulary and postings lists 22 / 62Recap Documents Terms Skip pointers Phrase queries
+Numbers
+3/20/91
+20/3/91
+Sch¨ utze: The term vocabulary and postings lists 22 / 62Recap Documents Terms Skip pointers Phrase queries
+Numbers
+3/20/91
+20/3/91
+Mar 20, 1991
+Sch¨ utze: The term vocabulary and postings lists 22 / 62Recap Documents Terms Skip pointers Phrase queries
+Numbers
+3/20/91
+20/3/91
+Mar 20, 1991
+B-52
+Sch¨ utze: The term vocabulary and postings lists 22 / 62Recap Documents Terms Skip pointers Phrase queries
+Numbers
+3/20/91
+20/3/91
+Mar 20, 1991
+B-52
+100.2.86.144
+Sch¨ utze: The term vocabulary and postings lists 22 / 62Recap Documents Terms Skip pointers Phrase queries
+Numbers
+3/20/91
+20/3/91
+Mar 20, 1991
+B-52
+100.2.86.144
+(800) 234-2333
+Sch¨ utze: The term vocabulary and postings lists 22 / 62Recap Documents Terms Skip pointers Phrase queries
+Numbers
+3/20/91
+20/3/91
+Mar 20, 1991
+B-52
+100.2.86.144
+(800) 234-2333
+800.234.2333
+Sch¨ utze: The term vocabulary and postings lists 22 / 62Recap Documents Terms Skip pointers Phrase queries
+Numbers
+3/20/91
+20/3/91
+Mar 20, 1991
+B-52
+100.2.86.144
+(800) 234-2333
+800.234.2333
+Older IR systems may not index numbers ...
+Sch¨ utze: The term vocabulary and postings lists 22 / 62Recap Documents Terms Skip pointers Phrase queries
+Numbers
+3/20/91
+20/3/91
+Mar 20, 1991
+B-52
+100.2.86.144
+(800) 234-2333
+800.234.2333
+Older IR systems may not index numbers ...
+...but generally it’s a useful feature.
+Sch¨ utze: The term vocabulary and postings lists 22 / 62Recap Documents Terms Skip pointers Phrase queries
+Numbers
+3/20/91
+20/3/91
+Mar 20, 1991
+B-52
+100.2.86.144
+(800) 234-2333
+800.234.2333
+Older IR systems may not index numbers ...
+...but generally it’s a useful feature.
+Google example
+Sch¨ utze: The term vocabulary and postings lists 22 / 62Recap Documents Terms Skip pointers Phrase queries
+Chinese: No whitespace
+/uni838E.6366/uni62C9.4974/uni6CE2.3326/uni5A03.1127! /uni5728.2127/uni5C45.1673/uni4F4F.2373/uni5728.2127 /uni7F8E.3474/uni56FD.2051" /uni5357.3270/uni90E8.3558/uni7684.3108 /uni4F5B.4128# /uni91CC.3948$ /uni3002.635/uni4ECA.2067/uni5E74.3301/uniFF14.784/uni6708.1860
+/uniFF19.789/uni65E5.3284/uniFF0C.636/uni838E.6366/uni62C9.4974/uni6CE2.3326/uni5A03.1127/uni5728.2127/uni7F8E.3474 /uni56FD.2051/uni7B2C.2888/uni4E00.1200/uni5927.2887/uni57CE.2515/uni5E02.2210 %& /uni5EA6.3155' /uni4E86.3971/uniFF11.781/uniFF18.788( /uni751F.2652
+/uni65E5.3284/uni3002.635/uni751F.2652/uni65E5.3284/uni6D3E.3327) /uni4E0A.2509/uniFF0C.636/uni838E.6366 /uni62C9.4974/uni6CE2.3326/uni5A03.1127/uni9732.4048/uni51FA.2394/uni4E86.3971 /uni751C.3126/uni7F8E.3474/uni7684.3108 /uni5FAE.3469/uni7B11.2488/uni3002.635  
+Sch¨ utze: The term vocabulary and postings lists 23 / 62Recap Documents Terms Skip pointers Phrase queries
+Ambiguous segmentation in Chinese
+/uni548C.4072/uni5C1A.2456  
+The two characters can be treated as one word meaning ‘monk’ or
+as a sequence of two words meaning ‘and’ and ‘still’.
+Sch¨ utze: The term vocabulary and postings lists 24 / 62Recap Documents Terms Skip pointers Phrase queries
+Other cases of “no whitespace”
+Compounds in Dutch, German, Swedish
+Sch¨ utze: The term vocabulary and postings lists 25 / 62Recap Documents Terms Skip pointers Phrase queries
+Other cases of “no whitespace”
+Compounds in Dutch, German, Swedish
+Computerlinguistik →Computer + Linguistik
+Sch¨ utze: The term vocabulary and postings lists 25 / 62Recap Documents Terms Skip pointers Phrase queries
+Other cases of “no whitespace”
+Compounds in Dutch, German, Swedish
+Computerlinguistik →Computer + Linguistik
+Lebensversicherungsgesellschaftsangestellter
+Sch¨ utze: The term vocabulary and postings lists 25 / 62Recap Documents Terms Skip pointers Phrase queries
+Other cases of “no whitespace”
+Compounds in Dutch, German, Swedish
+Computerlinguistik →Computer + Linguistik
+Lebensversicherungsgesellschaftsangestellter
+→leben + versicherung + gesellschaft + angestellter
+Sch¨ utze: The term vocabulary and postings lists 25 / 62Recap Documents Terms Skip pointers Phrase queries
+Other cases of “no whitespace”
+Compounds in Dutch, German, Swedish
+Computerlinguistik →Computer + Linguistik
+Lebensversicherungsgesellschaftsangestellter
+→leben + versicherung + gesellschaft + angestellter
+Inuit: tusaatsiarunnanngittualuujunga (I can’t hear very we ll.)
+Sch¨ utze: The term vocabulary and postings lists 25 / 62Recap Documents Terms Skip pointers Phrase queries
+Other cases of “no whitespace”
+Compounds in Dutch, German, Swedish
+Computerlinguistik →Computer + Linguistik
+Lebensversicherungsgesellschaftsangestellter
+→leben + versicherung + gesellschaft + angestellter
+Inuit: tusaatsiarunnanngittualuujunga (I can’t hear very we ll.)
+Many other languages with segmentation diﬃculties: Finnis h,
+Urdu, ...
+Sch¨ utze: The term vocabulary and postings lists 25 / 62Recap Documents Terms Skip pointers Phrase queries
+Japanese  	  
+     !"  ! $#
+% 
+'(& *
+),-+. /0* 2
+1346 78 ' ,95
+: ; : =
+><
+?@BCA
++ ED79 5
+: ; : =*GH ) I F
+):  J *K,MLN ?OPRQT 
+S
+VUU XWY'[ZN ?*
+, ] ^ ;_\,
+`4 a,c;b
+ef )g U hiU+ ?d N jlmk n
+: Bp	
+o N 6 ,r
+Usqtu
+'wvx
+* Ry {z
+i}
+'~   
+L ?@B
+Sch¨ utze: The term vocabulary and postings lists 26 / 62Recap Documents Terms Skip pointers Phrase queries
+Japanese|        ¡¢   ¡ £¤
+¥
+¦§¨ ©
+ª«¬­® ¯°© ±
+²³´µ ¶· ¦ «¸¹
+º » º ¼
+½¾
+¿ÀÁÂÃ
+­ ÄÅ¶¸ ¹
+º » º ¼©ÆÇ ª È É
+ªº  Ê ©Ë«ÌÍÎ ¿ÏÐÑÒÓ
+Ô
+ÕÖÖ ×ØÙ¦ÚÛÎ ¿©
+« Ü Ý »Þß«
+à´ á«â»ã
+äå ªæ Ö çèÖ­ ¿é Î êëìí î
+º Áï
+ð Î µ «ñ
+Öòóôõ
+¦ö÷ø
+© Ñù úû
+èü
+¦ý   þÿ
+Í ¿ÀÁ
+4 diﬀerent “alphabets”: Chinese characters, hiragana syllabary f or
+inﬂectional endings and function words, katakana syllabary f or
+transcription of foreign words and other uses, and latin. No spac es
+(as in Chinese).
+Sch¨ utze: The term vocabulary and postings lists 26 / 62Recap Documents Terms Skip pointers Phrase queries
+Japanese  	  
+     !"  ! $#
+% 
+'(& *
+),-+. /0* 2
+1346 78 ' ,95
+: ; : =
+><
+?@BCA
++ ED79 5
+: ; : =*GH ) I F
+):  J *K,MLN ?OPRQT 
+S
+VUU XWY'[ZN ?*
+, ] ^ ;_\,
+`4 a,c;b
+ef )g U hiU+ ?d N jlmk n
+: Bp	
+o N 6 ,r
+Usqtu
+'wvx
+* Ry {z
+i}
+'~   
+L ?@B
+4 diﬀerent “alphabets”: Chinese characters, hiragana syllabary f or
+inﬂectional endings and function words, katakana syllabary f or
+transcription of foreign words and other uses, and latin. No spac es
+(as in Chinese).
+End user can express query entirely in hiragana!
+Sch¨ utze: The term vocabulary and postings lists 26 / 62Recap Documents Terms Skip pointers Phrase queries
+Arabic script
+/بٌ afii62760/َ afii62766آِ    ⇐     ٌ    ب  ا  ت  ِ   ك     
+             un b ā  t  i k  
+/kitābun/ ‘a book’  
+ 
+Sch¨ utze: The term vocabulary and postings lists 27 / 62Recap Documents Terms Skip pointers Phrase queries
+Arabic script: Bidirectionality
+ /afii62764/afii62824/afii62784 /afii62833/afii62808 /afii62782/afii62757/اafii62783/afii62772/afii62817/ اafii62767/afii62818/afii62812/afii62766/afii62784ا 1962  /afii62780/afii62803/afii62761 132 /afii62833/afii62785/afii62823/afii62782/afii62809/afii62817/ل اafii62841/afii62766/afii62774/afii62840/ اafii62825/afii62820 /afii62760/afii62820/afii62760/afii62802 .   
+                               ← →   ← →                   ← START  
+‘Algeria achieved its independence in 1962 after 132 years of French occupation.’ 
+ 
+Sch¨ utze: The term vocabulary and postings lists 28 / 62Recap Documents Terms Skip pointers Phrase queries
+Arabic script: Bidirectionality
+ /afii62764/afii62824/afii62784 /afii62833/afii62808 /afii62782/afii62757/اafii62783/afii62772/afii62817/ اafii62767/afii62818/afii62812/afii62766/afii62784ا 1962  /afii62780/afii62803/afii62761 132 /afii62833/afii62785/afii62823/afii62782/afii62809/afii62817/ل اafii62841/afii62766/afii62774/afii62840/ اafii62825/afii62820 /afii62760/afii62820/afii62760/afii62802 .   
+                               ← →   ← →                   ← START  
+‘Algeria achieved its independence in 1962 after 132 years of French occupation.’ 
+ Bidirectionality is not a problem if text is coded in Unicode.
+Sch¨ utze: The term vocabulary and postings lists 28 / 62Recap Documents Terms Skip pointers Phrase queries
+Accents and diacritics
+Accents: r´ esum´ e vs. resume (simple omission of accent)
+Sch¨ utze: The term vocabulary and postings lists 29 / 62Recap Documents Terms Skip pointers Phrase queries
+Accents and diacritics
+Accents: r´ esum´ e vs. resume (simple omission of accent)
+Umlauts: Universit¨ at vs. Universitaet (substitution with
+special letter sequence “ae”)
+Sch¨ utze: The term vocabulary and postings lists 29 / 62Recap Documents Terms Skip pointers Phrase queries
+Accents and diacritics
+Accents: r´ esum´ e vs. resume (simple omission of accent)
+Umlauts: Universit¨ at vs. Universitaet (substitution with
+special letter sequence “ae”)
+Most important criterion: How are users likely to write their
+queries for these words?
+Sch¨ utze: The term vocabulary and postings lists 29 / 62Recap Documents Terms Skip pointers Phrase queries
+Accents and diacritics
+Accents: r´ esum´ e vs. resume (simple omission of accent)
+Umlauts: Universit¨ at vs. Universitaet (substitution with
+special letter sequence “ae”)
+Most important criterion: How are users likely to write their
+queries for these words?
+Even in languages that standardly have accents, users often
+do not type them. (Polish?)
+Sch¨ utze: The term vocabulary and postings lists 29 / 62Recap Documents Terms Skip pointers Phrase queries
+Outline
+1Recap
+2Documents
+3Terms
+General + Non-English
+English
+4Skip pointers
+5Phrase queries
+Sch¨ utze: The term vocabulary and postings lists 30 / 62Recap Documents Terms Skip pointers Phrase queries
+Case folding
+Reduce all letters to lower case
+Sch¨ utze: The term vocabulary and postings lists 31 / 62Recap Documents Terms Skip pointers Phrase queries
+Case folding
+Reduce all letters to lower case
+Even though case can be semantically meaningful
+Sch¨ utze: The term vocabulary and postings lists 31 / 62Recap Documents Terms Skip pointers Phrase queries
+Case folding
+Reduce all letters to lower case
+Even though case can be semantically meaningful
+capitalized words in mid-sentence
+Sch¨ utze: The term vocabulary and postings lists 31 / 62Recap Documents Terms Skip pointers Phrase queries
+Case folding
+Reduce all letters to lower case
+Even though case can be semantically meaningful
+capitalized words in mid-sentence
+MIT vs. mit
+Sch¨ utze: The term vocabulary and postings lists 31 / 62Recap Documents Terms Skip pointers Phrase queries
+Case folding
+Reduce all letters to lower case
+Even though case can be semantically meaningful
+capitalized words in mid-sentence
+MIT vs. mit
+Fed vs. fed
+Sch¨ utze: The term vocabulary and postings lists 31 / 62Recap Documents Terms Skip pointers Phrase queries
+Case folding
+Reduce all letters to lower case
+Even though case can be semantically meaningful
+capitalized words in mid-sentence
+MIT vs. mit
+Fed vs. fed
+...
+Sch¨ utze: The term vocabulary and postings lists 31 / 62Recap Documents Terms Skip pointers Phrase queries
+Case folding
+Reduce all letters to lower case
+Even though case can be semantically meaningful
+capitalized words in mid-sentence
+MIT vs. mit
+Fed vs. fed
+...
+It’s often best to lowercase everything since users will use
+lowercase regardless of correct capitalization.
+Sch¨ utze: The term vocabulary and postings lists 31 / 62Recap Documents Terms Skip pointers Phrase queries
+Stop words
+stop words = extremely common words which would appear
+to be of little value in helping select documents matching a
+user need
+Sch¨ utze: The term vocabulary and postings lists 32 / 62Recap Documents Terms Skip pointers Phrase queries
+Stop words
+stop words = extremely common words which would appear
+to be of little value in helping select documents matching a
+user need
+Examples: a, an, and, are, as, at, be, by, for, from, has, he, in,
+is, it, its, of, on, that, the, to, was, were, will, with
+Sch¨ utze: The term vocabulary and postings lists 32 / 62Recap Documents Terms Skip pointers Phrase queries
+Stop words
+stop words = extremely common words which would appear
+to be of little value in helping select documents matching a
+user need
+Examples: a, an, and, are, as, at, be, by, for, from, has, he, in,
+is, it, its, of, on, that, the, to, was, were, will, with
+Stop word elimination used to be standard in older IR systems.
+Sch¨ utze: The term vocabulary and postings lists 32 / 62Recap Documents Terms Skip pointers Phrase queries
+Stop words
+stop words = extremely common words which would appear
+to be of little value in helping select documents matching a
+user need
+Examples: a, an, and, are, as, at, be, by, for, from, has, he, in,
+is, it, its, of, on, that, the, to, was, were, will, with
+Stop word elimination used to be standard in older IR systems.
+But you need stop words for phrase queries, e.g. “King of
+Denmark”
+Sch¨ utze: The term vocabulary and postings lists 32 / 62Recap Documents Terms Skip pointers Phrase queries
+Stop words
+stop words = extremely common words which would appear
+to be of little value in helping select documents matching a
+user need
+Examples: a, an, and, are, as, at, be, by, for, from, has, he, in,
+is, it, its, of, on, that, the, to, was, were, will, with
+Stop word elimination used to be standard in older IR systems.
+But you need stop words for phrase queries, e.g. “King of
+Denmark”
+Most web search engines index stop words.
+Sch¨ utze: The term vocabulary and postings lists 32 / 62Recap Documents Terms Skip pointers Phrase queries
+More equivalence classing
+Soundex: IIR 3 (phonetic equivalence, Muller = Mueller)
+Sch¨ utze: The term vocabulary and postings lists 33 / 62Recap Documents Terms Skip pointers Phrase queries
+More equivalence classing
+Soundex: IIR 3 (phonetic equivalence, Muller = Mueller)
+Thesauri: IIR 9 (semantic equivalence, car = automobile)
+Sch¨ utze: The term vocabulary and postings lists 33 / 62Recap Documents Terms Skip pointers Phrase queries
+Lemmatization
+Reduce inﬂectional/variant forms to base form
+Sch¨ utze: The term vocabulary and postings lists 34 / 62Recap Documents Terms Skip pointers Phrase queries
+Lemmatization
+Reduce inﬂectional/variant forms to base form
+Example: am, are, is→be
+Sch¨ utze: The term vocabulary and postings lists 34 / 62Recap Documents Terms Skip pointers Phrase queries
+Lemmatization
+Reduce inﬂectional/variant forms to base form
+Example: am, are, is→be
+Example: car, cars, car’s, cars’ →car
+Sch¨ utze: The term vocabulary and postings lists 34 / 62Recap Documents Terms Skip pointers Phrase queries
+Lemmatization
+Reduce inﬂectional/variant forms to base form
+Example: am, are, is→be
+Example: car, cars, car’s, cars’ →car
+Example: the boy’s cars are diﬀerent colors →the boy car be
+diﬀerent color
+Sch¨ utze: The term vocabulary and postings lists 34 / 62Recap Documents Terms Skip pointers Phrase queries
+Lemmatization
+Reduce inﬂectional/variant forms to base form
+Example: am, are, is→be
+Example: car, cars, car’s, cars’ →car
+Example: the boy’s cars are diﬀerent colors →the boy car be
+diﬀerent color
+Lemmatization implies doing “proper” reduction to dictionary
+headword form (the lemma).
+Sch¨ utze: The term vocabulary and postings lists 34 / 62Recap Documents Terms Skip pointers Phrase queries
+Lemmatization
+Reduce inﬂectional/variant forms to base form
+Example: am, are, is→be
+Example: car, cars, car’s, cars’ →car
+Example: the boy’s cars are diﬀerent colors →the boy car be
+diﬀerent color
+Lemmatization implies doing “proper” reduction to dictionary
+headword form (the lemma).
+Inﬂectional morphology ( cutting→cut) vs. derivational
+morphology ( destruction→destroy)
+Sch¨ utze: The term vocabulary and postings lists 34 / 62Recap Documents Terms Skip pointers Phrase queries
+Stemming
+Deﬁnition of stemming: Crude heuristic process that chops oﬀ
+the ends of words in the hope of achieving what “principled”
+lemmatization attempts to do with a lot of linguistic
+knowledge.
+Sch¨ utze: The term vocabulary and postings lists 35 / 62Recap Documents Terms Skip pointers Phrase queries
+Stemming
+Deﬁnition of stemming: Crude heuristic process that chops oﬀ
+the ends of words in the hope of achieving what “principled”
+lemmatization attempts to do with a lot of linguistic
+knowledge.
+Language dependent
+Sch¨ utze: The term vocabulary and postings lists 35 / 62Recap Documents Terms Skip pointers Phrase queries
+Stemming
+Deﬁnition of stemming: Crude heuristic process that chops oﬀ
+the ends of words in the hope of achieving what “principled”
+lemmatization attempts to do with a lot of linguistic
+knowledge.
+Language dependent
+Often inﬂectional andderivational
+Sch¨ utze: The term vocabulary and postings lists 35 / 62Recap Documents Terms Skip pointers Phrase queries
+Stemming
+Deﬁnition of stemming: Crude heuristic process that chops oﬀ
+the ends of words in the hope of achieving what “principled”
+lemmatization attempts to do with a lot of linguistic
+knowledge.
+Language dependent
+Often inﬂectional andderivational
+Example for derivational: automate, automatic, automation
+all reduce to automat
+Sch¨ utze: The term vocabulary and postings lists 35 / 62Recap Documents Terms Skip pointers Phrase queries
+Porter algorithm
+Most common algorithm for stemming English
+Sch¨ utze: The term vocabulary and postings lists 36 / 62Recap Documents Terms Skip pointers Phrase queries
+Porter algorithm
+Most common algorithm for stemming English
+Results suggest that it is at least as good as other stemming
+options
+Sch¨ utze: The term vocabulary and postings lists 36 / 62Recap Documents Terms Skip pointers Phrase queries
+Porter algorithm
+Most common algorithm for stemming English
+Results suggest that it is at least as good as other stemming
+options
+Conventions + 5 phases of reductions
+Sch¨ utze: The term vocabulary and postings lists 36 / 62Recap Documents Terms Skip pointers Phrase queries
+Porter algorithm
+Most common algorithm for stemming English
+Results suggest that it is at least as good as other stemming
+options
+Conventions + 5 phases of reductions
+Phases are applied sequentially
+Sch¨ utze: The term vocabulary and postings lists 36 / 62Recap Documents Terms Skip pointers Phrase queries
+Porter algorithm
+Most common algorithm for stemming English
+Results suggest that it is at least as good as other stemming
+options
+Conventions + 5 phases of reductions
+Phases are applied sequentially
+Each phase consists of a set of commands.
+Sch¨ utze: The term vocabulary and postings lists 36 / 62Recap Documents Terms Skip pointers Phrase queries
+Porter algorithm
+Most common algorithm for stemming English
+Results suggest that it is at least as good as other stemming
+options
+Conventions + 5 phases of reductions
+Phases are applied sequentially
+Each phase consists of a set of commands.
+Sample command: Delete ﬁnal ementif what remains is longer
+than 1 character
+Sch¨ utze: The term vocabulary and postings lists 36 / 62Recap Documents Terms Skip pointers Phrase queries
+Porter algorithm
+Most common algorithm for stemming English
+Results suggest that it is at least as good as other stemming
+options
+Conventions + 5 phases of reductions
+Phases are applied sequentially
+Each phase consists of a set of commands.
+Sample command: Delete ﬁnal ementif what remains is longer
+than 1 character
+replacement→replac
+Sch¨ utze: The term vocabulary and postings lists 36 / 62Recap Documents Terms Skip pointers Phrase queries
+Porter algorithm
+Most common algorithm for stemming English
+Results suggest that it is at least as good as other stemming
+options
+Conventions + 5 phases of reductions
+Phases are applied sequentially
+Each phase consists of a set of commands.
+Sample command: Delete ﬁnal ementif what remains is longer
+than 1 character
+replacement→replac
+cement→cement
+Sch¨ utze: The term vocabulary and postings lists 36 / 62Recap Documents Terms Skip pointers Phrase queries
+Porter algorithm
+Most common algorithm for stemming English
+Results suggest that it is at least as good as other stemming
+options
+Conventions + 5 phases of reductions
+Phases are applied sequentially
+Each phase consists of a set of commands.
+Sample command: Delete ﬁnal ementif what remains is longer
+than 1 character
+replacement→replac
+cement→cement
+Sample convention: Of the rules in a compound command,
+select the one that applies to the longest suﬃx.
+Sch¨ utze: The term vocabulary and postings lists 36 / 62Recap Documents Terms Skip pointers Phrase queries
+Porter stemmer: A few rules
+Rule Example
+SSES→SS caresses →caress
+IES→I ponies →poni
+SS→SS caress →caress
+S→ cats→cat
+Sch¨ utze: The term vocabulary and postings lists 37 / 62Recap Documents Terms Skip pointers Phrase queries
+Three stemmers: A comparison
+Sample text: Such an analysis can reveal features that are not easily
+visible from the variations in the individual genes and can
+lead to a picture of expression that is more biologically
+transparent and accessible to interpretation
+Porter stemmer: such an analysi can reveal featur that ar not easili visibl
+from the variat in the individu gene and can lead to a pictur
+of express that is more biolog transpar and access to interpret
+Lovins stemmer: such an analys can reve featur that ar not eas vis from th
+vari in th individu gen and can lead to a pictur of expres that
+is mor biolog transpar and acces to interpres
+Paice stemmer: such an analys can rev feat that are not easy vis from the
+vary in the individ gen and can lead to a pict of express that
+is mor biolog transp and access to interpret
+Sch¨ utze: The term vocabulary and postings lists 38 / 62Recap Documents Terms Skip pointers Phrase queries
+Does stemming improve eﬀectiveness?
+In general, stemming increases eﬀectiveness for some queries,
+and decreases eﬀectiveness for others.
+Sch¨ utze: The term vocabulary and postings lists 39 / 62Recap Documents Terms Skip pointers Phrase queries
+Does stemming improve eﬀectiveness?
+In general, stemming increases eﬀectiveness for some queries,
+and decreases eﬀectiveness for others.
+Queries where stemming is likely to help: [tartan sweaters],
+[sightseeing tour san francisco]
+Sch¨ utze: The term vocabulary and postings lists 39 / 62Recap Documents Terms Skip pointers Phrase queries
+Does stemming improve eﬀectiveness?
+In general, stemming increases eﬀectiveness for some queries,
+and decreases eﬀectiveness for others.
+Queries where stemming is likely to help: [tartan sweaters],
+[sightseeing tour san francisco]
+(equivalence classes: {sweater,sweaters},{tour,tours})
+Sch¨ utze: The term vocabulary and postings lists 39 / 62Recap Documents Terms Skip pointers Phrase queries
+Does stemming improve eﬀectiveness?
+In general, stemming increases eﬀectiveness for some queries,
+and decreases eﬀectiveness for others.
+Queries where stemming is likely to help: [tartan sweaters],
+[sightseeing tour san francisco]
+(equivalence classes: {sweater,sweaters},{tour,tours})
+Porter Stemmer equivalence class opercontains all of operate
+operating operates operation operative operatives operational .
+Sch¨ utze: The term vocabulary and postings lists 39 / 62Recap Documents Terms Skip pointers Phrase queries
+Does stemming improve eﬀectiveness?
+In general, stemming increases eﬀectiveness for some queries,
+and decreases eﬀectiveness for others.
+Queries where stemming is likely to help: [tartan sweaters],
+[sightseeing tour san francisco]
+(equivalence classes: {sweater,sweaters},{tour,tours})
+Porter Stemmer equivalence class opercontains all of operate
+operating operates operation operative operatives operational .
+Queries where stemming hurts: [operational AND research],
+[operating AND system], [operative AND dentistry]
+Sch¨ utze: The term vocabulary and postings lists 39 / 62Recap Documents Terms Skip pointers Phrase queries
+Exercise: What does Google do?
+Stop words
+Normalization
+Tokenization
+Lowercasing
+Stemming
+Non-latin alphabets
+Umlauts
+Compounds
+Numbers
+Sch¨ utze: The term vocabulary and postings lists 40 / 62Recap Documents Terms Skip pointers Phrase queries
+Outline
+1Recap
+2Documents
+3Terms
+General + Non-English
+English
+4Skip pointers
+5Phrase queries
+Sch¨ utze: The term vocabulary and postings lists 41 / 62Recap Documents Terms Skip pointers Phrase queries
+Recall basic intersection algorithm
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒
+Sch¨ utze: The term vocabulary and postings lists 42 / 62Recap Documents Terms Skip pointers Phrase queries
+Recall basic intersection algorithm
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒
+Sch¨ utze: The term vocabulary and postings lists 42 / 62Recap Documents Terms Skip pointers Phrase queries
+Recall basic intersection algorithm
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒
+Sch¨ utze: The term vocabulary and postings lists 42 / 62Recap Documents Terms Skip pointers Phrase queries
+Recall basic intersection algorithm
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2
+Sch¨ utze: The term vocabulary and postings lists 42 / 62Recap Documents Terms Skip pointers Phrase queries
+Recall basic intersection algorithm
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2
+Sch¨ utze: The term vocabulary and postings lists 42 / 62Recap Documents Terms Skip pointers Phrase queries
+Recall basic intersection algorithm
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2
+Sch¨ utze: The term vocabulary and postings lists 42 / 62Recap Documents Terms Skip pointers Phrase queries
+Recall basic intersection algorithm
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2
+Sch¨ utze: The term vocabulary and postings lists 42 / 62Recap Documents Terms Skip pointers Phrase queries
+Recall basic intersection algorithm
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2→31
+Sch¨ utze: The term vocabulary and postings lists 42 / 62Recap Documents Terms Skip pointers Phrase queries
+Recall basic intersection algorithm
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2→31
+Sch¨ utze: The term vocabulary and postings lists 42 / 62Recap Documents Terms Skip pointers Phrase queries
+Recall basic intersection algorithm
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2→31
+Sch¨ utze: The term vocabulary and postings lists 42 / 62Recap Documents Terms Skip pointers Phrase queries
+Recall basic intersection algorithm
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2→31
+Sch¨ utze: The term vocabulary and postings lists 42 / 62Recap Documents Terms Skip pointers Phrase queries
+Recall basic intersection algorithm
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2→31
+Sch¨ utze: The term vocabulary and postings lists 42 / 62Recap Documents Terms Skip pointers Phrase queries
+Recall basic intersection algorithm
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2→31
+Linear in the length of the postings lists.
+Sch¨ utze: The term vocabulary and postings lists 42 / 62Recap Documents Terms Skip pointers Phrase queries
+Recall basic intersection algorithm
+Brutus−→1→2→4→11→31→45→173→174
+Calpurnia−→2→31→54→101
+Intersection =⇒2→31
+Linear in the length of the postings lists.
+Can we do better?
+Sch¨ utze: The term vocabulary and postings lists 42 / 62Recap Documents Terms Skip pointers Phrase queries
+Skip pointers
+Skip pointers allow us to skippostings that will not ﬁgure in
+the search results.
+Sch¨ utze: The term vocabulary and postings lists 43 / 62Recap Documents Terms Skip pointers Phrase queries
+Skip pointers
+Skip pointers allow us to skippostings that will not ﬁgure in
+the search results.
+This makes intersecting postings lists more eﬃcient.
+Sch¨ utze: The term vocabulary and postings lists 43 / 62Recap Documents Terms Skip pointers Phrase queries
+Skip pointers
+Skip pointers allow us to skippostings that will not ﬁgure in
+the search results.
+This makes intersecting postings lists more eﬃcient.
+Some postings lists contain several million entries – so
+eﬃciency can be an issue even if basic intersection is linear.
+Sch¨ utze: The term vocabulary and postings lists 43 / 62Recap Documents Terms Skip pointers Phrase queries
+Skip pointers
+Skip pointers allow us to skippostings that will not ﬁgure in
+the search results.
+This makes intersecting postings lists more eﬃcient.
+Some postings lists contain several million entries – so
+eﬃciency can be an issue even if basic intersection is linear.
+Where do we put skip pointers?
+Sch¨ utze: The term vocabulary and postings lists 43 / 62Recap Documents Terms Skip pointers Phrase queries
+Skip pointers
+Skip pointers allow us to skippostings that will not ﬁgure in
+the search results.
+This makes intersecting postings lists more eﬃcient.
+Some postings lists contain several million entries – so
+eﬃciency can be an issue even if basic intersection is linear.
+Where do we put skip pointers?
+How do we make sure insection results are correct?
+Sch¨ utze: The term vocabulary and postings lists 43 / 62Recap Documents Terms Skip pointers Phrase queries
+Basic idea
+Brutus
+Caesar34
+2 4 8128
+34 35 64 128
+8
+1 2 3 531
+8 17 21 31 75 81 84 89 92
+Sch¨ utze: The term vocabulary and postings lists 44 / 62Recap Documents Terms Skip pointers Phrase queries
+Basic idea
+Brutus
+Caesar34
+2 4 8128
+3435 64 128
+8
+1 2 3 531
+817 21 31 75 81 84 89 92
+Sch¨ utze: The term vocabulary and postings lists 44 / 62Recap Documents Terms Skip pointers Phrase queries
+Basic idea
+Brutus
+Caesar34
+2 4 8128
+3435 64 128
+8
+1 2 3 531
+8 17 21 3175 81 84 89 92
+Sch¨ utze: The term vocabulary and postings lists 44 / 62Recap Documents Terms Skip pointers Phrase queries
+Skip lists: Larger example
+16 28 72
+551 982 4 8 16 19 23 28 43
+1 2 3 5 8 41 51 60 71Brutus
+Caesar
+Sch¨ utze: The term vocabulary and postings lists 45 / 62Recap Documents Terms Skip pointers Phrase queries
+Intersecting with skip pointers
+IntersectWithSkips (p1,p2)
+1answer←/an}bracketle{t/an}bracketri}ht
+2whilep1/ne}ationslash=nilandp2/ne}ationslash=nil
+3do ifdocID(p1) =docID(p2)
+4 thenAdd(answer,docID(p1))
+5 p1←next(p1)
+6 p2←next(p2)
+7 else ifdocID(p1)<docID(p2)
+8 then ifhasSkip(p1)and(docID(skip(p1))≤docID(p2))
+9 then while hasSkip(p1)and(docID(skip(p1))≤docID(p2))
+10 dop1←skip(p1)
+11 elsep1←next(p1)
+12 else ifhasSkip(p2)and(docID(skip(p2))≤docID(p1))
+13 then while hasSkip(p2)and(docID(skip(p2))≤docID(p1))
+14 dop2←skip(p2)
+15 elsep2←next(p2)
+16returnanswer
+Sch¨ utze: The term vocabulary and postings lists 46 / 62Recap Documents Terms Skip pointers Phrase queries
+Where do we place skips?
+Tradeoﬀ: number of items skipped vs. frequency skip can be
+taken
+Sch¨ utze: The term vocabulary and postings lists 47 / 62Recap Documents Terms Skip pointers Phrase queries
+Where do we place skips?
+Tradeoﬀ: number of items skipped vs. frequency skip can be
+taken
+More skips: Each skip pointer skips only a few items, but we
+can frequently use it.
+Sch¨ utze: The term vocabulary and postings lists 47 / 62Recap Documents Terms Skip pointers Phrase queries
+Where do we place skips?
+Tradeoﬀ: number of items skipped vs. frequency skip can be
+taken
+More skips: Each skip pointer skips only a few items, but we
+can frequently use it.
+Fewer skips: Each skip pointer skips many items, but we can
+not use it very often.
+Sch¨ utze: The term vocabulary and postings lists 47 / 62Recap Documents Terms Skip pointers Phrase queries
+Where do we place skips? (cont)
+Simple heuristic: for postings list of length P, use√
+P
+evenly-spaced skip pointers.
+Sch¨ utze: The term vocabulary and postings lists 48 / 62Recap Documents Terms Skip pointers Phrase queries
+Where do we place skips? (cont)
+Simple heuristic: for postings list of length P, use√
+P
+evenly-spaced skip pointers.
+This ignores the distribution of query terms.
+Sch¨ utze: The term vocabulary and postings lists 48 / 62Recap Documents Terms Skip pointers Phrase queries
+Where do we place skips? (cont)
+Simple heuristic: for postings list of length P, use√
+P
+evenly-spaced skip pointers.
+This ignores the distribution of query terms.
+Easy if the index is static; harder in a dynamic environment
+because of updates.
+Sch¨ utze: The term vocabulary and postings lists 48 / 62Recap Documents Terms Skip pointers Phrase queries
+Where do we place skips? (cont)
+Simple heuristic: for postings list of length P, use√
+P
+evenly-spaced skip pointers.
+This ignores the distribution of query terms.
+Easy if the index is static; harder in a dynamic environment
+because of updates.
+How much do skip pointers help?
+Sch¨ utze: The term vocabulary and postings lists 48 / 62Recap Documents Terms Skip pointers Phrase queries
+Where do we place skips? (cont)
+Simple heuristic: for postings list of length P, use√
+P
+evenly-spaced skip pointers.
+This ignores the distribution of query terms.
+Easy if the index is static; harder in a dynamic environment
+because of updates.
+How much do skip pointers help?
+They used to help a lot.
+Sch¨ utze: The term vocabulary and postings lists 48 / 62Recap Documents Terms Skip pointers Phrase queries
+Where do we place skips? (cont)
+Simple heuristic: for postings list of length P, use√
+P
+evenly-spaced skip pointers.
+This ignores the distribution of query terms.
+Easy if the index is static; harder in a dynamic environment
+because of updates.
+How much do skip pointers help?
+They used to help a lot.
+With today’s fast CPUs, they don’t help that much anymore.
+Sch¨ utze: The term vocabulary and postings lists 48 / 62Recap Documents Terms Skip pointers Phrase queries
+Outline
+1Recap
+2Documents
+3Terms
+General + Non-English
+English
+4Skip pointers
+5Phrase queries
+Sch¨ utze: The term vocabulary and postings lists 49 / 62Recap Documents Terms Skip pointers Phrase queries
+Phrase queries
+We want to answer a query such as [stanford university] – as a
+phrase.
+Sch¨ utze: The term vocabulary and postings lists 50 / 62Recap Documents Terms Skip pointers Phrase queries
+Phrase queries
+We want to answer a query such as [stanford university] – as a
+phrase.
+ThusThe inventor Stanford Ovshinsky never went to
+university shouldnotbe a match.
+Sch¨ utze: The term vocabulary and postings lists 50 / 62Recap Documents Terms Skip pointers Phrase queries
+Phrase queries
+We want to answer a query such as [stanford university] – as a
+phrase.
+ThusThe inventor Stanford Ovshinsky never went to
+university shouldnotbe a match.
+The concept of phrase query has proven easily understood by
+users.
+Sch¨ utze: The term vocabulary and postings lists 50 / 62Recap Documents Terms Skip pointers Phrase queries
+Phrase queries
+We want to answer a query such as [stanford university] – as a
+phrase.
+ThusThe inventor Stanford Ovshinsky never went to
+university shouldnotbe a match.
+The concept of phrase query has proven easily understood by
+users.
+Signiﬁcant part of web queries are phrase queries (explicitly
+entered or interpreted as such)
+Sch¨ utze: The term vocabulary and postings lists 50 / 62Recap Documents Terms Skip pointers Phrase queries
+Phrase queries
+We want to answer a query such as [stanford university] – as a
+phrase.
+ThusThe inventor Stanford Ovshinsky never went to
+university shouldnotbe a match.
+The concept of phrase query has proven easily understood by
+users.
+Signiﬁcant part of web queries are phrase queries (explicitly
+entered or interpreted as such)
+Consequence for inverted index: it no longer suﬃces to store
+docIDs in postings lists.
+Sch¨ utze: The term vocabulary and postings lists 50 / 62Recap Documents Terms Skip pointers Phrase queries
+Phrase queries
+We want to answer a query such as [stanford university] – as a
+phrase.
+ThusThe inventor Stanford Ovshinsky never went to
+university shouldnotbe a match.
+The concept of phrase query has proven easily understood by
+users.
+Signiﬁcant part of web queries are phrase queries (explicitly
+entered or interpreted as such)
+Consequence for inverted index: it no longer suﬃces to store
+docIDs in postings lists.
+Two ways of extending the inverted index:
+Sch¨ utze: The term vocabulary and postings lists 50 / 62Recap Documents Terms Skip pointers Phrase queries
+Phrase queries
+We want to answer a query such as [stanford university] – as a
+phrase.
+ThusThe inventor Stanford Ovshinsky never went to
+university shouldnotbe a match.
+The concept of phrase query has proven easily understood by
+users.
+Signiﬁcant part of web queries are phrase queries (explicitly
+entered or interpreted as such)
+Consequence for inverted index: it no longer suﬃces to store
+docIDs in postings lists.
+Two ways of extending the inverted index:
+biword index
+Sch¨ utze: The term vocabulary and postings lists 50 / 62Recap Documents Terms Skip pointers Phrase queries
+Phrase queries
+We want to answer a query such as [stanford university] – as a
+phrase.
+ThusThe inventor Stanford Ovshinsky never went to
+university shouldnotbe a match.
+The concept of phrase query has proven easily understood by
+users.
+Signiﬁcant part of web queries are phrase queries (explicitly
+entered or interpreted as such)
+Consequence for inverted index: it no longer suﬃces to store
+docIDs in postings lists.
+Two ways of extending the inverted index:
+biword index
+positional index
+Sch¨ utze: The term vocabulary and postings lists 50 / 62Recap Documents Terms Skip pointers Phrase queries
+Biword indexes
+Index every consecutive pair of terms in the text as a phrase.
+Sch¨ utze: The term vocabulary and postings lists 51 / 62Recap Documents Terms Skip pointers Phrase queries
+Biword indexes
+Index every consecutive pair of terms in the text as a phrase.
+For example, Friends, Romans, Countrymen would generate
+two biwords: “friends romans” and“romans countrymen”
+Sch¨ utze: The term vocabulary and postings lists 51 / 62Recap Documents Terms Skip pointers Phrase queries
+Biword indexes
+Index every consecutive pair of terms in the text as a phrase.
+For example, Friends, Romans, Countrymen would generate
+two biwords: “friends romans” and“romans countrymen”
+Each of these biwords is now a vocabulary term.
+Sch¨ utze: The term vocabulary and postings lists 51 / 62Recap Documents Terms Skip pointers Phrase queries
+Biword indexes
+Index every consecutive pair of terms in the text as a phrase.
+For example, Friends, Romans, Countrymen would generate
+two biwords: “friends romans” and“romans countrymen”
+Each of these biwords is now a vocabulary term.
+Two-word phrases can now easily be answered.
+Sch¨ utze: The term vocabulary and postings lists 51 / 62Recap Documents Terms Skip pointers Phrase queries
+Longer phrase queries
+A long phrase like “stanford university palo alto” can be
+represented as the Boolean query “stanford university”
+AND “university palo” AND “palo alto”
+Sch¨ utze: The term vocabulary and postings lists 52 / 62Recap Documents Terms Skip pointers Phrase queries
+Longer phrase queries
+A long phrase like “stanford university palo alto” can be
+represented as the Boolean query “stanford university”
+AND “university palo” AND “palo alto”
+We need to do post-ﬁltering of hits to identify subset that
+actually contains the 4-word phrase.
+Sch¨ utze: The term vocabulary and postings lists 52 / 62Recap Documents Terms Skip pointers Phrase queries
+Issues with biword indexes
+Why are biword indexes rarely used?
+Sch¨ utze: The term vocabulary and postings lists 53 / 62Recap Documents Terms Skip pointers Phrase queries
+Issues with biword indexes
+Why are biword indexes rarely used?
+False positives, as noted above
+Sch¨ utze: The term vocabulary and postings lists 53 / 62Recap Documents Terms Skip pointers Phrase queries
+Issues with biword indexes
+Why are biword indexes rarely used?
+False positives, as noted above
+Index blowup due to very large term vocabulary
+Sch¨ utze: The term vocabulary and postings lists 53 / 62Recap Documents Terms Skip pointers Phrase queries
+Positional indexes
+Sch¨ utze: The term vocabulary and postings lists 54 / 62Recap Documents Terms Skip pointers Phrase queries
+Positional indexes
+Positional indexes are a more eﬃcient alternative to biword
+indexes.
+Sch¨ utze: The term vocabulary and postings lists 54 / 62Recap Documents Terms Skip pointers Phrase queries
+Positional indexes
+Positional indexes are a more eﬃcient alternative to biword
+indexes.
+Postings lists in a nonpositional index: each posting is just a
+docID
+Sch¨ utze: The term vocabulary and postings lists 54 / 62Recap Documents Terms Skip pointers Phrase queries
+Positional indexes
+Positional indexes are a more eﬃcient alternative to biword
+indexes.
+Postings lists in a nonpositional index: each posting is just a
+docID
+Postings lists in a positional index: each posting is a docID
+anda list of positions
+Sch¨ utze: The term vocabulary and postings lists 54 / 62Recap Documents Terms Skip pointers Phrase queries
+Positional indexes: Example
+Sch¨ utze: The term vocabulary and postings lists 55 / 62Recap Documents Terms Skip pointers Phrase queries
+Positional indexes: Example
+Query:“to1be2or3not4to5be6”
+Sch¨ utze: The term vocabulary and postings lists 55 / 62Recap Documents Terms Skip pointers Phrase queries
+Positional indexes: Example
+Query:“to1be2or3not4to5be6”
+to, 993427:
+/an}bracketle{t1:/an}bracketle{t7, 18, 33, 72, 86, 231 /an}bracketri}ht;
+2:/an}bracketle{t1, 17, 74, 222, 255 /an}bracketri}ht;
+4:/an}bracketle{t8, 16, 190, 429, 433 /an}bracketri}ht;
+5:/an}bracketle{t363, 367/an}bracketri}ht;
+7:/an}bracketle{t13, 23, 191/an}bracketri}ht; .../an}bracketri}ht
+be, 178239:
+/an}bracketle{t1:/an}bracketle{t17, 25/an}bracketri}ht;
+4:/an}bracketle{t17, 191, 291, 430, 434 /an}bracketri}ht;
+5:/an}bracketle{t14, 19, 101/an}bracketri}ht; .../an}bracketri}ht
+Sch¨ utze: The term vocabulary and postings lists 55 / 62Recap Documents Terms Skip pointers Phrase queries
+Positional indexes: Example
+Query:“to1be2or3not4to5be6”
+to, 993427:
+/an}bracketle{t1:/an}bracketle{t7,18, 33, 72, 86, 231/an}bracketri}ht;
+2:/an}bracketle{t1, 17, 74, 222, 255 /an}bracketri}ht;
+4:/an}bracketle{t8, 16, 190, 429, 433 /an}bracketri}ht;
+5:/an}bracketle{t363, 367/an}bracketri}ht;
+7:/an}bracketle{t13, 23, 191/an}bracketri}ht; .../an}bracketri}ht
+be, 178239:
+/an}bracketle{t1:/an}bracketle{t17, 25/an}bracketri}ht;
+4:/an}bracketle{t17, 191, 291, 430, 434 /an}bracketri}ht;
+5:/an}bracketle{t14, 19, 101/an}bracketri}ht; .../an}bracketri}ht
+Sch¨ utze: The term vocabulary and postings lists 55 / 62Recap Documents Terms Skip pointers Phrase queries
+Positional indexes: Example
+Query:“to1be2or3not4to5be6”
+to, 993427:
+/an}bracketle{t1:/an}bracketle{t7,18, 33, 72, 86, 231/an}bracketri}ht;
+2:/an}bracketle{t1, 17, 74, 222, 255 /an}bracketri}ht;
+4:/an}bracketle{t8, 16, 190, 429, 433 /an}bracketri}ht;
+5:/an}bracketle{t363, 367/an}bracketri}ht;
+7:/an}bracketle{t13, 23, 191/an}bracketri}ht; .../an}bracketri}ht
+be, 178239:
+/an}bracketle{t1:/an}bracketle{t17,25/an}bracketri}ht;
+4:/an}bracketle{t17, 191, 291, 430, 434 /an}bracketri}ht;
+5:/an}bracketle{t14, 19, 101/an}bracketri}ht; .../an}bracketri}ht
+Sch¨ utze: The term vocabulary and postings lists 55 / 62Recap Documents Terms Skip pointers Phrase queries
+Positional indexes: Example
+Query:“to1be2or3not4to5be6”
+to, 993427:
+/an}bracketle{t1:/an}bracketle{t7, 18,33, 72, 86, 231/an}bracketri}ht;
+2:/an}bracketle{t1, 17, 74, 222, 255 /an}bracketri}ht;
+4:/an}bracketle{t8, 16, 190, 429, 433 /an}bracketri}ht;
+5:/an}bracketle{t363, 367/an}bracketri}ht;
+7:/an}bracketle{t13, 23, 191/an}bracketri}ht; .../an}bracketri}ht
+be, 178239:
+/an}bracketle{t1:/an}bracketle{t17, 25/an}bracketri}ht;
+4:/an}bracketle{t17, 191, 291, 430, 434 /an}bracketri}ht;
+5:/an}bracketle{t14, 19, 101/an}bracketri}ht; .../an}bracketri}ht
+Sch¨ utze: The term vocabulary and postings lists 55 / 62Recap Documents Terms Skip pointers Phrase queries
+Positional indexes: Example
+Query:“to1be2or3not4to5be6”
+to, 993427:
+/an}bracketle{t1:/an}bracketle{t7, 18, 33, 72, 86, 231 /an}bracketri}ht;
+2:/an}bracketle{t1, 17, 74, 222, 255 /an}bracketri}ht;
+4:/an}bracketle{t8, 16, 190, 429, 433 /an}bracketri}ht;
+5:/an}bracketle{t363, 367/an}bracketri}ht;
+7:/an}bracketle{t13, 23, 191/an}bracketri}ht; .../an}bracketri}ht
+be, 178239:
+/an}bracketle{t1:/an}bracketle{t17, 25/an}bracketri}ht;
+4:/an}bracketle{t17, 191, 291, 430, 434 /an}bracketri}ht;
+5:/an}bracketle{t14, 19, 101/an}bracketri}ht; .../an}bracketri}ht
+Sch¨ utze: The term vocabulary and postings lists 55 / 62Recap Documents Terms Skip pointers Phrase queries
+Positional indexes: Example
+Query:“to1be2or3not4to5be6”
+to, 993427:
+/an}bracketle{t1:/an}bracketle{t7, 18, 33, 72, 86, 231 /an}bracketri}ht;
+2:/an}bracketle{t1, 17, 74, 222, 255 /an}bracketri}ht;
+4:/an}bracketle{t8, 16, 190, 429, 433 /an}bracketri}ht;
+5:/an}bracketle{t363, 367/an}bracketri}ht;
+7:/an}bracketle{t13, 23, 191/an}bracketri}ht; .../an}bracketri}ht
+be, 178239:
+/an}bracketle{t1:/an}bracketle{t17, 25/an}bracketri}ht;
+4:/an}bracketle{t17, 191, 291, 430, 434 /an}bracketri}ht;
+5:/an}bracketle{t14, 19, 101/an}bracketri}ht; .../an}bracketri}ht
+Sch¨ utze: The term vocabulary and postings lists 55 / 62Recap Documents Terms Skip pointers Phrase queries
+Positional indexes: Example
+Query:“to1be2or3not4to5be6”
+to, 993427:
+/an}bracketle{t1:/an}bracketle{t7, 18, 33, 72, 86, 231 /an}bracketri}ht;
+2:/an}bracketle{t1, 17, 74, 222, 255 /an}bracketri}ht;
+4:/an}bracketle{t8, 16, 190, 429, 433 /an}bracketri}ht;
+5:/an}bracketle{t363, 367/an}bracketri}ht;
+7:/an}bracketle{t13, 23, 191/an}bracketri}ht; .../an}bracketri}ht
+be, 178239:
+/an}bracketle{t1:/an}bracketle{t17, 25/an}bracketri}ht;
+4:/an}bracketle{t17, 191, 291, 430, 434 /an}bracketri}ht;
+5:/an}bracketle{t14, 19, 101/an}bracketri}ht; .../an}bracketri}ht
+Sch¨ utze: The term vocabulary and postings lists 55 / 62Recap Documents Terms Skip pointers Phrase queries
+Positional indexes: Example
+Query:“to1be2or3not4to5be6”
+to, 993427:
+/an}bracketle{t1:/an}bracketle{t7, 18, 33, 72, 86, 231 /an}bracketri}ht;
+2:/an}bracketle{t1, 17, 74, 222, 255 /an}bracketri}ht;
+4:/an}bracketle{t8,16, 190, 429, 433/an}bracketri}ht;
+5:/an}bracketle{t363, 367/an}bracketri}ht;
+7:/an}bracketle{t13, 23, 191/an}bracketri}ht; .../an}bracketri}ht
+be, 178239:
+/an}bracketle{t1:/an}bracketle{t17, 25/an}bracketri}ht;
+4:/an}bracketle{t17, 191, 291, 430, 434 /an}bracketri}ht;
+5:/an}bracketle{t14, 19, 101/an}bracketri}ht; .../an}bracketri}ht
+Sch¨ utze: The term vocabulary and postings lists 55 / 62Recap Documents Terms Skip pointers Phrase queries
+Positional indexes: Example
+Query:“to1be2or3not4to5be6”
+to, 993427:
+/an}bracketle{t1:/an}bracketle{t7, 18, 33, 72, 86, 231 /an}bracketri}ht;
+2:/an}bracketle{t1, 17, 74, 222, 255 /an}bracketri}ht;
+4:/an}bracketle{t8,16, 190, 429, 433/an}bracketri}ht;
+5:/an}bracketle{t363, 367/an}bracketri}ht;
+7:/an}bracketle{t13, 23, 191/an}bracketri}ht; .../an}bracketri}ht
+be, 178239:
+/an}bracketle{t1:/an}bracketle{t17, 25/an}bracketri}ht;
+4:/an}bracketle{t17, 191, 291, 430, 434 /an}bracketri}ht;
+5:/an}bracketle{t14, 19, 101/an}bracketri}ht; .../an}bracketri}ht
+Sch¨ utze: The term vocabulary and postings lists 55 / 62Recap Documents Terms Skip pointers Phrase queries
+Positional indexes: Example
+Query:“to1be2or3not4to5be6”
+to, 993427:
+/an}bracketle{t1:/an}bracketle{t7, 18, 33, 72, 86, 231 /an}bracketri}ht;
+2:/an}bracketle{t1, 17, 74, 222, 255 /an}bracketri}ht;
+4:/an}bracketle{t8,16,190, 429, 433/an}bracketri}ht;
+5:/an}bracketle{t363, 367/an}bracketri}ht;
+7:/an}bracketle{t13, 23, 191/an}bracketri}ht; .../an}bracketri}ht
+be, 178239:
+/an}bracketle{t1:/an}bracketle{t17, 25/an}bracketri}ht;
+4:/an}bracketle{t17, 191, 291, 430, 434 /an}bracketri}ht;
+5:/an}bracketle{t14, 19, 101/an}bracketri}ht; .../an}bracketri}ht
+Sch¨ utze: The term vocabulary and postings lists 55 / 62Recap Documents Terms Skip pointers Phrase queries
+Positional indexes: Example
+Query:“to1be2or3not4to5be6”
+to, 993427:
+/an}bracketle{t1:/an}bracketle{t7, 18, 33, 72, 86, 231 /an}bracketri}ht;
+2:/an}bracketle{t1, 17, 74, 222, 255 /an}bracketri}ht;
+4:/an}bracketle{t8, 16,190, 429, 433/an}bracketri}ht;
+5:/an}bracketle{t363, 367/an}bracketri}ht;
+7:/an}bracketle{t13, 23, 191/an}bracketri}ht; .../an}bracketri}ht
+be, 178239:
+/an}bracketle{t1:/an}bracketle{t17, 25/an}bracketri}ht;
+4:/an}bracketle{t17, 191, 291, 430, 434 /an}bracketri}ht;
+5:/an}bracketle{t14, 19, 101/an}bracketri}ht; .../an}bracketri}ht
+Sch¨ utze: The term vocabulary and postings lists 55 / 62Recap Documents Terms Skip pointers Phrase queries
+Positional indexes: Example
+Query:“to1be2or3not4to5be6”
+to, 993427:
+/an}bracketle{t1:/an}bracketle{t7, 18, 33, 72, 86, 231 /an}bracketri}ht;
+2:/an}bracketle{t1, 17, 74, 222, 255 /an}bracketri}ht;
+4:/an}bracketle{t8, 16,190, 429, 433/an}bracketri}ht;
+5:/an}bracketle{t363, 367/an}bracketri}ht;
+7:/an}bracketle{t13, 23, 191/an}bracketri}ht; .../an}bracketri}ht
+be, 178239:
+/an}bracketle{t1:/an}bracketle{t17, 25/an}bracketri}ht;
+4:/an}bracketle{t17,191, 291, 430, 434/an}bracketri}ht;
+5:/an}bracketle{t14, 19, 101/an}bracketri}ht; .../an}bracketri}ht
+Sch¨ utze: The term vocabulary and postings lists 55 / 62Recap Documents Terms Skip pointers Phrase queries
+Positional indexes: Example
+Query:“to1be2or3not4to5be6”
+to, 993427:
+/an}bracketle{t1:/an}bracketle{t7, 18, 33, 72, 86, 231 /an}bracketri}ht;
+2:/an}bracketle{t1, 17, 74, 222, 255 /an}bracketri}ht;
+4:/an}bracketle{t8, 16,190,429, 433/an}bracketri}ht;
+5:/an}bracketle{t363, 367/an}bracketri}ht;
+7:/an}bracketle{t13, 23, 191/an}bracketri}ht; .../an}bracketri}ht
+be, 178239:
+/an}bracketle{t1:/an}bracketle{t17, 25/an}bracketri}ht;
+4:/an}bracketle{t17,191, 291, 430, 434/an}bracketri}ht;
+5:/an}bracketle{t14, 19, 101/an}bracketri}ht; .../an}bracketri}ht
+Sch¨ utze: The term vocabulary and postings lists 55 / 62Recap Documents Terms Skip pointers Phrase queries
+Positional indexes: Example
+Query:“to1be2or3not4to5be6”
+to, 993427:
+/an}bracketle{t1:/an}bracketle{t7, 18, 33, 72, 86, 231 /an}bracketri}ht;
+2:/an}bracketle{t1, 17, 74, 222, 255 /an}bracketri}ht;
+4:/an}bracketle{t8, 16, 190, 429, 433/an}bracketri}ht;
+5:/an}bracketle{t363, 367/an}bracketri}ht;
+7:/an}bracketle{t13, 23, 191/an}bracketri}ht; .../an}bracketri}ht
+be, 178239:
+/an}bracketle{t1:/an}bracketle{t17, 25/an}bracketri}ht;
+4:/an}bracketle{t17, 191, 291, 430, 434/an}bracketri}ht;
+5:/an}bracketle{t14, 19, 101/an}bracketri}ht; .../an}bracketri}ht
+Sch¨ utze: The term vocabulary and postings lists 55 / 62Recap Documents Terms Skip pointers Phrase queries
+Positional indexes: Example
+Query:“to1be2or3not4to5be6”
+to, 993427:
+/an}bracketle{t1:/an}bracketle{t7, 18, 33, 72, 86, 231 /an}bracketri}ht;
+2:/an}bracketle{t1, 17, 74, 222, 255 /an}bracketri}ht;
+4:/an}bracketle{t8, 16, 190, 429,433/an}bracketri}ht;
+5:/an}bracketle{t363, 367/an}bracketri}ht;
+7:/an}bracketle{t13, 23, 191/an}bracketri}ht; .../an}bracketri}ht
+be, 178239:
+/an}bracketle{t1:/an}bracketle{t17, 25/an}bracketri}ht;
+4:/an}bracketle{t17, 191, 291, 430, 434/an}bracketri}ht;
+5:/an}bracketle{t14, 19, 101/an}bracketri}ht; .../an}bracketri}ht
+Sch¨ utze: The term vocabulary and postings lists 55 / 62Recap Documents Terms Skip pointers Phrase queries
+Positional indexes: Example
+Query:“to1be2or3not4to5be6”
+to, 993427:
+/an}bracketle{t1:/an}bracketle{t7, 18, 33, 72, 86, 231 /an}bracketri}ht;
+2:/an}bracketle{t1, 17, 74, 222, 255 /an}bracketri}ht;
+4:/an}bracketle{t8, 16, 190, 429,433/an}bracketri}ht;
+5:/an}bracketle{t363, 367/an}bracketri}ht;
+7:/an}bracketle{t13, 23, 191/an}bracketri}ht; .../an}bracketri}ht
+be, 178239:
+/an}bracketle{t1:/an}bracketle{t17, 25/an}bracketri}ht;
+4:/an}bracketle{t17, 191, 291, 430,434/an}bracketri}ht;
+5:/an}bracketle{t14, 19, 101/an}bracketri}ht; .../an}bracketri}ht
+Sch¨ utze: The term vocabulary and postings lists 55 / 62Recap Documents Terms Skip pointers Phrase queries
+Positional indexes: Example
+Query:“to1be2or3not4to5be6”
+to, 993427:
+/an}bracketle{t1:/an}bracketle{t7, 18, 33, 72, 86, 231 /an}bracketri}ht;
+2:/an}bracketle{t1, 17, 74, 222, 255 /an}bracketri}ht;
+4:/an}bracketle{t8, 16, 190, 429,433/an}bracketri}ht;
+5:/an}bracketle{t363, 367/an}bracketri}ht;
+7:/an}bracketle{t13, 23, 191/an}bracketri}ht; .../an}bracketri}ht
+be, 178239:
+/an}bracketle{t1:/an}bracketle{t17, 25/an}bracketri}ht;
+4:/an}bracketle{t17, 191, 291, 430,434/an}bracketri}ht;
+5:/an}bracketle{t14, 19, 101/an}bracketri}ht; .../an}bracketri}ht
+Document 4 is a match!
+Sch¨ utze: The term vocabulary and postings lists 55 / 62Recap Documents Terms Skip pointers Phrase queries
+Proximity search
+We just saw how to use a positional index for phrase searches.
+Sch¨ utze: The term vocabulary and postings lists 56 / 62Recap Documents Terms Skip pointers Phrase queries
+Proximity search
+We just saw how to use a positional index for phrase searches.
+We can also use it for proximity search.
+Sch¨ utze: The term vocabulary and postings lists 56 / 62Recap Documents Terms Skip pointers Phrase queries
+Proximity search
+We just saw how to use a positional index for phrase searches.
+We can also use it for proximity search.
+For example: employment /4 place
+Sch¨ utze: The term vocabulary and postings lists 56 / 62Recap Documents Terms Skip pointers Phrase queries
+Proximity search
+We just saw how to use a positional index for phrase searches.
+We can also use it for proximity search.
+For example: employment /4 place
+Find all documents that contain employment andplace
+within 4 words of each other.
+Sch¨ utze: The term vocabulary and postings lists 56 / 62Recap Documents Terms Skip pointers Phrase queries
+Proximity search
+We just saw how to use a positional index for phrase searches.
+We can also use it for proximity search.
+For example: employment /4 place
+Find all documents that contain employment andplace
+within 4 words of each other.
+Employment agencies that place healthcare workers are seeing
+growthis a hit.
+Sch¨ utze: The term vocabulary and postings lists 56 / 62Recap Documents Terms Skip pointers Phrase queries
+Proximity search
+We just saw how to use a positional index for phrase searches.
+We can also use it for proximity search.
+For example: employment /4 place
+Find all documents that contain employment andplace
+within 4 words of each other.
+Employment agencies that place healthcare workers are seeing
+growthis a hit.
+Employment agencies that have learned to adapt now place
+healthcare workers is not a hit.
+Sch¨ utze: The term vocabulary and postings lists 56 / 62Recap Documents Terms Skip pointers Phrase queries
+Proximity search
+Use the positional index
+Sch¨ utze: The term vocabulary and postings lists 57 / 62Recap Documents Terms Skip pointers Phrase queries
+Proximity search
+Use the positional index
+Simplest algorithm: look at cross-product of positions of (i)
+employment in document and (ii) placein document
+Sch¨ utze: The term vocabulary and postings lists 57 / 62Recap Documents Terms Skip pointers Phrase queries
+Proximity search
+Use the positional index
+Simplest algorithm: look at cross-product of positions of (i)
+employment in document and (ii) placein document
+Very ineﬃcient for frequent words, especially stop words
+Sch¨ utze: The term vocabulary and postings lists 57 / 62Recap Documents Terms Skip pointers Phrase queries
+Proximity search
+Use the positional index
+Simplest algorithm: look at cross-product of positions of (i)
+employment in document and (ii) placein document
+Very ineﬃcient for frequent words, especially stop words
+Note that we want to return the actual matching positions,
+not just a list of documents.
+Sch¨ utze: The term vocabulary and postings lists 57 / 62Recap Documents Terms Skip pointers Phrase queries
+Proximity search
+Use the positional index
+Simplest algorithm: look at cross-product of positions of (i)
+employment in document and (ii) placein document
+Very ineﬃcient for frequent words, especially stop words
+Note that we want to return the actual matching positions,
+not just a list of documents.
+This is important for dynamic summaries etc.
+Sch¨ utze: The term vocabulary and postings lists 57 / 62Recap Documents Terms Skip pointers Phrase queries
+“Proximity” intersection
+PositionalIntersect (p1,p2,k)
+1answer←/an}bracketle{t/an}bracketri}ht
+2whilep1/ne}ationslash=nilandp2/ne}ationslash=nil
+3do ifdocID(p1) =docID(p2)
+4 thenl←/an}bracketle{t/an}bracketri}ht
+5 pp1←positions (p1)
+6 pp2←positions (p2)
+7 whilepp1/ne}ationslash=nil
+8 do while pp2/ne}ationslash=nil
+9 do if|pos(pp1)−pos(pp2)|≤k
+10 thenAdd(l,pos(pp2))
+11 else ifpos(pp2)>pos(pp1)
+12 then break
+13 pp2←next(pp2)
+14 whilel/ne}ationslash=/an}bracketle{t/an}bracketri}htand|l[0]−pos(pp1)|>k
+15 doDelete(l[0])
+16 for each ps∈l
+17 doAdd(answer,/an}bracketle{tdocID(p1),pos(pp1),ps/an}bracketri}ht)
+18 pp1←next(pp1)
+19 p1←next(p1)
+20 p2←next(p2)
+21 else ifdocID(p1)<docID(p2)
+22 thenp1←next(p1)
+23 elsep2←next(p2)
+24returnanswer
+Sch¨ utze: The term vocabulary and postings lists 58 / 62Recap Documents Terms Skip pointers Phrase queries
+Combination scheme
+Biword indexes and positional indexes can be proﬁtably
+combined.
+Sch¨ utze: The term vocabulary and postings lists 59 / 62Recap Documents Terms Skip pointers Phrase queries
+Combination scheme
+Biword indexes and positional indexes can be proﬁtably
+combined.
+Many biwords are extremely frequent: Michael Jackson,
+Britney Spears etc
+Sch¨ utze: The term vocabulary and postings lists 59 / 62Recap Documents Terms Skip pointers Phrase queries
+Combination scheme
+Biword indexes and positional indexes can be proﬁtably
+combined.
+Many biwords are extremely frequent: Michael Jackson,
+Britney Spears etc
+For these biwords, increased speed compared to positional
+postings intersection is substantial.
+Sch¨ utze: The term vocabulary and postings lists 59 / 62Recap Documents Terms Skip pointers Phrase queries
+Combination scheme
+Biword indexes and positional indexes can be proﬁtably
+combined.
+Many biwords are extremely frequent: Michael Jackson,
+Britney Spears etc
+For these biwords, increased speed compared to positional
+postings intersection is substantial.
+Combination scheme: Include frequent biwords as vocabulary
+terms in the index. Do all other phrases by positional
+intersection.
+Sch¨ utze: The term vocabulary and postings lists 59 / 62Recap Documents Terms Skip pointers Phrase queries
+Combination scheme
+Biword indexes and positional indexes can be proﬁtably
+combined.
+Many biwords are extremely frequent: Michael Jackson,
+Britney Spears etc
+For these biwords, increased speed compared to positional
+postings intersection is substantial.
+Combination scheme: Include frequent biwords as vocabulary
+terms in the index. Do all other phrases by positional
+intersection.
+Williams et al. (2004) evaluate a more sophisticated mixed
+indexing scheme. Faster than a positional index, at a cost of
+26% more space for index.
+Sch¨ utze: The term vocabulary and postings lists 59 / 62Recap Documents Terms Skip pointers Phrase queries
+“Positional” queries on Google
+For web search engines, positional queries are much more
+expensive than regular Boolean queries.
+Sch¨ utze: The term vocabulary and postings lists 60 / 62Recap Documents Terms Skip pointers Phrase queries
+“Positional” queries on Google
+For web search engines, positional queries are much more
+expensive than regular Boolean queries.
+Let’s look at the example of phrase queries.
+Sch¨ utze: The term vocabulary and postings lists 60 / 62Recap Documents Terms Skip pointers Phrase queries
+“Positional” queries on Google
+For web search engines, positional queries are much more
+expensive than regular Boolean queries.
+Let’s look at the example of phrase queries.
+Why are they more expensive than regular Boolean queries?
+Sch¨ utze: The term vocabulary and postings lists 60 / 62Recap Documents Terms Skip pointers Phrase queries
+“Positional” queries on Google
+For web search engines, positional queries are much more
+expensive than regular Boolean queries.
+Let’s look at the example of phrase queries.
+Why are they more expensive than regular Boolean queries?
+Can you demonstrate on Google that phrase queries are more
+expensive than Boolean queries?
+Sch¨ utze: The term vocabulary and postings lists 60 / 62Recap Documents Terms Skip pointers Phrase queries
+Take-away
+Understanding of the basic unit of classical information
+retrieval systems: wordsanddocuments : What is a
+document, what is a term?
+Tokenization: how to get from raw text to words (or tokens)
+More complex indexes: skip pointers and phrases
+Sch¨ utze: The term vocabulary and postings lists 61 / 62Recap Documents Terms Skip pointers Phrase queries
+Resources
+Chapter 2 of IIR
+Resources at http://cislmu.org
+Porter stemmer
+A fun number search on Google
+Sch¨ utze: The term vocabulary and postings lists 62 / 62

@@ -1,0 +1,79 @@
+Kabin Wang  
+27295936  
+ENCS -393: Reflection Essay #1  
+As of recent, the rise in popularity of artificial intelligence has sparked transformative 
+changes in  many  industries, notably revolutionizing the field of digital art . Consequently, the 
+creation of hyper realistic images of people, including celebrities, has become accessible to 
+virtually anyone with access to the internet . This has been the cause of much controversy 
+recently, specifically in a case involving artificially generated nude images of renowned singer & 
+songwriter Taylor Swift  (Ray, 2024) . These images seemingly popped out of nowhere and 
+quickly took social media platforms by storm  – being reposted on platforms such as X and  has 
+caused the singer -songwriter t o threaten legal action against websites reposting them. Indeed, 
+this incident serves as a stark reminder of novel ethical dilemmas our society must wrestle with  
+in the age of artificial intelligence. The following essay will argue that using artificial 
+intelligence image generating technologies to create compromising or scandalous depictions of 
+celebrities is unethical because it undermines the person’s right to privacy and because it 
+contributes to the proliferation of misinformation that harms not just t he celebrity in question but 
+society at large.  
+The first argument against the generation of AI images of celebrities in compromised 
+situations hinges on the right to privacy and consent. Indeed, although celebrities are public 
+persons, they have a right to retain the legal rights to their digital liken ess and to personal 
+privacy . Generating fake images of them and then reposting those images without their consent is 
+a direct violation of this right and  should be treated no differently than if a paparazzi illegally 
+snapped pictures of them changing in th eir bedroom and proceeded to release those images to the 
+public. Furthermore, the argument that digital reproductions are not immune to being deemed 
+unethical is echoed by Nick Bostrom drawing on the  principles of “ Non-discrimination with 
+regard to substrate ” and “ Non-discrimination with regard to ontogeny ” wherein  all beings, 
+regardless of their physical or digital nature, deserve respect and autonomy (Bostrom, n.d.). In 
+other words, the notion that notion that digital representations of people can be manipulated 
+without ethical considerations does not hold. Moreover, he argues through the principle of the 
+“Procreator’s responsibility of provisioning ” that the creators of a digital product have a 
+responsibility to ensure that their creations do not harm existing persons (Bostrom, 202 4). 
+Naturally, this includes the persons right to privacy and consent. As such, it would be the case 
+that person responsible for creating the compromising AI -generated image should be held 
+accountable for their actions.  
+The second argument against the generation of AI images of celebrities in compromised 
+situations focuses on the broader societal ramifications  of circulating such images. Indeed, these 
+images can easily be mistaken for being “real” and contribute to the spreading of misinformation  
+and deceiving  the public. Nick Bostrom presents a compelling case on this matter, drawing on 
+the principle of  “Actual and potential beings ” wherein  he posits that  if the creation of potential 
+AI images harms the well -being of actual beings there is a moral reason not to bring these potential -beings into existence  (Bostrom, n.d.). In other words, if  the misinformation of the 
+public resulting from the generation of fake AI images can be stopped, then it should.  
+Furthermore, the onus of not choosing to stop it ultimately falls on the creator of the image.  
+Without intervention , either through new laws or regulations,  it is easy to see how 
+misinformation could attack the very fabric of truth and society, culminating to the point where it 
+is difficult, if not impossible, to discern between what is real and is fake.  
+In summary, t he advent of artificial intelligence has undeniable transformed the digital art 
+industry by enabling anyone to create hyper realistic images, even if unauthorized.  Academics 
+such as Nick Bostrom have laid much groundwork in regards to how we, as a society, should 
+properly tackle these new ethical challenges namely through the principles of “ Non-
+discrimination with regard to ontogeny ”, “Procreator’s responsibility of provisioning ” and 
+“Actual and potential beings ”  . However, as  we continue navi gating this complex technology 
+embedded world , it is important for us to consider what  new regulations need to be put in place 
+to properly safeguard society’s  rights to privacy and truthful information.  
+Word Count: 698  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Works Cited  
+ 
+Bostrom, N. (n.d.). Ethics of Artificial Intelligence and Robotics. Retrieved from 
+https://nickbostrom.com/ethics/aiethics  
+ 
+Ray, S. (2024, January 30). X Unblocks Taylor Swift Searches After Weekend Pause 
+Triggered by Spread of Deepfake Nudes. Forbes. Retrieved from 
+https://www.forbes.com/sites/siladityaray/2024/01/30/x -unblocks -taylor -swift -searches -after-
+weekend -pause -trigger ed-by-spread -of-deepfake -nudes/?sh=2c8faf643a10  

@@ -3,6 +3,10 @@ from urllib.parse import quote
 from rdflib import Graph, URIRef, Literal, Namespace, RDF
 from rdflib.namespace import RDFS, XSD
 from CourseBuilder import sanitize_string
+import PyPDF2
+import spacy
+from spacy.matcher import PhraseMatcher
+from spacy.kb import KnowledgeBase
 
 EX = Namespace("http://example.org/")
 VIVO = Namespace("http://vivoweb.org/ontology/core#")
@@ -40,16 +44,30 @@ def build_lecture_and_topics_graph():
     g.add((EX.coversTopic, RDFS.domain, EX.Lecture))
     g.add((EX.coversTopic, RDFS.range, DBPEDIA.Resource))
 
+    g.add((EX.mentionsTopic, RDF.type, RDF.Property))
+    g.add((EX.mentionsTopic, RDFS.domain, EX.Lecture))
+    g.add((EX.mentionsTopic, RDFS.range, DBPEDIA.Resource))
+
     courses = [
         ('COMP', '474', 'Intelligent Systems'),
         ('COMP', '479', 'Information Retrieval and Web Search')
     ]
 
-    # Define lecture topics
-    lecture_topics = {
-        'COMP-474': [DBPEDIA.Intelligent_system, DBPEDIA.Knowledge_representation_and_reasoning],
-        'COMP-479': [DBPEDIA.Information_retrieval, DBPEDIA.Web_search_engine]
-    }
+    # Load the spaCy English language model and add the entityfishing pipe
+    nlp = spacy.load("en_core_web_sm")
+    nlp.add_pipe('entityfishing')
+
+    # Set the confidence threshold for entity linking
+    confidence_threshold = 0.5
+
+    # Perform entity linking using spaCy-fishing
+    def link_entities(text):
+        doc = nlp(text)
+        entities = []
+        for ent in doc.ents:
+            if ent._.nerd_score is not None and ent._.nerd_score >= confidence_threshold:
+                entities.append(ent)
+        return entities
 
     for course_dept, course_num, course_name in courses:
         course_code = f"{course_dept}-{course_num}"
@@ -59,46 +77,61 @@ def build_lecture_and_topics_graph():
         g.add((course_uri, VIVO.courseNumber, Literal(course_num)))
         g.add((course_uri, RDFS.label, Literal(course_name)))
 
-        lectures_dir = f"src/res/{course_dept}-{course_num}/lectures"
+        lectures_dir = f"res/{course_dept}-{course_num}/lectures"
         lecture_files = os.listdir(lectures_dir)
 
-        for i, lecture_file in enumerate(lecture_files, start=1):
-            lecture_uri = EX[f"{course_code}/lecture{i}"]
-            g.add((lecture_uri, RDF.type, EX.Lecture))
-            g.add((lecture_uri, VIVO.rank, Literal(i, datatype=XSD.integer)))
-            g.add((lecture_uri, VIVO.partOf, course_uri))
-
+        for lecture_file in lecture_files:
             lecture_file_path = os.path.join(lectures_dir, lecture_file)
             lecture_file_uri = URIRef(f"file:///{quote(lecture_file_path)}")
-            g.add((lecture_uri, VIVO.hasAssociatedDocument, lecture_file_uri))
 
+            # Differentiate between reading, slides, and worksheets based on file name
             if lecture_file.endswith('.pdf'):
-                if 'slides' in lecture_file.lower():
+                if 'reading' in lecture_file.lower():
+                    g.add((lecture_file_uri, RDF.type, EX.LectureReading))
+                    resource_type = 'reading'
+                elif 'slides' in lecture_file.lower():
                     g.add((lecture_file_uri, RDF.type, EX.LectureSlides))
+                    resource_type = 'slides'
                 elif 'worksheet' in lecture_file.lower():
                     g.add((lecture_file_uri, RDF.type, EX.LectureWorksheet))
-                elif 'reading' in lecture_file.lower():
-                    g.add((lecture_file_uri, RDF.type, EX.LectureReading))
+                    resource_type = 'worksheet'
+                else:
+                    continue
 
-            # Add topics to lectures and associated materials
-            if course_code in lecture_topics and i <= len(lecture_topics[course_code]):
-                topic = lecture_topics[course_code][i - 1]
-                g.add((lecture_uri, EX.coversTopic, topic))
+                # Extract the resource number from the file name
+                resource_num = lecture_file.split('_')[-1].split('.')[0]
 
-                # Add the same topic to associated worksheet, reading, and slides
-                worksheet_uri = URIRef(f"file:///src/res/{course_code}/lectures%5Cworksheet_0{i}.pdf")
-                reading_uri = URIRef(f"file:///src/res/{course_code}/lectures%5Creading_reading0{i}.pdf")
-                slide_uri = URIRef(f"file:///src/res/{course_code}/lectures%5Cslides_0{i}.pdf")
-                g.add((lecture_uri, VIVO.hasAssociatedDocument, worksheet_uri))
-                g.add((lecture_uri, VIVO.hasAssociatedDocument, reading_uri))
-                g.add((lecture_uri, VIVO.hasAssociatedDocument, slide_uri))
-                g.add((worksheet_uri, EX.coversTopic, topic))
-                g.add((reading_uri, EX.coversTopic, topic))
-                g.add((slide_uri, EX.coversTopic, topic))
-                g.add((slide_uri, RDF.type, EX.LectureSlides))
+                # Create the resource URI
+                resource_uri = EX[f"{course_code}/{resource_type}{resource_num}"]
+                g.add((resource_uri, RDF.type, EX[resource_type.capitalize()]))
+                g.add((resource_uri, VIVO.partOf, course_uri))
+                g.add((resource_uri, VIVO.hasAssociatedDocument, lecture_file_uri))
+
+                # Extract text from PDF files
+                with open(lecture_file_path, 'rb') as file:
+                    pdf_reader = PyPDF2.PdfReader(file)
+                    text = ""
+                    for page in pdf_reader.pages:
+                        text += page.extract_text()
+
+                # Save the extracted text to a plain text file
+                plain_text_file = f"{course_code}_{resource_type}{resource_num}.txt"
+                plain_text_path = os.path.join("res", course_code, "plain_text", plain_text_file)
+                os.makedirs(os.path.dirname(plain_text_path), exist_ok=True)
+                with open(plain_text_path, 'w', encoding='utf-8') as file:
+                    file.write(text)
+
+                # Perform entity linking using spaCy-fishing
+                entities = link_entities(text)
+                for ent in entities:
+                    topic_uri = ent._.url_wikidata
+                    g.add((resource_uri, EX.coversTopic, URIRef(topic_uri)))
+                    g.add((URIRef(topic_uri), RDFS.label, Literal(ent.text)))
+                    g.add((lecture_file_uri, EX.mentionsTopic, URIRef(topic_uri)))
+                    g.add((course_uri, VIVO.hasTopic, URIRef(topic_uri)))
 
         g.add((course_uri, VIVO.numberOfCredits, Literal(4, datatype=XSD.integer)))
         g.add((course_uri, RDFS.seeAlso, EX[f"{course_code}/resources"]))
 
-    g.serialize(destination='src/output/lecture_and_topics.ttl', format='turtle')
+    g.serialize(destination='output/lecture_and_topics.ttl', format='turtle')
     return g

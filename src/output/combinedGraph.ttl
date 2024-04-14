@@ -32,89 +32,291 @@ vivo:Student a rdfs:Class ;
 
 vivo:University a rdfs:Class .
 
-<http://example.org/COMP-474/lecture1> a ex:Lecture ;
-    ex:coversTopic dbpedia:Intelligent_system ;
-    vivo:hasAssociatedDocument <file:///src/res/COMP-474/lectures%5Creading_reading01.pdf>,
-        <file:///src/res/COMP-474/lectures%5Cslides_01.pdf>,
-        <file:///src/res/COMP-474/lectures%5Cworksheet_01.pdf> ;
-    vivo:partOf ex:COMP-474 ;
-    vivo:rank 1 .
+<http://example.org/COMP-474/readingreading01> a ex:Reading ;
+    ex:coversTopic <https://www.wikidata.org/wiki/Q2494121>,
+        <https://www.wikidata.org/wiki/Q26876>,
+        <https://www.wikidata.org/wiki/Q460475> ;
+    vivo:hasAssociatedDocument <file:///res/COMP-474/lectures%5Creading_reading01.pdf> ;
+    vivo:partOf ex:COMP-474 .
 
-<http://example.org/COMP-474/lecture2> a ex:Lecture ;
-    ex:coversTopic dbpedia:Knowledge_representation_and_reasoning ;
-    vivo:hasAssociatedDocument <file:///src/res/COMP-474/lectures%5Creading_reading02.pdf>,
-        <file:///src/res/COMP-474/lectures%5Cslides_01.pdf>,
-        <file:///src/res/COMP-474/lectures%5Cslides_02.pdf>,
-        <file:///src/res/COMP-474/lectures%5Cworksheet_02.pdf> ;
-    vivo:partOf ex:COMP-474 ;
-    vivo:rank 2 .
+<http://example.org/COMP-474/slides01> a ex:Slides ;
+    ex:coversTopic <https://www.wikidata.org/wiki/Q1164001>,
+        <https://www.wikidata.org/wiki/Q1205323>,
+        <https://www.wikidata.org/wiki/Q150>,
+        <https://www.wikidata.org/wiki/Q1539155>,
+        <https://www.wikidata.org/wiki/Q1550345>,
+        <https://www.wikidata.org/wiki/Q16752102>,
+        <https://www.wikidata.org/wiki/Q174198>,
+        <https://www.wikidata.org/wiki/Q1860>,
+        <https://www.wikidata.org/wiki/Q197536>,
+        <https://www.wikidata.org/wiki/Q19837>,
+        <https://www.wikidata.org/wiki/Q21708200>,
+        <https://www.wikidata.org/wiki/Q2283>,
+        <https://www.wikidata.org/wiki/Q2600559>,
+        <https://www.wikidata.org/wiki/Q28022144>,
+        <https://www.wikidata.org/wiki/Q30642>,
+        <https://www.wikidata.org/wiki/Q312>,
+        <https://www.wikidata.org/wiki/Q37156>,
+        <https://www.wikidata.org/wiki/Q4917>,
+        <https://www.wikidata.org/wiki/Q5142666>,
+        <https://www.wikidata.org/wiki/Q5270587>,
+        <https://www.wikidata.org/wiki/Q54872>,
+        <https://www.wikidata.org/wiki/Q603889>,
+        <https://www.wikidata.org/wiki/Q671488>,
+        <https://www.wikidata.org/wiki/Q773196>,
+        <https://www.wikidata.org/wiki/Q80993>,
+        <https://www.wikidata.org/wiki/Q816826>,
+        <https://www.wikidata.org/wiki/Q836575>,
+        <https://www.wikidata.org/wiki/Q870780>,
+        <https://www.wikidata.org/wiki/Q9366>,
+        <https://www.wikidata.org/wiki/Q94702>,
+        <https://www.wikidata.org/wiki/Q95>,
+        <https://www.wikidata.org/wiki/Q95726734> ;
+    vivo:hasAssociatedDocument <file:///res/COMP-474/lectures%5Cslides_01.pdf> ;
+    vivo:partOf ex:COMP-474 .
 
-<http://example.org/COMP-474/lecture3> a ex:Lecture ;
-    vivo:hasAssociatedDocument <file:///src/res/COMP-474/lectures%5Cslides_02.pdf> ;
-    vivo:partOf ex:COMP-474 ;
-    vivo:rank 3 .
+<http://example.org/COMP-474/slides02> a ex:Slides ;
+    ex:coversTopic <https://www.wikidata.org/wiki/Q1045785>,
+        <https://www.wikidata.org/wiki/Q11198541>,
+        <https://www.wikidata.org/wiki/Q114409>,
+        <https://www.wikidata.org/wiki/Q1185775>,
+        <https://www.wikidata.org/wiki/Q1205323>,
+        <https://www.wikidata.org/wiki/Q12418>,
+        <https://www.wikidata.org/wiki/Q1299>,
+        <https://www.wikidata.org/wiki/Q131476>,
+        <https://www.wikidata.org/wiki/Q1389366>,
+        <https://www.wikidata.org/wiki/Q1424987>,
+        <https://www.wikidata.org/wiki/Q150>,
+        <https://www.wikidata.org/wiki/Q15117072>,
+        <https://www.wikidata.org/wiki/Q16000421>,
+        <https://www.wikidata.org/wiki/Q1715>,
+        <https://www.wikidata.org/wiki/Q1751819>,
+        <https://www.wikidata.org/wiki/Q1778029>,
+        <https://www.wikidata.org/wiki/Q2013>,
+        <https://www.wikidata.org/wiki/Q234460>,
+        <https://www.wikidata.org/wiki/Q2479726>,
+        <https://www.wikidata.org/wiki/Q24826>,
+        <https://www.wikidata.org/wiki/Q251>,
+        <https://www.wikidata.org/wiki/Q279859>,
+        <https://www.wikidata.org/wiki/Q2913725>,
+        <https://www.wikidata.org/wiki/Q3225164>,
+        <https://www.wikidata.org/wiki/Q324254>,
+        <https://www.wikidata.org/wiki/Q33002955>,
+        <https://www.wikidata.org/wiki/Q3508244>,
+        <https://www.wikidata.org/wiki/Q3575678>,
+        <https://www.wikidata.org/wiki/Q3625572>,
+        <https://www.wikidata.org/wiki/Q387196>,
+        <https://www.wikidata.org/wiki/Q403161>,
+        <https://www.wikidata.org/wiki/Q424583>,
+        <https://www.wikidata.org/wiki/Q44044>,
+        <https://www.wikidata.org/wiki/Q4648827>,
+        <https://www.wikidata.org/wiki/Q4648862>,
+        <https://www.wikidata.org/wiki/Q465>,
+        <https://www.wikidata.org/wiki/Q52>,
+        <https://www.wikidata.org/wiki/Q54837>,
+        <https://www.wikidata.org/wiki/Q54872>,
+        <https://www.wikidata.org/wiki/Q584580>,
+        <https://www.wikidata.org/wiki/Q59>,
+        <https://www.wikidata.org/wiki/Q595971>,
+        <https://www.wikidata.org/wiki/Q60198>,
+        <https://www.wikidata.org/wiki/Q648625>,
+        <https://www.wikidata.org/wiki/Q7096138>,
+        <https://www.wikidata.org/wiki/Q754848>,
+        <https://www.wikidata.org/wiki/Q80993>,
+        <https://www.wikidata.org/wiki/Q826165>,
+        <https://www.wikidata.org/wiki/Q84>,
+        <https://www.wikidata.org/wiki/Q866>,
+        <https://www.wikidata.org/wiki/Q9366> ;
+    vivo:hasAssociatedDocument <file:///res/COMP-474/lectures%5Cslides_02.pdf> ;
+    vivo:partOf ex:COMP-474 .
 
-<http://example.org/COMP-474/lecture4> a ex:Lecture ;
-    vivo:hasAssociatedDocument <file:///src/res/COMP-474/lectures%5Cslides_03.pdf> ;
-    vivo:partOf ex:COMP-474 ;
-    vivo:rank 4 .
+<http://example.org/COMP-474/slides03> a ex:Slides ;
+    ex:coversTopic <https://www.wikidata.org/wiki/Q128745>,
+        <https://www.wikidata.org/wiki/Q1367488>,
+        <https://www.wikidata.org/wiki/Q1389366>,
+        <https://www.wikidata.org/wiki/Q1424987>,
+        <https://www.wikidata.org/wiki/Q16000421>,
+        <https://www.wikidata.org/wiki/Q1674879>,
+        <https://www.wikidata.org/wiki/Q17152639>,
+        <https://www.wikidata.org/wiki/Q171861>,
+        <https://www.wikidata.org/wiki/Q1751819>,
+        <https://www.wikidata.org/wiki/Q189248>,
+        <https://www.wikidata.org/wiki/Q19281804>,
+        <https://www.wikidata.org/wiki/Q2494121>,
+        <https://www.wikidata.org/wiki/Q3225164>,
+        <https://www.wikidata.org/wiki/Q3475322>,
+        <https://www.wikidata.org/wiki/Q3575678>,
+        <https://www.wikidata.org/wiki/Q4411666>,
+        <https://www.wikidata.org/wiki/Q515701>,
+        <https://www.wikidata.org/wiki/Q54872>,
+        <https://www.wikidata.org/wiki/Q624610>,
+        <https://www.wikidata.org/wiki/Q84>,
+        <https://www.wikidata.org/wiki/Q864>,
+        <https://www.wikidata.org/wiki/Q8819>,
+        <https://www.wikidata.org/wiki/Q930439>,
+        <https://www.wikidata.org/wiki/Q942695> ;
+    vivo:hasAssociatedDocument <file:///res/COMP-474/lectures%5Cslides_03.pdf> ;
+    vivo:partOf ex:COMP-474 .
 
-<http://example.org/COMP-474/lecture5> a ex:Lecture ;
-    vivo:hasAssociatedDocument <file:///src/res/COMP-474/lectures%5Cworksheet_01.pdf> ;
-    vivo:partOf ex:COMP-474 ;
-    vivo:rank 5 .
+<http://example.org/COMP-474/worksheet01> a ex:Worksheet ;
+    ex:coversTopic <https://www.wikidata.org/wiki/Q1367488>,
+        <https://www.wikidata.org/wiki/Q2013>,
+        <https://www.wikidata.org/wiki/Q201492>,
+        <https://www.wikidata.org/wiki/Q213660>,
+        <https://www.wikidata.org/wiki/Q326342>,
+        <https://www.wikidata.org/wiki/Q340>,
+        <https://www.wikidata.org/wiki/Q355> ;
+    vivo:hasAssociatedDocument <file:///res/COMP-474/lectures%5Cworksheet_01.pdf> ;
+    vivo:partOf ex:COMP-474 .
 
-<http://example.org/COMP-474/lecture6> a ex:Lecture ;
-    vivo:hasAssociatedDocument <file:///src/res/COMP-474/lectures%5Cworksheet_02.pdf> ;
-    vivo:partOf ex:COMP-474 ;
-    vivo:rank 6 .
+<http://example.org/COMP-474/worksheet02> a ex:Worksheet ;
+    ex:coversTopic <https://www.wikidata.org/wiki/Q11697560> ;
+    vivo:hasAssociatedDocument <file:///res/COMP-474/lectures%5Cworksheet_02.pdf> ;
+    vivo:partOf ex:COMP-474 .
 
-<http://example.org/COMP-474/lecture7> a ex:Lecture ;
-    vivo:hasAssociatedDocument <file:///src/res/COMP-474/lectures%5Cworksheet_03.pdf> ;
-    vivo:partOf ex:COMP-474 ;
-    vivo:rank 7 .
+<http://example.org/COMP-474/worksheet03> a ex:Worksheet ;
+    ex:coversTopic <https://www.wikidata.org/wiki/Q1164001>,
+        <https://www.wikidata.org/wiki/Q2013>,
+        <https://www.wikidata.org/wiki/Q2983587>,
+        <https://www.wikidata.org/wiki/Q326342>,
+        <https://www.wikidata.org/wiki/Q340>,
+        <https://www.wikidata.org/wiki/Q465>,
+        <https://www.wikidata.org/wiki/Q5413> ;
+    vivo:hasAssociatedDocument <file:///res/COMP-474/lectures%5Cworksheet_03.pdf> ;
+    vivo:partOf ex:COMP-474 .
 
-<http://example.org/COMP-479/lecture1> a ex:Lecture ;
-    ex:coversTopic dbpedia:Information_retrieval ;
-    vivo:hasAssociatedDocument <file:///src/res/COMP-479/lectures%5Creading_reading01.pdf>,
-        <file:///src/res/COMP-479/lectures%5Cslides_01.pdf>,
-        <file:///src/res/COMP-479/lectures%5Cworksheet_01.pdf> ;
-    vivo:partOf ex:COMP-479 ;
-    vivo:rank 1 .
+<http://example.org/COMP-479/readingreading01> a ex:Reading ;
+    ex:coversTopic <https://www.wikidata.org/wiki/Q2494121>,
+        <https://www.wikidata.org/wiki/Q26876>,
+        <https://www.wikidata.org/wiki/Q460475> ;
+    vivo:hasAssociatedDocument <file:///res/COMP-479/lectures%5Creading_reading01.pdf> ;
+    vivo:partOf ex:COMP-479 .
 
-<http://example.org/COMP-479/lecture2> a ex:Lecture ;
-    ex:coversTopic dbpedia:Web_search_engine ;
-    vivo:hasAssociatedDocument <file:///src/res/COMP-479/lectures%5Creading_reading02.pdf>,
-        <file:///src/res/COMP-479/lectures%5Cslides_01intro.pdf>,
-        <file:///src/res/COMP-479/lectures%5Cslides_02.pdf>,
-        <file:///src/res/COMP-479/lectures%5Cworksheet_02.pdf> ;
-    vivo:partOf ex:COMP-479 ;
-    vivo:rank 2 .
+<http://example.org/COMP-479/slides01intro> a ex:Slides ;
+    ex:coversTopic <https://www.wikidata.org/wiki/Q1048>,
+        <https://www.wikidata.org/wiki/Q1100552>,
+        <https://www.wikidata.org/wiki/Q11652>,
+        <https://www.wikidata.org/wiki/Q1414645>,
+        <https://www.wikidata.org/wiki/Q1663>,
+        <https://www.wikidata.org/wiki/Q172248>,
+        <https://www.wikidata.org/wiki/Q173183>,
+        <https://www.wikidata.org/wiki/Q1747689>,
+        <https://www.wikidata.org/wiki/Q1806883>,
+        <https://www.wikidata.org/wiki/Q188751>,
+        <https://www.wikidata.org/wiki/Q2283>,
+        <https://www.wikidata.org/wiki/Q2293072>,
+        <https://www.wikidata.org/wiki/Q235627>,
+        <https://www.wikidata.org/wiki/Q2447542>,
+        <https://www.wikidata.org/wiki/Q275297>,
+        <https://www.wikidata.org/wiki/Q34925>,
+        <https://www.wikidata.org/wiki/Q360920>,
+        <https://www.wikidata.org/wiki/Q379652>,
+        <https://www.wikidata.org/wiki/Q4036474>,
+        <https://www.wikidata.org/wiki/Q41506>,
+        <https://www.wikidata.org/wiki/Q4772862>,
+        <https://www.wikidata.org/wiki/Q51673>,
+        <https://www.wikidata.org/wiki/Q635>,
+        <https://www.wikidata.org/wiki/Q665617>,
+        <https://www.wikidata.org/wiki/Q734950>,
+        <https://www.wikidata.org/wiki/Q76568>,
+        <https://www.wikidata.org/wiki/Q7989031> ;
+    vivo:hasAssociatedDocument <file:///res/COMP-479/lectures%5Cslides_01intro.pdf> ;
+    vivo:partOf ex:COMP-479 .
 
-<http://example.org/COMP-479/lecture3> a ex:Lecture ;
-    vivo:hasAssociatedDocument <file:///src/res/COMP-479/lectures%5Cslides_02voc.pdf> ;
-    vivo:partOf ex:COMP-479 ;
-    vivo:rank 3 .
+<http://example.org/COMP-479/slides02voc> a ex:Slides ;
+    ex:coversTopic <https://www.wikidata.org/wiki/Q1132051>,
+        <https://www.wikidata.org/wiki/Q1152226>,
+        <https://www.wikidata.org/wiki/Q11975>,
+        <https://www.wikidata.org/wiki/Q1321>,
+        <https://www.wikidata.org/wiki/Q1375963>,
+        <https://www.wikidata.org/wiki/Q13955>,
+        <https://www.wikidata.org/wiki/Q1458203>,
+        <https://www.wikidata.org/wiki/Q150>,
+        <https://www.wikidata.org/wiki/Q1502023>,
+        <https://www.wikidata.org/wiki/Q152057>,
+        <https://www.wikidata.org/wiki/Q155169>,
+        <https://www.wikidata.org/wiki/Q17081579>,
+        <https://www.wikidata.org/wiki/Q1726>,
+        <https://www.wikidata.org/wiki/Q173183>,
+        <https://www.wikidata.org/wiki/Q179797>,
+        <https://www.wikidata.org/wiki/Q1860>,
+        <https://www.wikidata.org/wiki/Q187931>,
+        <https://www.wikidata.org/wiki/Q204470>,
+        <https://www.wikidata.org/wiki/Q208902>,
+        <https://www.wikidata.org/wiki/Q2185969>,
+        <https://www.wikidata.org/wiki/Q2293072>,
+        <https://www.wikidata.org/wiki/Q262>,
+        <https://www.wikidata.org/wiki/Q26566>,
+        <https://www.wikidata.org/wiki/Q2831>,
+        <https://www.wikidata.org/wiki/Q28622>,
+        <https://www.wikidata.org/wiki/Q2918584>,
+        <https://www.wikidata.org/wiki/Q35>,
+        <https://www.wikidata.org/wiki/Q4036498>,
+        <https://www.wikidata.org/wiki/Q48332>,
+        <https://www.wikidata.org/wiki/Q49210>,
+        <https://www.wikidata.org/wiki/Q4970767>,
+        <https://www.wikidata.org/wiki/Q62>,
+        <https://www.wikidata.org/wiki/Q65>,
+        <https://www.wikidata.org/wiki/Q665617>,
+        <https://www.wikidata.org/wiki/Q7850>,
+        <https://www.wikidata.org/wiki/Q7989031>,
+        <https://www.wikidata.org/wiki/Q80978>,
+        <https://www.wikidata.org/wiki/Q849751>,
+        <https://www.wikidata.org/wiki/Q8819>,
+        <https://www.wikidata.org/wiki/Q95> ;
+    vivo:hasAssociatedDocument <file:///res/COMP-479/lectures%5Cslides_02voc.pdf> ;
+    vivo:partOf ex:COMP-479 .
 
-<http://example.org/COMP-479/lecture4> a ex:Lecture ;
-    vivo:hasAssociatedDocument <file:///src/res/COMP-479/lectures%5Cslides_03dict.pdf> ;
-    vivo:partOf ex:COMP-479 ;
-    vivo:rank 4 .
+<http://example.org/COMP-479/slides03dict> a ex:Slides ;
+    ex:coversTopic <https://www.wikidata.org/wiki/Q1048>,
+        <https://www.wikidata.org/wiki/Q11261>,
+        <https://www.wikidata.org/wiki/Q11917>,
+        <https://www.wikidata.org/wiki/Q141495>,
+        <https://www.wikidata.org/wiki/Q150>,
+        <https://www.wikidata.org/wiki/Q1502023>,
+        <https://www.wikidata.org/wiki/Q1726>,
+        <https://www.wikidata.org/wiki/Q1860>,
+        <https://www.wikidata.org/wiki/Q188>,
+        <https://www.wikidata.org/wiki/Q2088390>,
+        <https://www.wikidata.org/wiki/Q2524992>,
+        <https://www.wikidata.org/wiki/Q33>,
+        <https://www.wikidata.org/wiki/Q34>,
+        <https://www.wikidata.org/wiki/Q496939>,
+        <https://www.wikidata.org/wiki/Q4973304>,
+        <https://www.wikidata.org/wiki/Q541854>,
+        <https://www.wikidata.org/wiki/Q55>,
+        <https://www.wikidata.org/wiki/Q620516>,
+        <https://www.wikidata.org/wiki/Q665617>,
+        <https://www.wikidata.org/wiki/Q782543>,
+        <https://www.wikidata.org/wiki/Q7850>,
+        <https://www.wikidata.org/wiki/Q835922>,
+        <https://www.wikidata.org/wiki/Q8366>,
+        <https://www.wikidata.org/wiki/Q837518>,
+        <https://www.wikidata.org/wiki/Q92832>,
+        <https://www.wikidata.org/wiki/Q95> ;
+    vivo:hasAssociatedDocument <file:///res/COMP-479/lectures%5Cslides_03dict.pdf> ;
+    vivo:partOf ex:COMP-479 .
 
-<http://example.org/COMP-479/lecture5> a ex:Lecture ;
-    vivo:hasAssociatedDocument <file:///src/res/COMP-479/lectures%5Cworksheet_01.pdf> ;
-    vivo:partOf ex:COMP-479 ;
-    vivo:rank 5 .
+<http://example.org/COMP-479/worksheet01> a ex:Worksheet ;
+    ex:coversTopic <https://www.wikidata.org/wiki/Q130879>,
+        <https://www.wikidata.org/wiki/Q1635410>,
+        <https://www.wikidata.org/wiki/Q18631903>,
+        <https://www.wikidata.org/wiki/Q189722>,
+        <https://www.wikidata.org/wiki/Q30642> ;
+    vivo:hasAssociatedDocument <file:///res/COMP-479/lectures%5Cworksheet_01.pdf> ;
+    vivo:partOf ex:COMP-479 .
 
-<http://example.org/COMP-479/lecture6> a ex:Lecture ;
-    vivo:hasAssociatedDocument <file:///src/res/COMP-479/lectures%5Cworksheet_02.pdf> ;
-    vivo:partOf ex:COMP-479 ;
-    vivo:rank 6 .
+<http://example.org/COMP-479/worksheet02> a ex:Worksheet ;
+    ex:coversTopic <https://www.wikidata.org/wiki/Q130879>,
+        <https://www.wikidata.org/wiki/Q1635410>,
+        <https://www.wikidata.org/wiki/Q180160>,
+        <https://www.wikidata.org/wiki/Q3757> ;
+    vivo:hasAssociatedDocument <file:///res/COMP-479/lectures%5Cworksheet_02.pdf> ;
+    vivo:partOf ex:COMP-479 .
 
-<http://example.org/COMP-479/lecture7> a ex:Lecture ;
-    vivo:hasAssociatedDocument <file:///src/res/COMP-479/lectures%5Cworksheet_03.pdf> ;
-    vivo:partOf ex:COMP-479 ;
-    vivo:rank 7 .
+<http://example.org/COMP-479/worksheet03> a ex:Worksheet ;
+    vivo:hasAssociatedDocument <file:///res/COMP-479/lectures%5Cworksheet_03.pdf> ;
+    vivo:partOf ex:COMP-479 .
 
 <http://example.org/Student/Braun,Courtenay> a vivo:Student ;
     ex:HasEmail "co_bra@live.concordia.ca"^^xsd:string ;
@@ -143,6 +345,10 @@ vivo:University a rdfs:Class .
     foaf:name "Ilise Ramsey"^^xsd:string .
 
 ex:coversTopic a rdf:Property ;
+    rdfs:domain ex:Lecture ;
+    rdfs:range dbpedia:Resource .
+
+ex:mentionsTopic a rdf:Property ;
     rdfs:domain ex:Lecture ;
     rdfs:range dbpedia:Resource .
 
@@ -11854,33 +12060,263 @@ Artificial Intelligence Applications""",
         <https://csu.qc.ca/clubs/cfu>,
         <https://www.concordia.ca/finearts/creative-arts-therapies/research/ahrc.html> .
 
-<file:///src/res/COMP-474/lectures%5Creading_reading01.pdf> a ex:LectureReading ;
-    ex:coversTopic dbpedia:Intelligent_system .
+<file:///res/COMP-474/lectures%5Creading_reading01.pdf> a ex:LectureReading ;
+    ex:mentionsTopic <https://www.wikidata.org/wiki/Q2494121>,
+        <https://www.wikidata.org/wiki/Q26876>,
+        <https://www.wikidata.org/wiki/Q460475> .
 
-<file:///src/res/COMP-474/lectures%5Creading_reading02.pdf> ex:coversTopic dbpedia:Knowledge_representation_and_reasoning .
+<file:///res/COMP-474/lectures%5Cslides_01.pdf> a ex:LectureSlides ;
+    ex:mentionsTopic <https://www.wikidata.org/wiki/Q1164001>,
+        <https://www.wikidata.org/wiki/Q1205323>,
+        <https://www.wikidata.org/wiki/Q150>,
+        <https://www.wikidata.org/wiki/Q1539155>,
+        <https://www.wikidata.org/wiki/Q1550345>,
+        <https://www.wikidata.org/wiki/Q16752102>,
+        <https://www.wikidata.org/wiki/Q174198>,
+        <https://www.wikidata.org/wiki/Q1860>,
+        <https://www.wikidata.org/wiki/Q197536>,
+        <https://www.wikidata.org/wiki/Q19837>,
+        <https://www.wikidata.org/wiki/Q21708200>,
+        <https://www.wikidata.org/wiki/Q2283>,
+        <https://www.wikidata.org/wiki/Q2600559>,
+        <https://www.wikidata.org/wiki/Q28022144>,
+        <https://www.wikidata.org/wiki/Q30642>,
+        <https://www.wikidata.org/wiki/Q312>,
+        <https://www.wikidata.org/wiki/Q37156>,
+        <https://www.wikidata.org/wiki/Q4917>,
+        <https://www.wikidata.org/wiki/Q5142666>,
+        <https://www.wikidata.org/wiki/Q5270587>,
+        <https://www.wikidata.org/wiki/Q54872>,
+        <https://www.wikidata.org/wiki/Q603889>,
+        <https://www.wikidata.org/wiki/Q671488>,
+        <https://www.wikidata.org/wiki/Q773196>,
+        <https://www.wikidata.org/wiki/Q80993>,
+        <https://www.wikidata.org/wiki/Q816826>,
+        <https://www.wikidata.org/wiki/Q836575>,
+        <https://www.wikidata.org/wiki/Q870780>,
+        <https://www.wikidata.org/wiki/Q9366>,
+        <https://www.wikidata.org/wiki/Q94702>,
+        <https://www.wikidata.org/wiki/Q95>,
+        <https://www.wikidata.org/wiki/Q95726734> .
 
-<file:///src/res/COMP-474/lectures%5Cslides_03.pdf> a ex:LectureSlides .
+<file:///res/COMP-474/lectures%5Cslides_02.pdf> a ex:LectureSlides ;
+    ex:mentionsTopic <https://www.wikidata.org/wiki/Q1045785>,
+        <https://www.wikidata.org/wiki/Q11198541>,
+        <https://www.wikidata.org/wiki/Q114409>,
+        <https://www.wikidata.org/wiki/Q1185775>,
+        <https://www.wikidata.org/wiki/Q1205323>,
+        <https://www.wikidata.org/wiki/Q12418>,
+        <https://www.wikidata.org/wiki/Q1299>,
+        <https://www.wikidata.org/wiki/Q131476>,
+        <https://www.wikidata.org/wiki/Q1389366>,
+        <https://www.wikidata.org/wiki/Q1424987>,
+        <https://www.wikidata.org/wiki/Q150>,
+        <https://www.wikidata.org/wiki/Q15117072>,
+        <https://www.wikidata.org/wiki/Q16000421>,
+        <https://www.wikidata.org/wiki/Q1715>,
+        <https://www.wikidata.org/wiki/Q1751819>,
+        <https://www.wikidata.org/wiki/Q1778029>,
+        <https://www.wikidata.org/wiki/Q2013>,
+        <https://www.wikidata.org/wiki/Q234460>,
+        <https://www.wikidata.org/wiki/Q2479726>,
+        <https://www.wikidata.org/wiki/Q24826>,
+        <https://www.wikidata.org/wiki/Q251>,
+        <https://www.wikidata.org/wiki/Q279859>,
+        <https://www.wikidata.org/wiki/Q2913725>,
+        <https://www.wikidata.org/wiki/Q3225164>,
+        <https://www.wikidata.org/wiki/Q324254>,
+        <https://www.wikidata.org/wiki/Q33002955>,
+        <https://www.wikidata.org/wiki/Q3508244>,
+        <https://www.wikidata.org/wiki/Q3575678>,
+        <https://www.wikidata.org/wiki/Q3625572>,
+        <https://www.wikidata.org/wiki/Q387196>,
+        <https://www.wikidata.org/wiki/Q403161>,
+        <https://www.wikidata.org/wiki/Q424583>,
+        <https://www.wikidata.org/wiki/Q44044>,
+        <https://www.wikidata.org/wiki/Q4648827>,
+        <https://www.wikidata.org/wiki/Q4648862>,
+        <https://www.wikidata.org/wiki/Q465>,
+        <https://www.wikidata.org/wiki/Q52>,
+        <https://www.wikidata.org/wiki/Q54837>,
+        <https://www.wikidata.org/wiki/Q54872>,
+        <https://www.wikidata.org/wiki/Q584580>,
+        <https://www.wikidata.org/wiki/Q59>,
+        <https://www.wikidata.org/wiki/Q595971>,
+        <https://www.wikidata.org/wiki/Q60198>,
+        <https://www.wikidata.org/wiki/Q648625>,
+        <https://www.wikidata.org/wiki/Q7096138>,
+        <https://www.wikidata.org/wiki/Q754848>,
+        <https://www.wikidata.org/wiki/Q80993>,
+        <https://www.wikidata.org/wiki/Q826165>,
+        <https://www.wikidata.org/wiki/Q84>,
+        <https://www.wikidata.org/wiki/Q866>,
+        <https://www.wikidata.org/wiki/Q9366> .
 
-<file:///src/res/COMP-474/lectures%5Cworksheet_03.pdf> a ex:LectureWorksheet .
+<file:///res/COMP-474/lectures%5Cslides_03.pdf> a ex:LectureSlides ;
+    ex:mentionsTopic <https://www.wikidata.org/wiki/Q128745>,
+        <https://www.wikidata.org/wiki/Q1367488>,
+        <https://www.wikidata.org/wiki/Q1389366>,
+        <https://www.wikidata.org/wiki/Q1424987>,
+        <https://www.wikidata.org/wiki/Q16000421>,
+        <https://www.wikidata.org/wiki/Q1674879>,
+        <https://www.wikidata.org/wiki/Q17152639>,
+        <https://www.wikidata.org/wiki/Q171861>,
+        <https://www.wikidata.org/wiki/Q1751819>,
+        <https://www.wikidata.org/wiki/Q189248>,
+        <https://www.wikidata.org/wiki/Q19281804>,
+        <https://www.wikidata.org/wiki/Q2494121>,
+        <https://www.wikidata.org/wiki/Q3225164>,
+        <https://www.wikidata.org/wiki/Q3475322>,
+        <https://www.wikidata.org/wiki/Q3575678>,
+        <https://www.wikidata.org/wiki/Q4411666>,
+        <https://www.wikidata.org/wiki/Q515701>,
+        <https://www.wikidata.org/wiki/Q54872>,
+        <https://www.wikidata.org/wiki/Q624610>,
+        <https://www.wikidata.org/wiki/Q84>,
+        <https://www.wikidata.org/wiki/Q864>,
+        <https://www.wikidata.org/wiki/Q8819>,
+        <https://www.wikidata.org/wiki/Q930439>,
+        <https://www.wikidata.org/wiki/Q942695> .
 
-<file:///src/res/COMP-479/lectures%5Creading_reading01.pdf> a ex:LectureReading ;
-    ex:coversTopic dbpedia:Information_retrieval .
+<file:///res/COMP-474/lectures%5Cworksheet_01.pdf> a ex:LectureWorksheet ;
+    ex:mentionsTopic <https://www.wikidata.org/wiki/Q1367488>,
+        <https://www.wikidata.org/wiki/Q2013>,
+        <https://www.wikidata.org/wiki/Q201492>,
+        <https://www.wikidata.org/wiki/Q213660>,
+        <https://www.wikidata.org/wiki/Q326342>,
+        <https://www.wikidata.org/wiki/Q340>,
+        <https://www.wikidata.org/wiki/Q355> .
 
-<file:///src/res/COMP-479/lectures%5Creading_reading02.pdf> ex:coversTopic dbpedia:Web_search_engine .
+<file:///res/COMP-474/lectures%5Cworksheet_02.pdf> a ex:LectureWorksheet ;
+    ex:mentionsTopic <https://www.wikidata.org/wiki/Q11697560> .
 
-<file:///src/res/COMP-479/lectures%5Cslides_01.pdf> a ex:LectureSlides ;
-    ex:coversTopic dbpedia:Information_retrieval .
+<file:///res/COMP-474/lectures%5Cworksheet_03.pdf> a ex:LectureWorksheet ;
+    ex:mentionsTopic <https://www.wikidata.org/wiki/Q1164001>,
+        <https://www.wikidata.org/wiki/Q2013>,
+        <https://www.wikidata.org/wiki/Q2983587>,
+        <https://www.wikidata.org/wiki/Q326342>,
+        <https://www.wikidata.org/wiki/Q340>,
+        <https://www.wikidata.org/wiki/Q465>,
+        <https://www.wikidata.org/wiki/Q5413> .
 
-<file:///src/res/COMP-479/lectures%5Cslides_01intro.pdf> a ex:LectureSlides .
+<file:///res/COMP-479/lectures%5Creading_reading01.pdf> a ex:LectureReading ;
+    ex:mentionsTopic <https://www.wikidata.org/wiki/Q2494121>,
+        <https://www.wikidata.org/wiki/Q26876>,
+        <https://www.wikidata.org/wiki/Q460475> .
 
-<file:///src/res/COMP-479/lectures%5Cslides_02.pdf> a ex:LectureSlides ;
-    ex:coversTopic dbpedia:Web_search_engine .
+<file:///res/COMP-479/lectures%5Cslides_01intro.pdf> a ex:LectureSlides ;
+    ex:mentionsTopic <https://www.wikidata.org/wiki/Q1048>,
+        <https://www.wikidata.org/wiki/Q1100552>,
+        <https://www.wikidata.org/wiki/Q11652>,
+        <https://www.wikidata.org/wiki/Q1414645>,
+        <https://www.wikidata.org/wiki/Q1663>,
+        <https://www.wikidata.org/wiki/Q172248>,
+        <https://www.wikidata.org/wiki/Q173183>,
+        <https://www.wikidata.org/wiki/Q1747689>,
+        <https://www.wikidata.org/wiki/Q1806883>,
+        <https://www.wikidata.org/wiki/Q188751>,
+        <https://www.wikidata.org/wiki/Q2283>,
+        <https://www.wikidata.org/wiki/Q2293072>,
+        <https://www.wikidata.org/wiki/Q235627>,
+        <https://www.wikidata.org/wiki/Q2447542>,
+        <https://www.wikidata.org/wiki/Q275297>,
+        <https://www.wikidata.org/wiki/Q34925>,
+        <https://www.wikidata.org/wiki/Q360920>,
+        <https://www.wikidata.org/wiki/Q379652>,
+        <https://www.wikidata.org/wiki/Q4036474>,
+        <https://www.wikidata.org/wiki/Q41506>,
+        <https://www.wikidata.org/wiki/Q4772862>,
+        <https://www.wikidata.org/wiki/Q51673>,
+        <https://www.wikidata.org/wiki/Q635>,
+        <https://www.wikidata.org/wiki/Q665617>,
+        <https://www.wikidata.org/wiki/Q734950>,
+        <https://www.wikidata.org/wiki/Q76568>,
+        <https://www.wikidata.org/wiki/Q7989031> .
 
-<file:///src/res/COMP-479/lectures%5Cslides_02voc.pdf> a ex:LectureSlides .
+<file:///res/COMP-479/lectures%5Cslides_02voc.pdf> a ex:LectureSlides ;
+    ex:mentionsTopic <https://www.wikidata.org/wiki/Q1132051>,
+        <https://www.wikidata.org/wiki/Q1152226>,
+        <https://www.wikidata.org/wiki/Q11975>,
+        <https://www.wikidata.org/wiki/Q1321>,
+        <https://www.wikidata.org/wiki/Q1375963>,
+        <https://www.wikidata.org/wiki/Q13955>,
+        <https://www.wikidata.org/wiki/Q1458203>,
+        <https://www.wikidata.org/wiki/Q150>,
+        <https://www.wikidata.org/wiki/Q1502023>,
+        <https://www.wikidata.org/wiki/Q152057>,
+        <https://www.wikidata.org/wiki/Q155169>,
+        <https://www.wikidata.org/wiki/Q17081579>,
+        <https://www.wikidata.org/wiki/Q1726>,
+        <https://www.wikidata.org/wiki/Q173183>,
+        <https://www.wikidata.org/wiki/Q179797>,
+        <https://www.wikidata.org/wiki/Q1860>,
+        <https://www.wikidata.org/wiki/Q187931>,
+        <https://www.wikidata.org/wiki/Q204470>,
+        <https://www.wikidata.org/wiki/Q208902>,
+        <https://www.wikidata.org/wiki/Q2185969>,
+        <https://www.wikidata.org/wiki/Q2293072>,
+        <https://www.wikidata.org/wiki/Q262>,
+        <https://www.wikidata.org/wiki/Q26566>,
+        <https://www.wikidata.org/wiki/Q2831>,
+        <https://www.wikidata.org/wiki/Q28622>,
+        <https://www.wikidata.org/wiki/Q2918584>,
+        <https://www.wikidata.org/wiki/Q35>,
+        <https://www.wikidata.org/wiki/Q4036498>,
+        <https://www.wikidata.org/wiki/Q48332>,
+        <https://www.wikidata.org/wiki/Q49210>,
+        <https://www.wikidata.org/wiki/Q4970767>,
+        <https://www.wikidata.org/wiki/Q62>,
+        <https://www.wikidata.org/wiki/Q65>,
+        <https://www.wikidata.org/wiki/Q665617>,
+        <https://www.wikidata.org/wiki/Q7850>,
+        <https://www.wikidata.org/wiki/Q7989031>,
+        <https://www.wikidata.org/wiki/Q80978>,
+        <https://www.wikidata.org/wiki/Q849751>,
+        <https://www.wikidata.org/wiki/Q8819>,
+        <https://www.wikidata.org/wiki/Q95> .
 
-<file:///src/res/COMP-479/lectures%5Cslides_03dict.pdf> a ex:LectureSlides .
+<file:///res/COMP-479/lectures%5Cslides_03dict.pdf> a ex:LectureSlides ;
+    ex:mentionsTopic <https://www.wikidata.org/wiki/Q1048>,
+        <https://www.wikidata.org/wiki/Q11261>,
+        <https://www.wikidata.org/wiki/Q11917>,
+        <https://www.wikidata.org/wiki/Q141495>,
+        <https://www.wikidata.org/wiki/Q150>,
+        <https://www.wikidata.org/wiki/Q1502023>,
+        <https://www.wikidata.org/wiki/Q1726>,
+        <https://www.wikidata.org/wiki/Q1860>,
+        <https://www.wikidata.org/wiki/Q188>,
+        <https://www.wikidata.org/wiki/Q2088390>,
+        <https://www.wikidata.org/wiki/Q2524992>,
+        <https://www.wikidata.org/wiki/Q33>,
+        <https://www.wikidata.org/wiki/Q34>,
+        <https://www.wikidata.org/wiki/Q496939>,
+        <https://www.wikidata.org/wiki/Q4973304>,
+        <https://www.wikidata.org/wiki/Q541854>,
+        <https://www.wikidata.org/wiki/Q55>,
+        <https://www.wikidata.org/wiki/Q620516>,
+        <https://www.wikidata.org/wiki/Q665617>,
+        <https://www.wikidata.org/wiki/Q782543>,
+        <https://www.wikidata.org/wiki/Q7850>,
+        <https://www.wikidata.org/wiki/Q835922>,
+        <https://www.wikidata.org/wiki/Q8366>,
+        <https://www.wikidata.org/wiki/Q837518>,
+        <https://www.wikidata.org/wiki/Q92832>,
+        <https://www.wikidata.org/wiki/Q95> .
 
-<file:///src/res/COMP-479/lectures%5Cworksheet_03.pdf> a ex:LectureWorksheet .
+<file:///res/COMP-479/lectures%5Cworksheet_01.pdf> a ex:LectureWorksheet ;
+    ex:mentionsTopic <https://www.wikidata.org/wiki/Q130879>,
+        <https://www.wikidata.org/wiki/Q1635410>,
+        <https://www.wikidata.org/wiki/Q18631903>,
+        <https://www.wikidata.org/wiki/Q189722>,
+        <https://www.wikidata.org/wiki/Q30642> .
+
+<file:///res/COMP-479/lectures%5Cworksheet_02.pdf> a ex:LectureWorksheet ;
+    ex:mentionsTopic <https://www.wikidata.org/wiki/Q130879>,
+        <https://www.wikidata.org/wiki/Q1635410>,
+        <https://www.wikidata.org/wiki/Q180160>,
+        <https://www.wikidata.org/wiki/Q3757> .
+
+<file:///res/COMP-479/lectures%5Cworksheet_03.pdf> a ex:LectureWorksheet .
 
 <http://example.org/vocab/ACTU_486> a <http://example.org/vocab/ACTU> ;
     vivo:Grade "C-" ;
@@ -11946,28 +12382,488 @@ Artificial Intelligence Applications""",
     vivo:Grade "C" ;
     vivo:Semester vivo:Summer2022 .
 
-<file:///src/res/COMP-474/lectures%5Cslides_01.pdf> a ex:LectureSlides ;
-    ex:coversTopic dbpedia:Intelligent_system .
+<https://www.wikidata.org/wiki/Q1045785> rdfs:label "Semantic Networks" .
 
-<file:///src/res/COMP-474/lectures%5Cslides_02.pdf> a ex:LectureSlides ;
-    ex:coversTopic dbpedia:Knowledge_representation_and_reasoning .
+<https://www.wikidata.org/wiki/Q1100552> rdfs:label "Cleopatra" .
 
-<file:///src/res/COMP-474/lectures%5Cworksheet_01.pdf> a ex:LectureWorksheet ;
-    ex:coversTopic dbpedia:Intelligent_system .
+<https://www.wikidata.org/wiki/Q11198541> rdfs:label "Expose" .
 
-<file:///src/res/COMP-474/lectures%5Cworksheet_02.pdf> a ex:LectureWorksheet ;
-    ex:coversTopic dbpedia:Knowledge_representation_and_reasoning .
+<https://www.wikidata.org/wiki/Q11261> rdfs:label "MS Word" .
 
-<file:///src/res/COMP-479/lectures%5Cworksheet_01.pdf> a ex:LectureWorksheet ;
-    ex:coversTopic dbpedia:Information_retrieval .
+<https://www.wikidata.org/wiki/Q1132051> rdfs:label "¦" .
 
-<file:///src/res/COMP-479/lectures%5Cworksheet_02.pdf> a ex:LectureWorksheet ;
-    ex:coversTopic dbpedia:Web_search_engine .
+<https://www.wikidata.org/wiki/Q114409> rdfs:label "Turtle" .
+
+<https://www.wikidata.org/wiki/Q1152226> rdfs:label "21" .
+
+<https://www.wikidata.org/wiki/Q11652> rdfs:label "freq" .
+
+<https://www.wikidata.org/wiki/Q11697560> rdfs:label "FOAF",
+        "Friend-of-a-Friend" .
+
+<https://www.wikidata.org/wiki/Q1185775> rdfs:label "Frame Problem" .
+
+<https://www.wikidata.org/wiki/Q11917> rdfs:label "Geneva" .
+
+<https://www.wikidata.org/wiki/Q11975> rdfs:label "Britney Spears" .
+
+<https://www.wikidata.org/wiki/Q12418> rdfs:label "Mona Lisa" .
+
+<https://www.wikidata.org/wiki/Q128745> rdfs:label "Le palais" .
+
+<https://www.wikidata.org/wiki/Q1299> rdfs:label "Beatles" .
+
+<https://www.wikidata.org/wiki/Q131476> rdfs:label "Graphs" .
+
+<https://www.wikidata.org/wiki/Q1321> rdfs:label "Spanish" .
+
+<https://www.wikidata.org/wiki/Q1375963> rdfs:label "←" .
+
+<https://www.wikidata.org/wiki/Q13955> rdfs:label "Arabic" .
+
+<https://www.wikidata.org/wiki/Q1414645> rdfs:label "0s" .
+
+<https://www.wikidata.org/wiki/Q141495> rdfs:label "Optimal" .
+
+<https://www.wikidata.org/wiki/Q1458203> rdfs:label "transcription" .
+
+<https://www.wikidata.org/wiki/Q15117072> rdfs:label "WWW" .
+
+<https://www.wikidata.org/wiki/Q152057> rdfs:label "Bp" .
+
+<https://www.wikidata.org/wiki/Q1539155> rdfs:label "UIMA" .
+
+<https://www.wikidata.org/wiki/Q1550345> rdfs:label "1.14" .
+
+<https://www.wikidata.org/wiki/Q155169> rdfs:label "21" .
+
+<https://www.wikidata.org/wiki/Q1663> rdfs:label "Split" .
+
+<https://www.wikidata.org/wiki/Q1674879> rdfs:label "IRI" .
+
+<https://www.wikidata.org/wiki/Q16752102> rdfs:label "Cortana" .
+
+<https://www.wikidata.org/wiki/Q17081579> rdfs:label "MLN" .
+
+<https://www.wikidata.org/wiki/Q1715> rdfs:label "Hanover" .
+
+<https://www.wikidata.org/wiki/Q17152639> rdfs:label "thesauri" .
+
+<https://www.wikidata.org/wiki/Q171861> rdfs:label "The Artist" .
+
+<https://www.wikidata.org/wiki/Q172248> rdfs:label "Brutus" .
+
+<https://www.wikidata.org/wiki/Q174198> rdfs:label "Gartner" .
+
+<https://www.wikidata.org/wiki/Q1747689> rdfs:label "Romans" .
+
+<https://www.wikidata.org/wiki/Q1778029> rdfs:label "SHRDLU" .
+
+<https://www.wikidata.org/wiki/Q179797> rdfs:label "Thesauri" .
+
+<https://www.wikidata.org/wiki/Q180160> rdfs:label "metadata" .
+
+<https://www.wikidata.org/wiki/Q1806883> rdfs:label "Latent Semantic Indexing" .
+
+<https://www.wikidata.org/wiki/Q18631903> rdfs:label "Edward Loper" .
+
+<https://www.wikidata.org/wiki/Q187931> rdfs:label "Phrase" .
+
+<https://www.wikidata.org/wiki/Q188> rdfs:label "German" .
+
+<https://www.wikidata.org/wiki/Q188751> rdfs:label "Caesar" .
+
+<https://www.wikidata.org/wiki/Q189248> rdfs:label "§" .
+
+<https://www.wikidata.org/wiki/Q189722> rdfs:label "Emacs" .
+
+<https://www.wikidata.org/wiki/Q19281804> rdfs:label "Json" .
+
+<https://www.wikidata.org/wiki/Q197536> rdfs:label "Deep Learning" .
+
+<https://www.wikidata.org/wiki/Q19837> rdfs:label "Steve Jobs" .
+
+<https://www.wikidata.org/wiki/Q201492> rdfs:label "McGill",
+        "McGill University" .
+
+<https://www.wikidata.org/wiki/Q204470> rdfs:label "18" .
+
+<https://www.wikidata.org/wiki/Q2088390> rdfs:label "Spelling" .
+
+<https://www.wikidata.org/wiki/Q208902> rdfs:label "19" .
+
+<https://www.wikidata.org/wiki/Q213660> rdfs:label "LinkedIn" .
+
+<https://www.wikidata.org/wiki/Q21708200> rdfs:label "OpenAI" .
+
+<https://www.wikidata.org/wiki/Q2185969> rdfs:label "MLN" .
+
+<https://www.wikidata.org/wiki/Q234460> rdfs:label "Text" .
+
+<https://www.wikidata.org/wiki/Q235627> rdfs:label "Calpurnia" .
+
+<https://www.wikidata.org/wiki/Q2447542> rdfs:label "Hamlet" .
+
+<https://www.wikidata.org/wiki/Q2479726> rdfs:label "Graph" .
+
+<https://www.wikidata.org/wiki/Q24826> rdfs:label "Liverpool" .
+
+<https://www.wikidata.org/wiki/Q251> rdfs:label "Java" .
+
+<https://www.wikidata.org/wiki/Q2524992> rdfs:label "Cormen" .
+
+<https://www.wikidata.org/wiki/Q2600559> rdfs:label "POWER7" .
+
+<https://www.wikidata.org/wiki/Q262> rdfs:label "Algeria" .
+
+<https://www.wikidata.org/wiki/Q26566> rdfs:label "Stanford Ovshinsky" .
+
+<https://www.wikidata.org/wiki/Q275297> rdfs:label "Brutus" .
+
+<https://www.wikidata.org/wiki/Q279859> rdfs:label "A1" .
+
+<https://www.wikidata.org/wiki/Q28022144> rdfs:label "Amazon Alexa" .
+
+<https://www.wikidata.org/wiki/Q2831> rdfs:label "Michael Jackson" .
+
+<https://www.wikidata.org/wiki/Q28622> rdfs:label "Î" .
+
+<https://www.wikidata.org/wiki/Q2913725> rdfs:label "The Next Web" .
+
+<https://www.wikidata.org/wiki/Q2918584> rdfs:label "Postings" .
+
+<https://www.wikidata.org/wiki/Q2983587> rdfs:label "Dawson College" .
+
+<https://www.wikidata.org/wiki/Q312> rdfs:label "Apple" .
+
+<https://www.wikidata.org/wiki/Q324254> rdfs:label "Knowledge Graphs",
+        """Knowledge Graphs
+""" .
+
+<https://www.wikidata.org/wiki/Q33> rdfs:label "Finnish" .
+
+<https://www.wikidata.org/wiki/Q33002955> rdfs:label "Knowledge Graph" .
+
+<https://www.wikidata.org/wiki/Q34> rdfs:label "Swedish" .
+
+<https://www.wikidata.org/wiki/Q3475322> rdfs:label "Schema.org" .
+
+<https://www.wikidata.org/wiki/Q34925> rdfs:label "Capitol" .
+
+<https://www.wikidata.org/wiki/Q35> rdfs:label "Denmark" .
+
+<https://www.wikidata.org/wiki/Q3508244> rdfs:label "Oracle Spatial" .
+
+<https://www.wikidata.org/wiki/Q355> rdfs:label "Facebook" .
+
+<https://www.wikidata.org/wiki/Q360920> rdfs:label "Domitius Enobarbus",
+        "Enobarbus" .
+
+<https://www.wikidata.org/wiki/Q3625572> rdfs:label """Graph API
+""" .
+
+<https://www.wikidata.org/wiki/Q37156> rdfs:label "IBM Watson",
+        "IBM" .
+
+<https://www.wikidata.org/wiki/Q3757> rdfs:label "Java" .
+
+<https://www.wikidata.org/wiki/Q379652> rdfs:label "Philippi" .
+
+<https://www.wikidata.org/wiki/Q387196> rdfs:label "Description Logic" .
+
+<https://www.wikidata.org/wiki/Q403161> rdfs:label "AI" .
+
+<https://www.wikidata.org/wiki/Q4036474> rdfs:label "Compute" .
+
+<https://www.wikidata.org/wiki/Q4036498> rdfs:label "Consequence" .
+
+<https://www.wikidata.org/wiki/Q41506> rdfs:label "Stanford University" .
+
+<https://www.wikidata.org/wiki/Q424583> rdfs:label "IRI" .
+
+<https://www.wikidata.org/wiki/Q44044> rdfs:label "N-Triples" .
+
+<https://www.wikidata.org/wiki/Q4411666> rdfs:label "Chapter 7" .
+
+<https://www.wikidata.org/wiki/Q4648827> rdfs:label "A11" .
+
+<https://www.wikidata.org/wiki/Q4648862> rdfs:label "A12" .
+
+<https://www.wikidata.org/wiki/Q4772862> rdfs:label "Anthony Julius" .
+
+<https://www.wikidata.org/wiki/Q48332> rdfs:label "hiragana" .
+
+<https://www.wikidata.org/wiki/Q4917> rdfs:label "$5 million" .
+
+<https://www.wikidata.org/wiki/Q49210> rdfs:label "New York University" .
+
+<https://www.wikidata.org/wiki/Q496939> rdfs:label "Levenshtein" .
+
+<https://www.wikidata.org/wiki/Q4970767> rdfs:label "31" .
+
+<https://www.wikidata.org/wiki/Q4973304> rdfs:label "Boolean" .
+
+<https://www.wikidata.org/wiki/Q5142666> rdfs:label "Cole Howard" .
+
+<https://www.wikidata.org/wiki/Q515701> rdfs:label "Linked Data" .
+
+<https://www.wikidata.org/wiki/Q51673> rdfs:label "Antony" .
+
+<https://www.wikidata.org/wiki/Q52> rdfs:label "Wikipedia" .
+
+<https://www.wikidata.org/wiki/Q5270587> rdfs:label "Conversational Agents" .
+
+<https://www.wikidata.org/wiki/Q5413> rdfs:label "Yangtze" .
+
+<https://www.wikidata.org/wiki/Q541854> rdfs:label "Threshold" .
+
+<https://www.wikidata.org/wiki/Q54837> rdfs:label "Semantic Web" .
+
+<https://www.wikidata.org/wiki/Q55> rdfs:label "Dutch" .
+
+<https://www.wikidata.org/wiki/Q584580> rdfs:label "Satori" .
+
+<https://www.wikidata.org/wiki/Q59> rdfs:label "PHP" .
+
+<https://www.wikidata.org/wiki/Q595971> rdfs:label "Graph" .
+
+<https://www.wikidata.org/wiki/Q60198> rdfs:label "Notes" .
+
+<https://www.wikidata.org/wiki/Q603889> rdfs:label "GPT" .
+
+<https://www.wikidata.org/wiki/Q62> rdfs:label "San Francisco",
+        "san francisco" .
+
+<https://www.wikidata.org/wiki/Q620516> rdfs:label "Apostrophe" .
+
+<https://www.wikidata.org/wiki/Q624610> rdfs:label "Dublin Core" .
+
+<https://www.wikidata.org/wiki/Q635> rdfs:label "Cleopatra" .
+
+<https://www.wikidata.org/wiki/Q648625> rdfs:label "Google Knowledge Graph" .
+
+<https://www.wikidata.org/wiki/Q65> rdfs:label "Los Angeles" .
+
+<https://www.wikidata.org/wiki/Q671488> rdfs:label "SAAS" .
+
+<https://www.wikidata.org/wiki/Q7096138> rdfs:label "ConceptNet" .
+
+<https://www.wikidata.org/wiki/Q734950> rdfs:label "Julius Caesar" .
+
+<https://www.wikidata.org/wiki/Q754848> rdfs:label "LLM" .
+
+<https://www.wikidata.org/wiki/Q76568> rdfs:label "Agrippa" .
+
+<https://www.wikidata.org/wiki/Q773196> rdfs:label "Lucene" .
+
+<https://www.wikidata.org/wiki/Q782543> rdfs:label "UI" .
+
+<https://www.wikidata.org/wiki/Q80978> rdfs:label "Hewlett-Packard" .
+
+<https://www.wikidata.org/wiki/Q816826> rdfs:label "Information Retrieval" .
+
+<https://www.wikidata.org/wiki/Q826165> rdfs:label "OWL" .
+
+<https://www.wikidata.org/wiki/Q835922> rdfs:label "Token" .
+
+<https://www.wikidata.org/wiki/Q836575> rdfs:label "QA" .
+
+<https://www.wikidata.org/wiki/Q8366> rdfs:label "Algorithm" .
+
+<https://www.wikidata.org/wiki/Q837518> rdfs:label "alphabet" .
+
+<https://www.wikidata.org/wiki/Q849751> rdfs:label "York University" .
+
+<https://www.wikidata.org/wiki/Q864> rdfs:label "Pokémon" .
+
+<https://www.wikidata.org/wiki/Q866> rdfs:label "YouTube" .
+
+<https://www.wikidata.org/wiki/Q870780> rdfs:label "Chatbot" .
+
+<https://www.wikidata.org/wiki/Q92832> rdfs:label "Peter Norvig" .
+
+<https://www.wikidata.org/wiki/Q930439> rdfs:label "ISO" .
+
+<https://www.wikidata.org/wiki/Q942695> rdfs:label "LOC" .
+
+<https://www.wikidata.org/wiki/Q94702> rdfs:label "Collaborative Filtering" .
+
+<https://www.wikidata.org/wiki/Q95726734> rdfs:label "GPT-3" .
+
+<https://www.wikidata.org/wiki/Q1048> rdfs:label "Caesar",
+        "Julius Caesar" .
+
+<https://www.wikidata.org/wiki/Q1164001> rdfs:label "SELECT" .
+
+<https://www.wikidata.org/wiki/Q1205323> rdfs:label "6Notes" .
+
+<https://www.wikidata.org/wiki/Q130879> rdfs:label "Reuters" .
+
+<https://www.wikidata.org/wiki/Q1367488> rdfs:label "RDF" .
+
+<https://www.wikidata.org/wiki/Q1389366> rdfs:label "FOAF" .
+
+<https://www.wikidata.org/wiki/Q1424987> rdfs:label "N3" .
+
+<https://www.wikidata.org/wiki/Q1502023> rdfs:label "Soundex" .
+
+<https://www.wikidata.org/wiki/Q16000421> rdfs:label "Primer" .
+
+<https://www.wikidata.org/wiki/Q1635410> rdfs:label "NLTK" .
+
+<https://www.wikidata.org/wiki/Q1726> rdfs:label "Munich",
+        "munich" .
+
+<https://www.wikidata.org/wiki/Q173183> rdfs:label "Boolean" .
+
+<https://www.wikidata.org/wiki/Q1751819> rdfs:label "RDFS",
+        "RDF Schema",
+        "RDFS" .
+
+<https://www.wikidata.org/wiki/Q2293072> rdfs:label "Inverted" .
+
+<https://www.wikidata.org/wiki/Q3225164> rdfs:label "The Glass Palace" .
+
+<https://www.wikidata.org/wiki/Q326342> rdfs:label "Concordia University" .
+
+<https://www.wikidata.org/wiki/Q340> rdfs:label "Montreal" .
+
+<https://www.wikidata.org/wiki/Q3575678> rdfs:label "RDF" .
+
+<https://www.wikidata.org/wiki/Q465> rdfs:label "DBpedia" .
+
+<https://www.wikidata.org/wiki/Q7850> rdfs:label "Chinese" .
+
+<https://www.wikidata.org/wiki/Q7989031> rdfs:label "Westlaw" .
+
+<https://www.wikidata.org/wiki/Q80993> rdfs:label "Software Engineering" .
+
+<https://www.wikidata.org/wiki/Q84> rdfs:label "London" .
+
+<https://www.wikidata.org/wiki/Q9366> rdfs:label "Google",
+        "Google Search",
+        "Search" .
+
+<https://www.wikidata.org/wiki/Q2283> rdfs:label "Microsoft" .
+
+<https://www.wikidata.org/wiki/Q26876> rdfs:label "Taylor Swift" .
+
+<https://www.wikidata.org/wiki/Q30642> rdfs:label "NLP",
+        "Natural Language Processing" .
+
+<https://www.wikidata.org/wiki/Q460475> rdfs:label "Bostrom",
+        "Nick Bostrom" .
+
+<https://www.wikidata.org/wiki/Q8819> rdfs:label "Unicode" .
 
 ex:COMP-474 a vivo:Course ;
     rdfs:label "Intelligent Systems" ;
     vivo:courseCode "COMP" ;
     vivo:courseNumber "474" ;
+    vivo:hasTopic <https://www.wikidata.org/wiki/Q1045785>,
+        <https://www.wikidata.org/wiki/Q11198541>,
+        <https://www.wikidata.org/wiki/Q114409>,
+        <https://www.wikidata.org/wiki/Q1164001>,
+        <https://www.wikidata.org/wiki/Q11697560>,
+        <https://www.wikidata.org/wiki/Q1185775>,
+        <https://www.wikidata.org/wiki/Q1205323>,
+        <https://www.wikidata.org/wiki/Q12418>,
+        <https://www.wikidata.org/wiki/Q128745>,
+        <https://www.wikidata.org/wiki/Q1299>,
+        <https://www.wikidata.org/wiki/Q131476>,
+        <https://www.wikidata.org/wiki/Q1367488>,
+        <https://www.wikidata.org/wiki/Q1389366>,
+        <https://www.wikidata.org/wiki/Q1424987>,
+        <https://www.wikidata.org/wiki/Q150>,
+        <https://www.wikidata.org/wiki/Q15117072>,
+        <https://www.wikidata.org/wiki/Q1539155>,
+        <https://www.wikidata.org/wiki/Q1550345>,
+        <https://www.wikidata.org/wiki/Q16000421>,
+        <https://www.wikidata.org/wiki/Q1674879>,
+        <https://www.wikidata.org/wiki/Q16752102>,
+        <https://www.wikidata.org/wiki/Q1715>,
+        <https://www.wikidata.org/wiki/Q17152639>,
+        <https://www.wikidata.org/wiki/Q171861>,
+        <https://www.wikidata.org/wiki/Q174198>,
+        <https://www.wikidata.org/wiki/Q1751819>,
+        <https://www.wikidata.org/wiki/Q1778029>,
+        <https://www.wikidata.org/wiki/Q1860>,
+        <https://www.wikidata.org/wiki/Q189248>,
+        <https://www.wikidata.org/wiki/Q19281804>,
+        <https://www.wikidata.org/wiki/Q197536>,
+        <https://www.wikidata.org/wiki/Q19837>,
+        <https://www.wikidata.org/wiki/Q2013>,
+        <https://www.wikidata.org/wiki/Q201492>,
+        <https://www.wikidata.org/wiki/Q213660>,
+        <https://www.wikidata.org/wiki/Q21708200>,
+        <https://www.wikidata.org/wiki/Q2283>,
+        <https://www.wikidata.org/wiki/Q234460>,
+        <https://www.wikidata.org/wiki/Q2479726>,
+        <https://www.wikidata.org/wiki/Q24826>,
+        <https://www.wikidata.org/wiki/Q2494121>,
+        <https://www.wikidata.org/wiki/Q251>,
+        <https://www.wikidata.org/wiki/Q2600559>,
+        <https://www.wikidata.org/wiki/Q26876>,
+        <https://www.wikidata.org/wiki/Q279859>,
+        <https://www.wikidata.org/wiki/Q28022144>,
+        <https://www.wikidata.org/wiki/Q2913725>,
+        <https://www.wikidata.org/wiki/Q2983587>,
+        <https://www.wikidata.org/wiki/Q30642>,
+        <https://www.wikidata.org/wiki/Q312>,
+        <https://www.wikidata.org/wiki/Q3225164>,
+        <https://www.wikidata.org/wiki/Q324254>,
+        <https://www.wikidata.org/wiki/Q326342>,
+        <https://www.wikidata.org/wiki/Q33002955>,
+        <https://www.wikidata.org/wiki/Q340>,
+        <https://www.wikidata.org/wiki/Q3475322>,
+        <https://www.wikidata.org/wiki/Q3508244>,
+        <https://www.wikidata.org/wiki/Q355>,
+        <https://www.wikidata.org/wiki/Q3575678>,
+        <https://www.wikidata.org/wiki/Q3625572>,
+        <https://www.wikidata.org/wiki/Q37156>,
+        <https://www.wikidata.org/wiki/Q387196>,
+        <https://www.wikidata.org/wiki/Q403161>,
+        <https://www.wikidata.org/wiki/Q424583>,
+        <https://www.wikidata.org/wiki/Q44044>,
+        <https://www.wikidata.org/wiki/Q4411666>,
+        <https://www.wikidata.org/wiki/Q460475>,
+        <https://www.wikidata.org/wiki/Q4648827>,
+        <https://www.wikidata.org/wiki/Q4648862>,
+        <https://www.wikidata.org/wiki/Q465>,
+        <https://www.wikidata.org/wiki/Q4917>,
+        <https://www.wikidata.org/wiki/Q5142666>,
+        <https://www.wikidata.org/wiki/Q515701>,
+        <https://www.wikidata.org/wiki/Q52>,
+        <https://www.wikidata.org/wiki/Q5270587>,
+        <https://www.wikidata.org/wiki/Q5413>,
+        <https://www.wikidata.org/wiki/Q54837>,
+        <https://www.wikidata.org/wiki/Q54872>,
+        <https://www.wikidata.org/wiki/Q584580>,
+        <https://www.wikidata.org/wiki/Q59>,
+        <https://www.wikidata.org/wiki/Q595971>,
+        <https://www.wikidata.org/wiki/Q60198>,
+        <https://www.wikidata.org/wiki/Q603889>,
+        <https://www.wikidata.org/wiki/Q624610>,
+        <https://www.wikidata.org/wiki/Q648625>,
+        <https://www.wikidata.org/wiki/Q671488>,
+        <https://www.wikidata.org/wiki/Q7096138>,
+        <https://www.wikidata.org/wiki/Q754848>,
+        <https://www.wikidata.org/wiki/Q773196>,
+        <https://www.wikidata.org/wiki/Q80993>,
+        <https://www.wikidata.org/wiki/Q816826>,
+        <https://www.wikidata.org/wiki/Q826165>,
+        <https://www.wikidata.org/wiki/Q836575>,
+        <https://www.wikidata.org/wiki/Q84>,
+        <https://www.wikidata.org/wiki/Q864>,
+        <https://www.wikidata.org/wiki/Q866>,
+        <https://www.wikidata.org/wiki/Q870780>,
+        <https://www.wikidata.org/wiki/Q8819>,
+        <https://www.wikidata.org/wiki/Q930439>,
+        <https://www.wikidata.org/wiki/Q9366>,
+        <https://www.wikidata.org/wiki/Q942695>,
+        <https://www.wikidata.org/wiki/Q94702>,
+        <https://www.wikidata.org/wiki/Q95>,
+        <https://www.wikidata.org/wiki/Q95726734> ;
     vivo:numberOfCredits 4 ;
     rdfs:seeAlso <http://example.org/COMP-474/resources> .
 
@@ -11975,8 +12871,115 @@ ex:COMP-479 a vivo:Course ;
     rdfs:label "Information Retrieval and Web Search" ;
     vivo:courseCode "COMP" ;
     vivo:courseNumber "479" ;
+    vivo:hasTopic <https://www.wikidata.org/wiki/Q1048>,
+        <https://www.wikidata.org/wiki/Q1100552>,
+        <https://www.wikidata.org/wiki/Q11261>,
+        <https://www.wikidata.org/wiki/Q1132051>,
+        <https://www.wikidata.org/wiki/Q1152226>,
+        <https://www.wikidata.org/wiki/Q11652>,
+        <https://www.wikidata.org/wiki/Q11917>,
+        <https://www.wikidata.org/wiki/Q11975>,
+        <https://www.wikidata.org/wiki/Q130879>,
+        <https://www.wikidata.org/wiki/Q1321>,
+        <https://www.wikidata.org/wiki/Q1375963>,
+        <https://www.wikidata.org/wiki/Q13955>,
+        <https://www.wikidata.org/wiki/Q1414645>,
+        <https://www.wikidata.org/wiki/Q141495>,
+        <https://www.wikidata.org/wiki/Q1458203>,
+        <https://www.wikidata.org/wiki/Q150>,
+        <https://www.wikidata.org/wiki/Q1502023>,
+        <https://www.wikidata.org/wiki/Q152057>,
+        <https://www.wikidata.org/wiki/Q155169>,
+        <https://www.wikidata.org/wiki/Q1635410>,
+        <https://www.wikidata.org/wiki/Q1663>,
+        <https://www.wikidata.org/wiki/Q17081579>,
+        <https://www.wikidata.org/wiki/Q172248>,
+        <https://www.wikidata.org/wiki/Q1726>,
+        <https://www.wikidata.org/wiki/Q173183>,
+        <https://www.wikidata.org/wiki/Q1747689>,
+        <https://www.wikidata.org/wiki/Q179797>,
+        <https://www.wikidata.org/wiki/Q180160>,
+        <https://www.wikidata.org/wiki/Q1806883>,
+        <https://www.wikidata.org/wiki/Q1860>,
+        <https://www.wikidata.org/wiki/Q18631903>,
+        <https://www.wikidata.org/wiki/Q187931>,
+        <https://www.wikidata.org/wiki/Q188>,
+        <https://www.wikidata.org/wiki/Q188751>,
+        <https://www.wikidata.org/wiki/Q189722>,
+        <https://www.wikidata.org/wiki/Q204470>,
+        <https://www.wikidata.org/wiki/Q2088390>,
+        <https://www.wikidata.org/wiki/Q208902>,
+        <https://www.wikidata.org/wiki/Q2185969>,
+        <https://www.wikidata.org/wiki/Q2283>,
+        <https://www.wikidata.org/wiki/Q2293072>,
+        <https://www.wikidata.org/wiki/Q235627>,
+        <https://www.wikidata.org/wiki/Q2447542>,
+        <https://www.wikidata.org/wiki/Q2494121>,
+        <https://www.wikidata.org/wiki/Q2524992>,
+        <https://www.wikidata.org/wiki/Q262>,
+        <https://www.wikidata.org/wiki/Q26566>,
+        <https://www.wikidata.org/wiki/Q26876>,
+        <https://www.wikidata.org/wiki/Q275297>,
+        <https://www.wikidata.org/wiki/Q2831>,
+        <https://www.wikidata.org/wiki/Q28622>,
+        <https://www.wikidata.org/wiki/Q2918584>,
+        <https://www.wikidata.org/wiki/Q30642>,
+        <https://www.wikidata.org/wiki/Q33>,
+        <https://www.wikidata.org/wiki/Q34>,
+        <https://www.wikidata.org/wiki/Q34925>,
+        <https://www.wikidata.org/wiki/Q35>,
+        <https://www.wikidata.org/wiki/Q360920>,
+        <https://www.wikidata.org/wiki/Q3757>,
+        <https://www.wikidata.org/wiki/Q379652>,
+        <https://www.wikidata.org/wiki/Q4036474>,
+        <https://www.wikidata.org/wiki/Q4036498>,
+        <https://www.wikidata.org/wiki/Q41506>,
+        <https://www.wikidata.org/wiki/Q460475>,
+        <https://www.wikidata.org/wiki/Q4772862>,
+        <https://www.wikidata.org/wiki/Q48332>,
+        <https://www.wikidata.org/wiki/Q49210>,
+        <https://www.wikidata.org/wiki/Q496939>,
+        <https://www.wikidata.org/wiki/Q4970767>,
+        <https://www.wikidata.org/wiki/Q4973304>,
+        <https://www.wikidata.org/wiki/Q51673>,
+        <https://www.wikidata.org/wiki/Q541854>,
+        <https://www.wikidata.org/wiki/Q55>,
+        <https://www.wikidata.org/wiki/Q62>,
+        <https://www.wikidata.org/wiki/Q620516>,
+        <https://www.wikidata.org/wiki/Q635>,
+        <https://www.wikidata.org/wiki/Q65>,
+        <https://www.wikidata.org/wiki/Q665617>,
+        <https://www.wikidata.org/wiki/Q734950>,
+        <https://www.wikidata.org/wiki/Q76568>,
+        <https://www.wikidata.org/wiki/Q782543>,
+        <https://www.wikidata.org/wiki/Q7850>,
+        <https://www.wikidata.org/wiki/Q7989031>,
+        <https://www.wikidata.org/wiki/Q80978>,
+        <https://www.wikidata.org/wiki/Q835922>,
+        <https://www.wikidata.org/wiki/Q8366>,
+        <https://www.wikidata.org/wiki/Q837518>,
+        <https://www.wikidata.org/wiki/Q849751>,
+        <https://www.wikidata.org/wiki/Q8819>,
+        <https://www.wikidata.org/wiki/Q92832>,
+        <https://www.wikidata.org/wiki/Q95> ;
     vivo:numberOfCredits 4 ;
     rdfs:seeAlso <http://example.org/COMP-479/resources> .
+
+<https://www.wikidata.org/wiki/Q2013> rdfs:label "Wikidata" .
+
+<https://www.wikidata.org/wiki/Q54872> rdfs:label "Resource Description Framework",
+        "RDF",
+        "Resource Description Framework" .
+
+<https://www.wikidata.org/wiki/Q665617> rdfs:label "IIR" .
+
+<https://www.wikidata.org/wiki/Q1860> rdfs:label "English" .
+
+<https://www.wikidata.org/wiki/Q2494121> rdfs:label "AI" .
+
+<https://www.wikidata.org/wiki/Q95> rdfs:label "Google" .
+
+<https://www.wikidata.org/wiki/Q150> rdfs:label "French" .
 
 <http://example.org/vocab/ConcordiaUniversity> a vivo:University ;
     rdfs:label "Concordia University" ;

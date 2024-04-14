@@ -292,20 +292,22 @@ def get_students_Transcript(graph, value_stu):
     )
     return query_result
 
-
+# Query #14
 def query_topics_by_course(course_uri):
     query = f"""
-        SELECT DISTINCT ?topic ?label ?event ?resource
+        SELECT DISTINCT ?topic ?label ?resource ?resourceType
         WHERE {{
             <{course_uri}> vivo:hasTopic ?topic .
             ?topic rdfs:label ?label .
-            ?event vivo:coversTopic ?topic .
-            ?resource vivo:mentionsTopic ?topic .
+            ?resource vivo:partOf <{course_uri}> .
+            ?resource rdf:type ?resourceType .
+            OPTIONAL {{ ?resource vivo:mentionsTopic ?topic }}
+            OPTIONAL {{ ?resource ex:coversTopic ?topic }}
         }}
     """
     return query
 
-
+# Query #15
 def query_courses_by_topic(topic_uri):
     query = f"""
         SELECT ?course ?event (COUNT(?topic) AS ?count)
@@ -320,7 +322,7 @@ def query_courses_by_topic(topic_uri):
     """
     return query
 
-
+#Query #16
 def query_topic_coverage(topic_uri):
     query = f"""
         SELECT ?course ?event ?resource
@@ -333,7 +335,7 @@ def query_topic_coverage(topic_uri):
     """
     return query
 
-
+#Query #17
 def query_missing_topics(course_uri):
     query = f"""
         SELECT ?event ?resource
@@ -350,9 +352,8 @@ def query_missing_topics(course_uri):
     """
     return query
 
-
 def execute_query(g, query_number, *args):
-    output_dir = "src/output"
+    output_dir = "output"
     output_file = f"{output_dir}/query_{query_number}_output.txt"
     with open(output_file, "w", encoding="utf-8") as file:
         if query_number == 1:
@@ -454,6 +455,7 @@ def execute_query(g, query_number, *args):
             for grade in students_who_completed_x:
                 print(grade)
                 file.write(grade + "\n")
+
         elif query_number == 12:
             value_id, value_course = args
             students_who_completed_x = get_students_who_completed_course(g, value_id, value_course)
@@ -474,5 +476,43 @@ def execute_query(g, query_number, *args):
                 output = f"{name} {sem} {subject} {grade}"
                 print(output)
                 file.write(output + "\n")
+        elif query_number == 14:
+            course_uri = args[0]
+            query = query_topics_by_course(course_uri)
+            results = g.query(query)
+            print(f"\nQuery 14: Topics covered in course {course_uri}")
+            for row in results:
+                print(f"Topic: {row.label} ({row.topic})")
+                print(f"Resource: {row.resource} ({row.resourceType})")
+                print("---")
+        elif query_number == 15:
+            topic_uri = args[0]
+            query = query_courses_by_topic(topic_uri)
+            results = g.query(query)
+            print(f"\nQuery 15: Courses covering topic {topic_uri}")
+            for row in results:
+                print(f"Course: {row.course}")
+                print(f"Event: {row.event}")
+                print(f"Count: {row.count}")
+                print("---")
+        elif query_number == 16:
+            topic_uri = args[0]
+            query = query_topic_coverage(topic_uri)
+            results = g.query(query)
+            print(f"\nQuery 16: Topic coverage for {topic_uri}")
+            for row in results:
+                print(f"Course: {row.course}")
+                print(f"Event: {row.event}")
+                print(f"Resource: {row.resource}")
+                print("---")
+        elif query_number == 17:
+            course_uri = args[0]
+            query = query_missing_topics(course_uri)
+            results = g.query(query)
+            print(f"\nQuery 17: Course events/resources without associated topics in {course_uri}")
+            for row in results:
+                print(f"Event: {row.event}")
+                print(f"Resource: {row.resource}")
+                print("---")
         else:
             print(f"Invalid query number: {query_number}")

@@ -19,7 +19,7 @@ def is_valid_url(url):
 
 
 def get_courses():
-    csv_file_path = 'src/res/CATALOG.csv'
+    csv_file_path = 'res/CATALOG.csv'
     dataframe = pd.read_csv(csv_file_path)
 
     courses = []
@@ -38,7 +38,7 @@ def build_course_graph():
     # Define the Course class
     g.add((vivo.Course, RDF.type, RDFS.Class))
 
-    csv_file_path = 'src/res/CATALOG.csv'
+    csv_file_path = 'res/CATALOG.csv'
     dataframe = pd.read_csv(csv_file_path)
 
     concordia_uri = URIRef("http://example.org/vocab/ConcordiaUniversity")
@@ -60,5 +60,5 @@ def build_course_graph():
         if website and str(website).strip() and is_valid_url(str(website)):
             g.add((course_uri, RDFS.seeAlso, URIRef(str(website))))
 
-    g.serialize(destination='src/output/course.ttl', format='turtle')
+    g.serialize(destination='output/course.ttl', format='turtle')
     return g
