@@ -5,13 +5,8 @@ from rasa_sdk.executor import CollectingDispatcher
 from . import query
 from . import Fuseki_Queries as FQ
 from rdflib import Graph
-import sys
 
 SPARQL = False
-# import Fuseki_Queries as FQ
-
-if SPARQL:
-    from SPARQLWrapper import SPARQLWrapper, JSON
 
 
 def load_graph():
