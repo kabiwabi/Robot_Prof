@@ -29,7 +29,7 @@ nlu:
   - intent: query_courses_by_topic
     examples: |
       - What courses cover the topic of [Artificial Intelligence](topic)?
-      - What courses cover the topic of [artificial intelligence](topic)?
+      - What courses cover the topic of [programming](topic)?
       - What courses cover the topic of [machine learning](topic)?
       - What courses cover the topic of [AI](topic)?
       - What courses cover the topic of [ML](topic)?
@@ -55,11 +55,11 @@ nlu:
   # QUERY 4 - List all [courses] offered by [university] within the [subject] (e.g., “COMP”, “SOEN”).
   - intent: query_courses_offered_by_university
     examples: |
-      - What courses with code [COMP](course_code) are offered by [ConcordiaUniversity](university)?
-      - List the courses offered by [McGillUniversity](university) in the [MATH](course_code) department
-      - Show me [ENGL](course_code) courses offered by [UniversityOfToronto](university)
-      - What [COEN](course_code) courses are available at [ConcordiaUniversity](university)?
-      - Which [PSYC](course_code) courses does [ConcordiaUniversity](university) have?
+      - What courses with code [COMP](course) are offered by [ConcordiaUniversity](university)?
+      - List the courses offered by [McGillUniversity](university) in the [MATH](course) department
+      - Show me [ENGL](course) courses offered by [UniversityOfToronto](university)
+      - What [COEN](course) courses are available at [ConcordiaUniversity](university)?
+      - Which [PSYC](course) courses does [ConcordiaUniversity](university) have?
 
   # QUERY 5 - What [materials] (slides, readings) are recommended for [topic] in [course] [number]?
   - intent: query_materials_for_topic
@@ -111,6 +111,8 @@ nlu:
   - intent: query_student_grade
     examples: |
       - What grade did [Ilise](student) get in the course [COMS](course) [506](course_id)?
+      - What grade did [Braun](student) get in the course [COMS](course) [506](course_id)?
+      - Grade for [Ramsey](student) for [COMS](course) [506](course_id)
       - Show me the grade of [John](student) for [COMP](course) [474](course_id)
       - Grade of [Sarah](student) in [MATH](course) [203](course_id)
       - What is [Jack](student)'s grade for [SOEN](course) [321](course_id)?

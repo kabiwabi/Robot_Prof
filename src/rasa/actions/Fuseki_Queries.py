@@ -31,7 +31,7 @@ def FusekiQuery1(sparql):
     sparql.setReturnFormat("json")
     try:
         ret = sparql.queryAndConvert()
-        return ret
+        return ret["results"]["bindings"]
     except Exception as e:
         print(e)
 
@@ -77,7 +77,6 @@ def FusekiQuery3(sparql, course, lecture_number):
     sparql.setReturnFormat("json")
     try:
         ret = sparql.queryAndConvert()
-        i = 1  # index to track theoretical answer vs fuseki obtained vs main.py obtained
         return ret
     except Exception as e:
         print(e)
@@ -95,7 +94,7 @@ def FusekiQuery4(sparql, value_uni, value_courseCode):
   			?course rdfs:label ?name .
             ?course vivo:offeredBy ?university .
             FILTER regex(str(?courseCode), \"%s\", "i") .
-            FILTER sameTerm(str(?university),  \"%s\") .
+            FILTER regex(str(?university),  \"%s\") .
             }
     """ % (value_courseCode, uni_uri))
     sparql.setReturnFormat("json")
