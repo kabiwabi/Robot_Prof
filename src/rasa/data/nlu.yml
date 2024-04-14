@@ -132,6 +132,16 @@ nlu:
       - Show me [Bob](student)'s grades
       - What are [Jack](student)'s grades
 
+  # QUERY 14 - Print a transcript for a [student], listing all the course taken with their grades
+  - intent: query_topics_by_course
+    examples: |
+      - What resources are available in [COMP](course) [474](course_id)?
+      - In [COMP](course) [474](course_id) what resource topics are covered?
+      - List all detailed resources for topics in [COMP](course) [474](course_id).
+      - For [COMP](course) [474](course_id) where can i find resources for topics covered?
+      - Are there any resources available for [COMP](course) [474](course_id)?
+      - List resources for [COMP](course) [474](course_id).
+
   - intent: out_of_scope
     examples: |
       - What is the weather today?

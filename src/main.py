@@ -12,13 +12,18 @@ from LectureAndTopicsBuilder import EX, URIRef, DBPEDIA
 from knowledge_base_builder import build_knowledge_base
 
 CREATEGRAPH = False
+SPARQLSERVER = False
 EXECUTE_BASEQUERIES = True
+if (SPARQLSERVER):
+    from queries import Fuseki_Queries as FQ
 
 # Define the namespaces
 vivo = Namespace("http://vivoweb.org/ontology/core#")
 
 
 def main():
+    if (SPARQLSERVER):
+        sparql = FQ.initSparqlWrapper()
     if CREATEGRAPH:
         # Build university knowledge graph
         university_graph = UB.build_university_graph()
@@ -36,11 +41,11 @@ def main():
         g = university_graph + course_graph + student_graph + lecture_and_topics_graph
 
         # Serialize the combined graph to a file
-        turtle_file_path = 'output/combinedGraph.ttl'
+        turtle_file_path = 'src/output/combinedGraph.ttl'
         g.serialize(destination=turtle_file_path, format='turtle')
     else:
         g = Graph()
-        g = g.parse(source='./output/combinedGraph.ttl', format='turtle')
+        g = g.parse(source='src/output/combinedGraph.ttl', format='turtle')
 
     if EXECUTE_BASEQUERIES:
         # Query.execute_query(g, 1)  # Query 1: Get all courses and their universities
@@ -58,10 +63,27 @@ def main():
         # Query.execute_query(g, 11, "Ilise", "506", "coms")  # Query 11: Get grade of a student who completed a course
         # Query.execute_query(g, 12, "506", "Coms")  # Query 12: Students who completed a specific course
         # Query.execute_query(g, 13, "Braun")  # Query 13: Print transcript for a student
+        print(f"EX {EX['COMP-474']}")
         Query.execute_query(g, 14, EX['COMP-474'])  # Query 14: Topics covered in COMP-474
         # Query.execute_query(g, 15, DBPEDIA.Information_retrieval)  # Query 15: Courses covering "Information Retrieval"
         # Query.execute_query(g, 16, DBPEDIA.Intelligent_system)  # Query 16: Topic coverage for "Intelligent Systems"
         # Query.execute_query(g, 17,EX['COMP-479'])  # Query 17: Course events/resources without associated topics in COMP-479
+
+    if SPARQLSERVER:
+        FQ.execute_fuseki_query(sparql, 1)
+        FQ.execute_fuseki_query(sparql, 2, "programming")
+        FQ.execute_fuseki_query(sparql, 3, "COMP-479", 1)
+        FQ.execute_fuseki_query(sparql, 4, "ConcordiaUniversity", "comp")
+        FQ.execute_fuseki_query(sparql, 5, DBPEDIA.Intelligent_system, "COMP", "474")
+        FQ.execute_fuseki_query(sparql, 6, "COMP", "479")
+        FQ.execute_fuseki_query(sparql, 7, "COMP", "474")
+        FQ.execute_fuseki_query(sparql, 8, "COMP", "474", 1)
+        FQ.execute_fuseki_query(sparql, 9, DBPEDIA.Information_retrieval, "COMP", "479")
+        FQ.execute_fuseki_query(sparql, 10, "stat", "380")
+        FQ.execute_fuseki_query(sparql, 11, "Ilise", "506", "coms")
+        FQ.execute_fuseki_query(sparql, 12, "506", "Coms")
+        FQ.execute_fuseki_query(sparql, 13, "Braun")
+
 
 if __name__ == '__main__':
     main()

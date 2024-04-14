@@ -3,7 +3,17 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from . import query
+from . import Fuseki_Queries as FQ
 from rdflib import Graph
+import sys
+
+sys.path.append("..")
+
+SPARQL = True
+# import Fuseki_Queries as FQ
+
+if SPARQL:
+    from SPARQLWrapper import SPARQLWrapper, JSON
 
 
 def load_graph():
@@ -15,7 +25,11 @@ def load_graph():
 # QUERY 1 - List all courses offered by [university]
 class ActionCoursesAndUniversities(Action):
     def __init__(self):
+        global SPARQL
         self.graph = load_graph()
+        if SPARQL:
+            self.sparql = FQ.initSparqlWrapper()
+            # self.Fuseki = FQ.FusekiQueries()
 
     def name(self) -> Text:
         return "action_courses_and_universities"
@@ -254,6 +268,7 @@ class ActionCompetenciesGained(Action):
 class ActionStudentGrade(Action):
     def __init__(self):
         self.graph = load_graph()
+        self.sparql = FQ.initSparqlWrapper()
 
     def name(self) -> Text:
         return "action_student_grade"
@@ -265,9 +280,11 @@ class ActionStudentGrade(Action):
         course_id = tracker.get_slot("course_num")
         course = tracker.get_slot("course")
         grade = query.get_grades_of_student_who_completed_course(self.graph, student, course_id, course)
+        ret = FQ.FusekiQuery11(self.sparql, str(student), str(course_id), str(course))
+
         response = f"{student} completed {course} {course_id} with a grade of:\n"
-        for g in grade:
-            response += f"- {g}\n"
+        for result in ret["results"]["bindings"]:
+            response += f"- {result['grade']['value']}"
 
         dispatcher.utter_message(text=response)
         return []
@@ -311,6 +328,29 @@ class ActionStudentTranscript(Action):
         response = f"Here is the transcript for {student}:\n"
         for name, stu_id, subject, sem, grade in transcript:
             response += f"{name} ({stu_id}) - {sem} - {subject} - Grade: {grade}\n"
+
+        dispatcher.utter_message(text=response)
+        return []
+
+
+# QUERY 14 - Print a transcript for a [student], listing all the course taken with their grades
+class ActionTopicByCourse(Action):
+    def __init__(self):
+        self.graph = load_graph()
+
+    def name(self) -> Text:
+        return "action_topics_by_course"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        course = tracker.get_slot("course")
+        course_num = tracker.get_slot("course_id")
+        course_uri = f"http://example.org/{str(course).upper()}-{str(course_num)}"
+        result = query.query_topics_by_course(self.graph, course_uri)
+        response = f"Here are topics covered in {course}-{course_num} : {course_uri}:\n"
+        for row in result:
+            response += f"Topic: {row.label} ({row.topic})\nResource: {row.resource} ({row.resourceType})\n --- "
 
         dispatcher.utter_message(text=response)
         return []

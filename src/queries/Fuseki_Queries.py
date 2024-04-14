@@ -1,9 +1,8 @@
-from SPARQLWrapper import SPARQLWrapper, JSON
 from rdflib import Literal
 from rdflib import URIRef
 import re
-from . import QueryHelper
 import os
+from SPARQLWrapper import SPARQLWrapper, JSON
 
 
 def initSparqlWrapper():

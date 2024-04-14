@@ -16,6 +16,7 @@ intents:
   - query_student_grade
   - query_students_completed_course
   - query_student_transcript
+  - query_topics_by_course
   - out_of_scope
   - mood_great
   - affirm
@@ -34,6 +35,8 @@ entities:
   - course_number
   - course_id
   - student
+  - course_doot
+  - course_name
 
 actions:
   - action_initialize_graph
@@ -50,6 +53,7 @@ actions:
   - action_student_grade
   - action_students_completed_course
   - action_student_transcript
+  - action_topics_by_course
   - action_default_fallback
 
 slots:
@@ -103,6 +107,7 @@ slots:
     mappings:
       - type: from_entity
         entity: student
+
 
 responses:
   utter_greet:

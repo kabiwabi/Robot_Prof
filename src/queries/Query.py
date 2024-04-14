@@ -292,6 +292,7 @@ def get_students_Transcript(graph, value_stu):
     )
     return query_result
 
+
 # Query #14
 def query_topics_by_course(course_uri):
     query = f"""
@@ -306,6 +307,7 @@ def query_topics_by_course(course_uri):
         }}
     """
     return query
+
 
 # Query #15
 def query_courses_by_topic(topic_uri):
@@ -322,7 +324,8 @@ def query_courses_by_topic(topic_uri):
     """
     return query
 
-#Query #16
+
+# Query #16
 def query_topic_coverage(topic_uri):
     query = f"""
         SELECT ?course ?event ?resource
@@ -335,7 +338,8 @@ def query_topic_coverage(topic_uri):
     """
     return query
 
-#Query #17
+
+# Query #17
 def query_missing_topics(course_uri):
     query = f"""
         SELECT ?event ?resource
@@ -352,8 +356,9 @@ def query_missing_topics(course_uri):
     """
     return query
 
+
 def execute_query(g, query_number, *args):
-    output_dir = "output"
+    output_dir = "src/output"
     output_file = f"{output_dir}/query_{query_number}_output.txt"
     with open(output_file, "w", encoding="utf-8") as file:
         if query_number == 1:
@@ -482,6 +487,8 @@ def execute_query(g, query_number, *args):
             results = g.query(query)
             print(f"\nQuery 14: Topics covered in course {course_uri}")
             for row in results:
+                output = f"Topic: {row.label} ({row.topic})\nResource: {row.resource} ({row.resourceType})\n --- "
+                file.write(output + "\n")
                 print(f"Topic: {row.label} ({row.topic})")
                 print(f"Resource: {row.resource} ({row.resourceType})")
                 print("---")
