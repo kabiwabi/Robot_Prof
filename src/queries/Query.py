@@ -366,7 +366,7 @@ def query_missing_topics(graph, course_uri):
 
 
 def execute_query(g, query_number, *args):
-    output_dir = "src/output"
+    output_dir = "output"
     output_file = f"{output_dir}/query_{query_number}_output.txt"
     with open(output_file, "w", encoding="utf-8") as file:
         if query_number == 1:
