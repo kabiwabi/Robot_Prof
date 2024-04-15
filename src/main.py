@@ -9,7 +9,6 @@ from rasa.utils.endpoints import EndpointConfig
 from rasa.core.channels.rest import RestInput
 from rasa import run
 from LectureAndTopicsBuilder import EX, URIRef, DBPEDIA
-from knowledge_base_builder import build_knowledge_base
 
 CREATEGRAPH = False
 SPARQLSERVER = False
