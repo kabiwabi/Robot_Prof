@@ -292,7 +292,6 @@ def get_students_Transcript(graph, value_stu):
     )
     return query_result
 
-
 # Query #14
 def query_topics_by_course(course_uri):
     query = f"""
@@ -308,49 +307,58 @@ def query_topics_by_course(course_uri):
     """
     return query
 
-
 # Query #15
-def query_courses_by_topic(topic_uri):
+def query_courses_by_topic(graph, topic_label):
     query = f"""
-        SELECT ?course ?event (COUNT(?topic) AS ?count)
+        SELECT ?course ?courseLabel ?resource (COUNT(?topic) AS ?topicCount)
         WHERE {{
-            ?course vivo:hasTopic <{topic_uri}> .
-            ?event vivo:coversTopic <{topic_uri}> .
-            ?event vivo:partOf ?course .
-            ?resource vivo:mentionsTopic <{topic_uri}> .
+            ?topic rdfs:label ?topicLabel .
+            FILTER (str(?topicLabel) = "{topic_label}")
+            ?course vivo:hasTopic ?topic .
+            ?course rdfs:label ?courseLabel .
+            ?resource vivo:partOf ?course .
+            OPTIONAL {{
+                ?resource vivo:partOf ?course .
+                {{ ?resource a ex:LectureSlides . }}
+                UNION
+                {{ ?resource a ex:LectureWorksheet . }}
+                UNION
+                {{ ?resource a ex:LectureReading . }}
+                {{ ?resource ex:coversTopic ?topic . }}
+                UNION 
+                {{ ?resource ex:mentionsTopic ?topic . }}
+            }}
         }}
-        GROUP BY ?course ?event
-        ORDER BY DESC(?count)
+        GROUP BY ?course ?courseLabel ?resource
+        ORDER BY DESC(?topicCount)
     """
     return query
-
-
 # Query #16
-def query_topic_coverage(topic_uri):
+def query_topic_coverage(graph, topic_label):
     query = f"""
-        SELECT ?course ?event ?resource
+        SELECT ?course ?courseLabel ?resource ?resourceType
         WHERE {{
-            ?course vivo:hasTopic <{topic_uri}> .
-            ?event vivo:coversTopic <{topic_uri}> .
-            ?event vivo:partOf ?course .
-            ?resource vivo:mentionsTopic <{topic_uri}> .
+            ?topic rdfs:label ?topicLabel .
+            FILTER (str(?topicLabel) = "{topic_label}")
+            ?resource ex:coversTopic ?topic .
+            ?resource vivo:partOf ?course .
+            ?course rdfs:label ?courseLabel .
+            ?resource rdf:type ?resourceType .
         }}
     """
     return query
-
-
 # Query #17
-def query_missing_topics(course_uri):
+def query_missing_topics(graph, course_uri):
     query = f"""
-        SELECT ?event ?resource
+        SELECT ?resource ?resourceType
         WHERE {{
-            ?event vivo:partOf <{course_uri}> .
-            ?resource vivo:partOf ?event .
+            ?resource vivo:partOf <{course_uri}> .
+            ?resource rdf:type ?resourceType .
             FILTER NOT EXISTS {{
-                ?event vivo:coversTopic ?topic .
+                ?resource ex:coversTopic ?topic .
             }}
             FILTER NOT EXISTS {{
-                ?resource vivo:mentionsTopic ?topic .
+                ?resource ex:mentionsTopic ?topic .
             }}
         }}
     """
@@ -493,33 +501,32 @@ def execute_query(g, query_number, *args):
                 print(f"Resource: {row.resource} ({row.resourceType})")
                 print("---")
         elif query_number == 15:
-            topic_uri = args[0]
-            query = query_courses_by_topic(topic_uri)
+            topic_label = args[0]
+            query = query_courses_by_topic(g, topic_label)
             results = g.query(query)
-            print(f"\nQuery 15: Courses covering topic {topic_uri}")
+            print(f"\nQuery 15: Courses covering topic '{topic_label}'")
             for row in results:
-                print(f"Course: {row.course}")
-                print(f"Event: {row.event}")
-                print(f"Count: {row.count}")
+                print(f"Course: {row.courseLabel} ({row.course})")
+                resource = row.resource if row.resource else "N/A"
+                print(f"Resource: {resource}")
+                print(f"Count: {row.topicCount}")
                 print("---")
         elif query_number == 16:
-            topic_uri = args[0]
-            query = query_topic_coverage(topic_uri)
+            topic_label = args[0]
+            query = query_topic_coverage(g, topic_label)
             results = g.query(query)
-            print(f"\nQuery 16: Topic coverage for {topic_uri}")
+            print(f"\nQuery 16: Topic coverage for '{topic_label}'")
             for row in results:
-                print(f"Course: {row.course}")
-                print(f"Event: {row.event}")
-                print(f"Resource: {row.resource}")
+                print(f"Course: {row.courseLabel} ({row.course})")
+                print(f"Resource: {row.resource} ({row.resourceType})")
                 print("---")
         elif query_number == 17:
             course_uri = args[0]
-            query = query_missing_topics(course_uri)
+            query = query_missing_topics(g, course_uri)
             results = g.query(query)
-            print(f"\nQuery 17: Course events/resources without associated topics in {course_uri}")
+            print(f"\nQuery 17: Course resources without associated topics in {course_uri}")
             for row in results:
-                print(f"Event: {row.event}")
-                print(f"Resource: {row.resource}")
+                print(f"Resource: {row.resource} ({row.resourceType})")
                 print("---")
         else:
             print(f"Invalid query number: {query_number}")

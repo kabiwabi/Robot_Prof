@@ -63,11 +63,10 @@ def main():
         # Query.execute_query(g, 11, "Ilise", "506", "coms")  # Query 11: Get grade of a student who completed a course
         # Query.execute_query(g, 12, "506", "Coms")  # Query 12: Students who completed a specific course
         # Query.execute_query(g, 13, "Braun")  # Query 13: Print transcript for a student
-        print(f"EX {EX['COMP-474']}")
-        Query.execute_query(g, 14, EX['COMP-474'])  # Query 14: Topics covered in COMP-474
-        # Query.execute_query(g, 15, DBPEDIA.Information_retrieval)  # Query 15: Courses covering "Information Retrieval"
-        # Query.execute_query(g, 16, DBPEDIA.Intelligent_system)  # Query 16: Topic coverage for "Intelligent Systems"
-        # Query.execute_query(g, 17,EX['COMP-479'])  # Query 17: Course events/resources without associated topics in COMP-479
+        # Query.execute_query(g, 14, EX['COMP-474'])  # Query 14: Topics covered in COMP-474
+        # Query.execute_query(g, 15, "Google")  # Query 15: Courses covering the topic "Google"
+        # Query.execute_query(g, 16, "Google")  # Query 16: Topic coverage for "Google"
+        Query.execute_query(g, 17, EX['COMP-479'])  # Query 17: Course resources without associated topics in COMP-479
 
     if SPARQLSERVER:
         FQ.execute_fuseki_query(sparql, 1)
