@@ -541,6 +541,85 @@ class ActionTopicByCourse(Action):
         return []
 
 
+# QUERY 15 - Print a transcript for a [student], listing all the course taken with their grades
+class ActionCourseResourceByTopic(Action):
+    def __init__(self):
+        self.graph = load_graph()
+        if SPARQL:
+            self.sparql = FQ.initSparqlWrapper()
+
+    def name(self) -> Text:
+        return "action_course_resource_by_topic"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        topic = tracker.get_slot("topic")
+        result = query.query_courses_by_topic(self.graph, topic)
+        response = f"Here are courses and resources avaiable for topic {topic}:\n"
+        for row in result:
+            response += f"Course: {row.courseLabel} ({row.course}) \n"
+            resource = row.resource if row.resource else "N/A"
+            response += f"Resource: {resource} \nCount: {row.topicCount} \n--- \n"
+        dispatcher.utter_message(text=response)
+        return []
+
+
+# QUERY 16 - Print a transcript for a [student], listing all the course taken with their grades
+class ActionCourseResourceByTopic(Action):
+    def __init__(self):
+        self.graph = load_graph()
+        if SPARQL:
+            self.sparql = FQ.initSparqlWrapper()
+
+    def name(self) -> Text:
+        return "action_topic_coverage"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        topic = tracker.get_slot("topic")
+        result = query.query_topic_coverage(self.graph, topic)
+        response = f"\nQuery 16: Topic coverage for '{topic}'\n"
+        for row in result:
+            response += f"Course: {row.courseLabel} ({row.course}) \n"
+            # resource = row.resource if row.resource else "N/A"
+            response += f"Resource: {row.resource} {row.resourceType} \n--- \n"
+            print(f"Course: {row.courseLabel} ({row.course})")
+            print(f"Resource: {row.resource} ({row.resourceType})")
+            print("---")
+        # response += f"Course: {row.courseLabel} ({row.course}) \n"
+        # resource = row.resource if row.resource else "N/A"
+        # response += f"Resource: {resource} \nCount: {row.topicCount} \n--- \n"
+        dispatcher.utter_message(text=response)
+        return []
+
+
+# QUERY 17 - Print a transcript for a [student], listing all the course taken with their grades
+class ActionCourseResourceByTopic(Action):
+    def __init__(self):
+        self.graph = load_graph()
+        if SPARQL:
+            self.sparql = FQ.initSparqlWrapper()
+
+    def name(self) -> Text:
+        return "action_missing_materials"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        course = tracker.get_slot("course")
+        course_id = tracker.get_slot("course_id")
+        course_uri = f"http://example.org/{str(course).upper()}-{str(course_id)}"
+        result = query.query_missing_topics(self.graph, course_uri)
+        response = f"\nQuery 17: Course resources without associated topics in {course_uri}\n"
+        for row in result:
+            response += f"Resource: {row.resource} {row.resourceType} \n--- \n"
+        dispatcher.utter_message(text=response)
+        return []
+
+
 class ActionSetSparql(Action):
     def name(self) -> Text:
         return "action_set_sparql"

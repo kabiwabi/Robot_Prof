@@ -144,6 +144,43 @@ nlu:
       - Are there any resources available for [COMP](course) [474](course_id)?
       - List resources for [COMP](course) [474](course_id).
 
+  # QUERY 15 - Print a transcript for a [student], listing all the course taken with their grades
+  - intent: query_course_resource_by_topic
+    examples: |
+      - Which resources and courses explore [Google](topic)?
+      - Which resources and courses delve into the subject of [Artificial Intelligence](topic)?
+      - What resources and courses explore the realm of [Blockchain Technology](topic)?
+      - Which resources and courses discuss the topic of [Cybersecurity](topic)?
+      - What resources and courses provide insights into [Virtual Reality](topic)?
+      - Which resources and courses tackle the subject matter of [Data Science](topic)?
+  # QUERY 16 -
+  - intent: query_topic_coverage
+    examples: |
+      - Topic coverage for [Google](topic)?
+      - Topic coverage for [Artificial Intelligence](topic)?
+      - Topic coverage for [Blockchain Technology](topic)?
+      - Topic coverage for [Cybersecurity](topic)?
+      - Topic coverage for [Virtual Reality](topic)?
+      - Navigating through the landscape of [Artificial Intelligence](topic)
+      - Uncovering insights into [Blockchain Technology](topic) realms
+      - Examining the intricacies of [Cybersecurity](topic)
+      - Immersing oneself in the world of [Virtual Reality](topic)
+      - Analyzing the depths of [Data Science](topic)
+  
+  # QUERY 17 -
+  - intent: query_missing_materials
+    examples: |
+      - Course resource without associated topics in [COMP](course) [479](course_id)
+      - Course resource without associated topics in [ENGL](course) [202](course_id)
+      - Course resource without associated topics in [MATH](course) [432](course_id)
+      - Course resource without associated topics in [PHYS] (course) [205](course_id)
+      - Course resource without associated topics in [PSYC] (course) [279](course_id)
+      - Resource repository devoid of topics under [COMP] (course) [366](course_id)
+      - Unassociated course materials within [ENGL] (course) [315](course_id)
+      - Course content unlinked to topics in [MATH] (course) [316](course_id)
+      - Resource directory lacking topics for [PHYS] (course) [434](course_id)
+      - Course-related resources without specific topics for [PSYC] (course) [432](course_id)
+
   - intent: out_of_scope
     examples: |
       - What is the weather today?

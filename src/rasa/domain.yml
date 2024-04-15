@@ -17,6 +17,9 @@ intents:
   - query_students_completed_course
   - query_student_transcript
   - query_topics_by_course
+  - query_course_resource_by_topic
+  - query_topic_coverage
+  - query_missing_materials
   - out_of_scope
   - mood_great
   - affirm
@@ -56,6 +59,9 @@ actions:
   - action_students_completed_course
   - action_student_transcript
   - action_topics_by_course
+  - action_course_resource_by_topic
+  - action_topic_coverage
+  - action_missing_materials
   - action_default_fallback
   - action_set_sparql
 

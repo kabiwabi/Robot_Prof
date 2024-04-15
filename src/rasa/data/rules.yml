@@ -95,6 +95,21 @@ rules:
     steps:
       - intent: query_topics_by_course
       - action: action_topics_by_course
+  # QUERY 15 - Do the course and resource for the topic
+  - rule: Query course and resource for topic
+    steps:
+      - intent: query_course_resource_by_topic
+      - action: action_course_resource_by_topic
+  #query 16
+  - rule: Query sixteen
+    steps:
+      - intent: query_topic_coverage
+      - action: action_topic_coverage
+  #query 17
+  - rule: Query seventeen
+    steps:
+      - intent: query_missing_materials
+      - action: action_missing_materials
 
   - rule: Set SPARQL
     steps:

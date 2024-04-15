@@ -293,6 +293,7 @@ def get_students_Transcript(graph, value_stu):
     return query_result
 
 
+# Q14
 def query_topics_by_course(graph, course_uri):
     query = f"""
         SELECT DISTINCT ?topic ?label ?resource ?resourceType
@@ -309,49 +310,69 @@ def query_topics_by_course(graph, course_uri):
     return query_result
 
 
-def query_courses_by_topic(topic_uri):
+# Q15
+def query_courses_by_topic(graph, topic_label):
     query = f"""
-        SELECT ?course ?event (COUNT(?topic) AS ?count)
-        WHERE {{
-            ?course vivo:hasTopic <{topic_uri}> .
-            ?event vivo:coversTopic <{topic_uri}> .
-            ?event vivo:partOf ?course .
-            ?resource vivo:mentionsTopic <{topic_uri}> .
-        }}
-        GROUP BY ?course ?event
-        ORDER BY DESC(?count)
-    """
-    return query
-
-
-def query_topic_coverage(topic_uri):
-    query = f"""
-        SELECT ?course ?event ?resource
-        WHERE {{
-            ?course vivo:hasTopic <{topic_uri}> .
-            ?event vivo:coversTopic <{topic_uri}> .
-            ?event vivo:partOf ?course .
-            ?resource vivo:mentionsTopic <{topic_uri}> .
-        }}
-    """
-    return query
-
-
-def query_missing_topics(course_uri):
-    query = f"""
-        SELECT ?event ?resource
-        WHERE {{
-            ?event vivo:partOf <{course_uri}> .
-            ?resource vivo:partOf ?event .
-            FILTER NOT EXISTS {{
-                ?event vivo:coversTopic ?topic .
+            SELECT ?course ?courseLabel ?resource (COUNT(?topic) AS ?topicCount)
+            WHERE {{
+                ?topic rdfs:label ?topicLabel .
+                FILTER (str(?topicLabel) = "{topic_label}")
+                ?course vivo:hasTopic ?topic .
+                ?course rdfs:label ?courseLabel .
+                ?resource vivo:partOf ?course .
+                OPTIONAL {{
+                    ?resource vivo:partOf ?course .
+                    {{ ?resource a ex:LectureSlides . }}
+                    UNION
+                    {{ ?resource a ex:LectureWorksheet . }}
+                    UNION
+                    {{ ?resource a ex:LectureReading . }}
+                    {{ ?resource ex:coversTopic ?topic . }}
+                    UNION 
+                    {{ ?resource ex:mentionsTopic ?topic . }}
+                }}
             }}
-            FILTER NOT EXISTS {{
-                ?resource vivo:mentionsTopic ?topic .
+            GROUP BY ?course ?courseLabel ?resource
+            ORDER BY DESC(?topicCount)
+        """
+    query_result = graph.query(query)
+    return query_result
+
+
+# Q16
+def query_topic_coverage(graph, topic_label):
+    query = f"""
+            SELECT ?course ?courseLabel ?resource ?resourceType
+            WHERE {{
+                ?topic rdfs:label ?topicLabel .
+                FILTER (str(?topicLabel) = "{topic_label}")
+                ?resource ex:coversTopic ?topic .
+                ?resource vivo:partOf ?course .
+                ?course rdfs:label ?courseLabel .
+                ?resource rdf:type ?resourceType .
             }}
-        }}
-    """
-    return query
+        """
+    query_result = graph.query(query)
+    return query_result
+
+
+# Q17
+def query_missing_topics(graph, course_uri):
+    query = f"""
+            SELECT ?resource ?resourceType
+            WHERE {{
+                ?resource vivo:partOf <{course_uri}> .
+                ?resource rdf:type ?resourceType .
+                FILTER NOT EXISTS {{
+                    ?resource ex:coversTopic ?topic .
+                }}
+                FILTER NOT EXISTS {{
+                    ?resource ex:mentionsTopic ?topic .
+                }}
+            }}
+        """
+    query_result = graph.query(query)
+    return query_result
 
 
 def execute_query(g, query_number, *args):
