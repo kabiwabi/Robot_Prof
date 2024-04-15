@@ -40,6 +40,8 @@ class ActionCoursesAndUniversities(Action):
             response = f"- I found {response_counter} courses offered.\n"
 
         else:
+            if SPARQL:
+                self.sparql = FQ.initSparqlWrapper()
             returned = FQ.FusekiQuery1(self.sparql)
             response = "Fuseki: Here are the courses and their offering universities:\n"
             value = "value"
@@ -76,6 +78,8 @@ class ActionCoursesByTopic(Action):
                 response += f"- {course}\n"
             dispatcher.utter_message(text=response)
         else:
+            if SPARQL:
+                self.sparql = FQ.initSparqlWrapper()
             returned = FQ.FusekiQuery2(self.sparql, topic)
             value = "value"
             response = f"Fuseki: Here are the courses discussing the topic '{topic}':\n"
@@ -110,6 +114,8 @@ class ActionTopicsCoveredInLecture(Action):
 
             dispatcher.utter_message(text=response)
         else:
+            if SPARQL:
+                self.sparql = FQ.initSparqlWrapper()
             course = tracker.get_slot("course")
             lecture_number = tracker.get_slot("lecture_number")
             returned = FQ.FusekiQuery3(self.sparql, str(course), int(lecture_number))
@@ -145,6 +151,8 @@ class ActionCoursesOfferedByUniversity(Action):
 
             dispatcher.utter_message(text=response)
         else:
+            if SPARQL:
+                self.sparql = FQ.initSparqlWrapper()
             returned = FQ.FusekiQuery4(self.sparql, university, course_code)
             value = "value"
             response = f"Fuseki: Here are the courses with course code [{str(course_code)}] offered by [{university}]:\n"
@@ -188,6 +196,8 @@ class ActionMaterialsForTopic(Action):
 
             dispatcher.utter_message(text=response)
         else:
+            if SPARQL:
+                self.sparql = FQ.initSparqlWrapper()
             value = "value"
             response = f"Fuseki: Here are the materials recommended for {qTopic} in {course_dept} {course_num}:\n"
             returned = FQ.FusekiQuery5(self.sparql, str(qTopic), str(course_dept), str(course_num))
@@ -223,6 +233,8 @@ class ActionCourseCredits(Action):
 
             dispatcher.utter_message(text=response)
         else:
+            if SPARQL:
+                self.sparql = FQ.initSparqlWrapper()
             value = "value"
             returned = FQ.FusekiQuery6(self.sparql, str(course), str(course_number))
             response = f"Fuseki: The credits for {course} {course_number} are:\n"
@@ -257,6 +269,8 @@ class ActionCourseAdditionalResources(Action):
 
             dispatcher.utter_message(text=response)
         else:
+            if SPARQL:
+                self.sparql = FQ.initSparqlWrapper()
             value = "value"
             returned = FQ.FusekiQuery7(self.sparql, course, course_number)
             response = f"Fuseki: Here are the additional resources for {course} {course_number}:\n"
@@ -292,6 +306,8 @@ class ActionLectureContent(Action):
 
             dispatcher.utter_message(text=response)
         else:
+            if SPARQL:
+                self.sparql = FQ.initSparqlWrapper()
             value = "value"
             returned = FQ.FusekiQuery8(self.sparql, course_code, course_number, int(lecture_number))
             response = f"Non-fuseki: Here is the content for lecture {lecture_number} in {course_code} {course_number}:\n"
@@ -332,6 +348,8 @@ class ActionTopicReadingMaterials(Action):
 
             dispatcher.utter_message(text=response)
         else:
+            if SPARQL:
+                self.sparql = FQ.initSparqlWrapper()
             value = "value"
             returned = FQ.FusekiQuery9(self.sparql, qTopic, course_dept, course_num)
             response = f"Non-fuseki: Here are the reading materials for {qTopic} in {course_dept} {course_num}:\n"
@@ -367,6 +385,8 @@ class ActionCompetenciesGained(Action):
 
             dispatcher.utter_message(text=response)
         else:
+            if SPARQL:
+                self.sparql = FQ.initSparqlWrapper()
             value = "value"
             returned = FQ.FusekiQuery10(self.sparql, course_code, int(course_num))
             response = f"Fuseki: Here are the competencies gained from {course_code} {course_num}:\n"
@@ -400,6 +420,8 @@ class ActionStudentGrade(Action):
             for g in grade:
                 response += f"- {g}\n"
         else:
+            if SPARQL:
+                self.sparql = FQ.initSparqlWrapper()
             value = "value"
             returned = FQ.FusekiQuery11(self.sparql, str(student), str(course_id), str(course))
             response = f"Fuseki: {student} completed {course} {course_id} with a grade of:\n"
@@ -433,6 +455,8 @@ class ActionStudentsCompletedCourse(Action):
                 response += f"- {name} ({stu_id})\n"
             dispatcher.utter_message(text=response)
         else:
+            if SPARQL:
+                self.sparql = FQ.initSparqlWrapper()
             value = "value"
             returned = FQ.FusekiQuery12(self.sparql, str(course_id), str(course))
             response = f"Fuseki: Here are the students who completed {course} {course_id}:\n"
@@ -459,6 +483,7 @@ class ActionStudentTranscript(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         student = tracker.get_slot("student")
+        print(f"SPARQL CHECK: {SPARQL}\n")
         if not SPARQL:
             transcript = query.get_students_Transcript(self.graph, student)
             response = f"Non-fuseki: Here is the transcript for {student}:\n"
@@ -467,6 +492,8 @@ class ActionStudentTranscript(Action):
 
             dispatcher.utter_message(text=response)
         else:
+            if SPARQL:
+                self.sparql = FQ.initSparqlWrapper()
             value = "value"
             returned = FQ.FusekiQuery13(self.sparql, student)
             response = f"Fuseki: Here is the transcript for {student}:\n"
@@ -493,6 +520,8 @@ class ActionStudentTranscript(Action):
 class ActionTopicByCourse(Action):
     def __init__(self):
         self.graph = load_graph()
+        if SPARQL:
+            self.sparql = FQ.initSparqlWrapper()
 
     def name(self) -> Text:
         return "action_topics_by_course"
@@ -509,6 +538,30 @@ class ActionTopicByCourse(Action):
             response += f"Topic: {row.label} ({row.topic})\nResource: {row.resource} ({row.resourceType})\n --- "
 
         dispatcher.utter_message(text=response)
+        return []
+
+
+class ActionSetSparql(Action):
+    def name(self) -> Text:
+        return "action_set_sparql"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        global SPARQL
+        value = tracker.get_slot("sparql")
+        value = value.lower()
+        value = value.title()
+        print(f"value: {value}")
+        print(f"SPARQL changed from val: {SPARQL}")
+        if value in ("Yes", "True", "T", "1"):
+            SPARQL = True
+            print(f"SPARQL changed to val: {SPARQL}")
+        elif value in ("No", "False", "F", "0"):
+            SPARQL = False
+            print(f"SPARQL changed to val: {SPARQL}")
+
+        dispatcher.utter_message(template="utter_default")
         return []
 
 

@@ -149,3 +149,10 @@ nlu:
       - What is the weather today?
       - Tell me a joke
       - Who won the soccer game last night?
+
+  - intent: query_set_sparql
+    examples: |
+      - Set sparql [True](sparql)
+      - Set sparql [False](sparql)
+      - Set sparql [true](sparql)
+      - Set sparql [false](sparql)

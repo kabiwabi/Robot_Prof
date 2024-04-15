@@ -23,6 +23,7 @@ intents:
   - mood_unhappy
   - deny
   - bot_challenge
+  - query_set_sparql
 
 entities:
   - topic
@@ -37,6 +38,7 @@ entities:
   - student
   - course_doot
   - course_name
+  - sparql
 
 actions:
   - action_initialize_graph
@@ -55,6 +57,7 @@ actions:
   - action_student_transcript
   - action_topics_by_course
   - action_default_fallback
+  - action_set_sparql
 
 slots:
   topic:
@@ -107,7 +110,11 @@ slots:
     mappings:
       - type: from_entity
         entity: student
-
+  sparql:
+    type: bool
+    mappings:
+      - type: from_entity
+        entity: sparql
 
 responses:
   utter_greet:

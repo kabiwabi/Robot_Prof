@@ -95,3 +95,8 @@ rules:
     steps:
       - intent: query_topics_by_course
       - action: action_topics_by_course
+
+  - rule: Set SPARQL
+    steps:
+      - intent: query_set_sparql
+      - action: action_set_sparql
